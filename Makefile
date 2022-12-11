@@ -6,7 +6,7 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2022/12/11 11:20:04 by makacem          ###   ########.fr        #
+#    Updated: 2022/12/11 13:15:37 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ FLAGS = -Wall -Werror -Wextra -lreadline
 HEADER = minishell.h
 
 SRC = main.c \
+	lexer/ft_lex.c \
 
 OBJ = $(SRC:.c=.o)
 

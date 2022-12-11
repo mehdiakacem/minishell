@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/11 13:20:34 by makacem          ###   ########.fr       */
+/*   Created: 2022/12/11 12:31:56 by makacem           #+#    #+#             */
+/*   Updated: 2022/12/11 13:15:17 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#ifndef LEXER_H
 
-int main(void)
-{
-	char	*line;
+# define LEXER_H
 
-	while (1)
-	{
-		line = readline("minishell$ ");
-		add_history(line);
-		//printf("%s\n", line);
-		ft_lex(line);
-	}
-	return (0);
-}
+# include <stdio.h>
+# include <stdlib.h>
+# include "../libft/libft.h"
+# include <readline/readline.h>
+# include <readline/history.h>
+
+void	ft_lex(char	*line);
+
+#endif

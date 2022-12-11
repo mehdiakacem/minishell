@@ -1,27 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lex.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/11 13:20:34 by makacem          ###   ########.fr       */
+/*   Created: 2022/12/11 13:08:39 by makacem           #+#    #+#             */
+/*   Updated: 2022/12/11 13:57:04 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-int main(void)
+#include "lexer.h"
+#define PIPE '|'
+void	ft_lex(char	*line)
 {
-	char	*line;
+	char **word;
 
-	while (1)
+	word = ft_split(line, ' ');
+	while (*word != NULL)
 	{
-		line = readline("minishell$ ");
-		add_history(line);
-		//printf("%s\n", line);
-		ft_lex(line);
+		printf("%s\n", *word);
+		word++;
 	}
-	return (0);
 }
+
+int c;
+
+c = PIPE;
+
+printf()
