@@ -1,24 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_memcmp.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/08 18:47:27 by makacem          ###   ########.fr       */
+/*   Created: 2021/12/03 16:36:33 by makacem           #+#    #+#             */
+/*   Updated: 2021/12/15 21:43:40 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
+#include "libft.h"
 
-# define MINISHELL_H
+int	ft_memcmp(const void *s1, const void *s2, size_t n)
+{
+	unsigned char	*ps1;
+	unsigned char	*ps2;
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-
-
-#endif
+	ps1 = (unsigned char *)s1;
+	ps2 = (unsigned char *)s2;
+	if (n == 0)
+		return (0);
+	while (n - 1 > 0 && *ps1 - *ps2 == 0)
+	{
+		ps1++;
+		ps2++;
+		n--;
+	}
+	return (*ps1 - *ps2);
+}

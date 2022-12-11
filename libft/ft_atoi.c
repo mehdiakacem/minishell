@@ -1,24 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/08 18:47:27 by makacem          ###   ########.fr       */
+/*   Created: 2021/12/05 12:39:08 by makacem           #+#    #+#             */
+/*   Updated: 2022/09/27 19:51:38 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
+#include "libft.h"
 
-# define MINISHELL_H
+long int	ft_atoi(const char *str)
+{
+	long int	n;
+	int			a;
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-
-
-#endif
+	while (*str == ' ' || (*str >= 9 && *str <= 13))
+	{
+		str++;
+	}
+	a = 1;
+	while (*str == '-' || *str == '+')
+	{
+		if (*str == '-')
+			a = a * -1;
+		str++;
+	}
+	n = 0;
+	while (*str >= 48 && *str <= 57)
+	{
+		n = n * 10 + (*str - 48);
+		str++;
+	}
+	return (n * a);
+}

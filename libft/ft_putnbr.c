@@ -1,24 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/08 18:47:27 by makacem          ###   ########.fr       */
+/*   Created: 2021/12/15 14:22:13 by makacem           #+#    #+#             */
+/*   Updated: 2022/06/15 10:29:10 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
+#include "libft.h"
 
-# define MINISHELL_H
+int	ft_putnbr(long int n)
+{
+	int	ret;
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-
-
-#endif
+	ret = 0;
+	if (n < 0)
+	{
+		n = -n;
+		ret += ft_putchar('-');
+	}
+	if (n >= 10)
+	{
+		ret += ft_putnbr(n / 10);
+		ret += ft_putnbr(n % 10);
+	}
+	else if (n >= 0 && n <= 9)
+		ret += ft_putchar(n + '0');
+	return (ret);
+}

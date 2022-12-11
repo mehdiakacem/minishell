@@ -1,24 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/08 18:47:27 by makacem          ###   ########.fr       */
+/*   Created: 2021/12/05 18:59:35 by makacem           #+#    #+#             */
+/*   Updated: 2021/12/15 21:44:31 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef MINISHELL_H
+#include "libft.h"
 
-# define MINISHELL_H
+char	*ft_strdup(const char *s1)
+{
+	size_t	size;
+	char	*ps1;
+	char	*pps1;
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <readline/readline.h>
-# include <readline/history.h>
-
-
-
-#endif
+	size = ft_strlen(s1);
+	ps1 = malloc(size + 1);
+	if (ps1 == NULL)
+		return (NULL);
+	pps1 = ps1;
+	while (*s1)
+	{
+		*pps1 = *s1;
+		pps1++;
+		s1++;
+	}
+	*pps1 = '\0';
+	return (ps1);
+}

@@ -1,25 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/10 10:40:54 by makacem          ###   ########.fr       */
+/*   Created: 2021/11/29 15:30:05 by makacem           #+#    #+#             */
+/*   Updated: 2021/12/15 21:43:49 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-int main(void)
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	char	*line;
+	char	*plcdst;
+	char	*plcsrc;
 
-	while (1)
+	if (!dst && !src)
+		return (NULL);
+	if (dst > src)
 	{
-		line = readline("minishell$ ");
-		add_history(line);
+		while (len > 0)
+		{
+			plcdst = dst + (len - 1);
+			plcsrc = (char *)src + (len - 1);
+			*plcdst = *plcsrc;
+			len--;
+		}
+		return (dst);
 	}
-	return (0);
+	plcdst = dst;
+	while (len > 0)
+	{
+		*((char *)dst) = *((char *)src);
+		dst++;
+		src++;
+		len--;
+	}
+	return (plcdst);
 }
