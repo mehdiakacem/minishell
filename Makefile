@@ -6,7 +6,7 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2022/12/11 13:15:37 by makacem          ###   ########.fr        #
+#    Updated: 2022/12/12 15:38:14 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,6 +20,8 @@ HEADER = minishell.h
 
 SRC = main.c \
 	lexer/ft_lex.c \
+	lexer/ft_remove_spaces.c \
+	lexer/ft_create_token_list.c \
 
 OBJ = $(SRC:.c=.o)
 
