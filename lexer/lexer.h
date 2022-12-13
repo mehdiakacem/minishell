@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 12:31:56 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/12 17:36:12 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/13 16:27:27 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 # define LEXER_H
 
+# define SPACE 0
 # define PIPE 1
 # define WORD 2
 # define REDIRECTION 3
-# define SPACE 4
 
 # include <stdio.h>
 # include <stdlib.h>
@@ -34,9 +34,10 @@ typedef struct token
 	
 }	t_token;
 
-
+ 
 t_token	ft_lex(char	*line);
 char	**ft_remove_spaces(char *line);
 t_token	*ft_create_token_list(char	*line);
+void	ft_tokenize(t_token *token);
 
 #endif

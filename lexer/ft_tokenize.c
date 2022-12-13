@@ -1,21 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
+/*   ft_tokenize.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/11/26 13:19:28 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/13 16:13:33 by makacem          ###   ########.fr       */
+/*   Created: 2022/12/12 18:40:33 by makacem           #+#    #+#             */
+/*   Updated: 2022/12/13 16:27:18 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "lexer.h"
 
-int	ft_isprint(int c)
+void	ft_tokenize(t_token *token)
 {
-	if (c >= 32 && c <= 126)
-		return (1);
-	else
-		return (0);
+	t_token	*temp;
+
+	temp = token;
+	while (temp != NULL)
+	{
+		if (temp->value == '|')
+			temp->type = PIPE;
+		else if (temp->value == '>' || temp->value == '<')
+			temp->type = REDIRECTION;
+		else if (temp->value == ' ')
+			temp->type = SPACE;
+		else if (ft_isprint(temp->value))
+			temp->type = WORD;
+		temp = temp->next;
+	}
 }
