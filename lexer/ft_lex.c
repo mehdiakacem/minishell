@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 13:08:39 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/13 17:47:18 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/14 14:21:45 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,7 @@ t_token	ft_lex(char	*line)
 	temp = temp->next;
 	while (temp != NULL)
 	{
-		if (temp->type == SPACE)
-			printf("SPACE ");
-		else if (temp->type == PIPE)
+		if (temp->type == PIPE)
 			printf("PIPE ");
 		else if (temp->type == WORD)
 			printf("WORD ");

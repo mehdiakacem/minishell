@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 12:31:56 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/13 16:27:27 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/14 14:21:59 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 # define LEXER_H
 
-# define SPACE 0
 # define PIPE 1
 # define WORD 2
 # define REDIRECTION 3
