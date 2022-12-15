@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 18:40:33 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/14 14:21:49 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/15 15:07:00 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,19 @@
 void	ft_tokenize(t_token *token)
 {
 	t_token	*temp;
+	char	*squote;
 
+	squote = "'";
 	temp = token;
 	while (temp != NULL)
 	{
-		if (temp->value == '|')
+		if (temp->value == ' ')
+			temp->type = SPACE;
+		else if (temp->value == 39)
+			temp->type = SQUOTE;
+		else if (temp->value == '"')
+			temp->type = DQUOTE;
+		else if (temp->value == '|')
 			temp->type = PIPE;
 		else if (temp->value == '>' || temp->value == '<')
 			temp->type = REDIRECTION;

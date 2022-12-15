@@ -6,7 +6,7 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2022/12/13 14:52:09 by makacem          ###   ########.fr        #
+#    Updated: 2022/12/15 15:35:15 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ SRC = main.c \
 	lexer/ft_remove_spaces.c \
 	lexer/ft_create_token_list.c \
 	lexer/ft_tokenize.c \
+	lexer/ft_grp_tokens.c \
 
 OBJ = $(SRC:.c=.o)
 
