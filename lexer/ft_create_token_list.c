@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 15:36:17 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/15 15:06:32 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/16 15:48:34 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,21 @@ t_token	*ft_create_token_list(char	*line)
 	t_token	*new_token;
 	t_token	*temp;
 
-	c = line;
 	token = (t_token *)malloc(sizeof(t_token));
-	token->value = *c;
+	token->value = *line;
 	token->name = NULL;
-	c++;
+	line++;
 	token->next = NULL;
 	temp = token;
-	while (*c != '\0')
+	while (*line != '\0')
 	{
 		new_token = (t_token *)malloc(sizeof(t_token));
-		new_token->value = *c;
+		new_token->value = *line;
 		new_token->name = NULL;
 		new_token->next = NULL;
 		temp->next = new_token;
 		temp = temp->next;
-		c++;
+		line++;
 	}
 	return (token);
 }

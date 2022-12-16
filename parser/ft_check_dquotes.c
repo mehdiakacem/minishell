@@ -1,32 +1,46 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lex.c                                           :+:      :+:    :+:   */
+/*   ft_check_dquotes.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 13:08:39 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/16 16:52:46 by makacem          ###   ########.fr       */
+/*   Created: 2022/12/15 17:51:17 by makacem           #+#    #+#             */
+/*   Updated: 2022/12/15 17:53:01 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "parser.h"
 
-t_token	*ft_lex(char	*line)
+int	ft_count_dquotes(char *str);
+
+int	ft_check_dquotes(t_token *token_list)
 {
-	t_token	*token;
-	t_token	*token_list;
-	t_token *temp;
+	int count;
+	t_token *token;
 
-	line = ft_strtrim(line, " ");
-	token = ft_create_token_list(line);
-	ft_tokenize(token);
-	token_list = ft_grp_tokens(token);
+	count = 0;
+	token = token_list;
 	while (token != NULL)
 	{
-		free(token);
+		if (token->type == DQUOTE)
+			count = count + ft_count_dquotes(token->name);
 		token = token->next;
 	}
-	free(line);
-	return (token_list);
+	if (count % 2 != 0)
+		return (1);
+	return (0);
+}
+
+int	ft_count_dquotes(char *str)
+{
+	int	count;
+
+	count = 0;
+	while (*str != '\0')
+	{
+		count++;
+		str++;
+	}
+	return (count);
 }

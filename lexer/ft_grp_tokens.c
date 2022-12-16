@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 15:34:05 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/15 16:15:30 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/16 16:47:36 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ t_token	*ft_grp_tokens(t_token *token)
 		new_token = (t_token *)malloc(sizeof(t_token));
 		new_token->type = token->type;
 		new_token->name = str;
-		free(str);
 		new_token->next = NULL;
 		temp->next = new_token;
 		temp = temp->next;

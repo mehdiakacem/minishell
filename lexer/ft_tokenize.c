@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 18:40:33 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/15 15:07:00 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/15 21:30:58 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,7 @@
 void	ft_tokenize(t_token *token)
 {
 	t_token	*temp;
-	char	*squote;
 
-	squote = "'";
 	temp = token;
 	while (temp != NULL)
 	{
@@ -33,6 +31,7 @@ void	ft_tokenize(t_token *token)
 			temp->type = REDIRECTION;
 		else if (ft_isprint(temp->value))
 			temp->type = WORD;
+		//printf("%c  %d\n", temp->value, temp->type);
 		temp = temp->next;
 	}
 }

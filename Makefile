@@ -6,7 +6,7 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2022/12/15 15:35:15 by makacem          ###   ########.fr        #
+#    Updated: 2022/12/16 17:32:52 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,10 +20,13 @@ HEADER = minishell.h
 
 SRC = main.c \
 	lexer/ft_lex.c \
-	lexer/ft_remove_spaces.c \
 	lexer/ft_create_token_list.c \
 	lexer/ft_tokenize.c \
 	lexer/ft_grp_tokens.c \
+	parser/ft_pars.c \
+	parser/ft_check_squotes.c \
+	parser/ft_check_dquotes.c \
+	parser/ft_check_pipes.c \
 
 OBJ = $(SRC:.c=.o)
 

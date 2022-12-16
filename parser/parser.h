@@ -1,32 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lex.c                                           :+:      :+:    :+:   */
+/*   parser.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 13:08:39 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/16 16:52:46 by makacem          ###   ########.fr       */
+/*   Created: 2022/12/15 16:18:30 by makacem           #+#    #+#             */
+/*   Updated: 2022/12/16 17:32:38 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#ifndef PARSER_H
 
-t_token	*ft_lex(char	*line)
-{
-	t_token	*token;
-	t_token	*token_list;
-	t_token *temp;
+# define PARSER_H
 
-	line = ft_strtrim(line, " ");
-	token = ft_create_token_list(line);
-	ft_tokenize(token);
-	token_list = ft_grp_tokens(token);
-	while (token != NULL)
-	{
-		free(token);
-		token = token->next;
-	}
-	free(line);
-	return (token_list);
-}
+#include "../lexer/lexer.h"
+
+int	ft_pars(t_token *token_list);
+int	ft_pars_error(void);
+int	ft_check_squotes(t_token *token_list);
+int	ft_check_dquotes(t_token *token_list);
+int	ft_check_pipes(t_token *token_list);
+
+#endif
