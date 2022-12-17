@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_check_pipes.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:31:57 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/17 15:35:00 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/17 18:51:02 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,15 @@ int	ft_check_pipes(t_token *token_list)
 		{
 			if (count == 0)
 				return (1);
-			else if (token->next == NULL)
+			else if (token->next == NULL || token->next->type == PIPE)
 				return (1);
+			token = token->next;
+			while (token->type == SPACE)
+			{
+				token = token->next;
+				if (token->type == PIPE)
+					return(1);
+			}
 		}
 		token = token->next;
 	}
