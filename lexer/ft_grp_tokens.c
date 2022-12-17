@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 15:34:05 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/16 16:47:36 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/17 12:21:12 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ t_token	*ft_grp_tokens(t_token *token)
 	while (token != NULL)
 	{
 		str = NULL;
-		if (token->next == NULL || token->type != token->next->type)
+		if (token->next == NULL || token->type != WORD)
+			str = ft_strjoin(&token->value, "");
+		else if (token->next == NULL || token->type == WORD)
 			str = ft_strjoin(&token->value, "");
 		token = ft_join_tokens(&str, token);
 		new_token = (t_token *)malloc(sizeof(t_token));
@@ -45,7 +47,7 @@ t_token	*ft_join_tokens(char **str, t_token *token)
 {
 	char	*temp_str;
 
-	while (token->next != NULL && token->type == token->next->type)
+	while (token->next != NULL && token->type == WORD && token->next->type == WORD)
 	{
 		if (*str == NULL)
 		{

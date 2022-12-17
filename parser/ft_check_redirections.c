@@ -1,32 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_check_squotes.c                                 :+:      :+:    :+:   */
+/*   ft_check_redirections.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/15 17:47:05 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/17 14:17:53 by makacem          ###   ########.fr       */
+/*   Created: 2022/12/17 15:34:01 by makacem           #+#    #+#             */
+/*   Updated: 2022/12/17 17:23:55 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-int	ft_check_squotes(t_token *token_list)
+int ft_check_redirections(t_token *token_list)
 {
-	int count;
 	t_token *token;
+	int		count;
 
-	count = 0;
 	token = token_list;
-    token = token->next;
+	token = token->next;
 	while (token != NULL)
 	{
-		if (token->type == SQUOTE)
-			count++;
+		if (token->type == REDIRECTION && token->next == NULL)
+			return(1);
 		token = token->next;
 	}
-	if (count % 2 != 0)
-		return (1);
+	token = token_list;
+	token = token->next;
+	count = 0;
+	while (token != NULL)
+	{
+		while (token->type != REDIRECTION && token->next != NULL)
+		{
+			if (token->type == PIPE)
+				return(1);
+			token = token->next;
+		}
+		
+		token = token->next;
+	}
 	return (0);
 }

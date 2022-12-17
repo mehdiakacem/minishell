@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:22:31 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/16 17:55:41 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/17 17:29:08 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,14 @@ int	ft_pars(t_token *token_list)
 	// 	temp = temp->next;
 	// }
 	// printf("\n");
-
-	if (ft_check_squotes(token_list) == 1)
+	if (ft_check_dquotes(token_list) == 1)
 		return (1);
-	else if (ft_check_dquotes(token_list) == 1)
+	else if (ft_check_squotes(token_list) == 1)
 		return (1);
 	else if (ft_check_pipes(token_list) == 1)
 		return (1);
+	// else if (ft_check_redirections(token_list) == 1)
+	// 	return (1);
 	return (0);
 }
 

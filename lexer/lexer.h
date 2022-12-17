@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 12:31:56 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/15 16:15:09 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/17 11:52:30 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct token
 t_token	*ft_lex(char	*line);
 t_token	*ft_create_token_list(char	*line);
 void	ft_tokenize(t_token *token);
+void	ft_wordnize(t_token *token);
 t_token	*ft_grp_tokens(t_token *token);
 
 #endif

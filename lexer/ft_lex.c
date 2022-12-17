@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 13:08:39 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/16 16:52:46 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/17 14:12:10 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_token	*ft_lex(char	*line)
 	line = ft_strtrim(line, " ");
 	token = ft_create_token_list(line);
 	ft_tokenize(token);
+	ft_wordnize(token);
 	token_list = ft_grp_tokens(token);
 	while (token != NULL)
 	{
