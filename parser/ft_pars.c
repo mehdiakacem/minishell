@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:22:31 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/17 17:29:08 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/17 18:20:55 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ int	ft_pars(t_token *token_list)
 		return (1);
 	else if (ft_check_pipes(token_list) == 1)
 		return (1);
-	// else if (ft_check_redirections(token_list) == 1)
-	// 	return (1);
+	else if (ft_check_redirections(token_list) == 1)
+		return (1);
 	return (0);
 }
 
 int	ft_pars_error(void)
 {
-	printf("pars error\n");
+	printf("parse error\n");
 	return (1);
 }
