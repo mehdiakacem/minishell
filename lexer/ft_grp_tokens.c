@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 15:34:05 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/17 12:21:12 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/18 12:28:17 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,8 @@ t_token	*ft_join_tokens(char **str, t_token *token)
 {
 	char	*temp_str;
 
-	while (token->next != NULL && token->type == WORD && token->next->type == WORD)
+	while (token->next != NULL && token->type == WORD
+		&& token->next->type == WORD)
 	{
 		if (*str == NULL)
 		{

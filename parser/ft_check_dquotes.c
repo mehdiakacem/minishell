@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 17:51:17 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/17 14:16:42 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/18 12:29:04 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int	ft_check_dquotes(t_token *token_list)
 {
-	int count;
-	t_token *token;
+	int		count;
+	t_token	*token;
 
 	count = 0;
 	token = token_list;

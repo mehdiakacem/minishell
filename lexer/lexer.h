@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 12:31:56 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/17 11:52:30 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/18 14:29:48 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # define REDIRECTION 3
 # define DQUOTE 4
 # define SQUOTE 5
+# define DOLLAR 6
 
 # include <stdio.h>
 # include <stdlib.h>
