@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 15:34:05 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/18 12:28:17 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/20 14:37:33 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ t_token	*ft_grp_tokens(t_token *token)
 	while (token != NULL)
 	{
 		str = NULL;
-		if (token->next == NULL || token->type != WORD)
+		if (token->next == NULL || token->type != WORD || token->type != SPACE)
 			str = ft_strjoin(&token->value, "");
-		else if (token->next == NULL || token->type == WORD)
+		else if (token->next == NULL || token->type == WORD || token->type == 0)
 			str = ft_strjoin(&token->value, "");
 		token = ft_join_tokens(&str, token);
 		new_token = (t_token *)malloc(sizeof(t_token));
@@ -47,8 +47,9 @@ t_token	*ft_join_tokens(char **str, t_token *token)
 {
 	char	*temp_str;
 
-	while (token->next != NULL && token->type == WORD
-		&& token->next->type == WORD)
+	while (token->next != NULL && ((token->type == WORD
+				&& token->next->type == WORD) || (token->type == SPACE
+				&& token->next->type == SPACE)))
 	{
 		if (*str == NULL)
 		{
