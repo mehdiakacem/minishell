@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 11:52:58 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/18 12:28:45 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/20 14:19:44 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,27 @@
 
 void	ft_wordnize(t_token *token)
 {
-	t_token	*temp;
-
-	temp = token;
-	while (temp != NULL)
+	while (token != NULL)
 	{
-		if (temp->type == SQUOTE && temp->next != NULL)
+		if (token->type == SQUOTE && token->next != NULL)
 		{
-			temp = temp->next;
-			while (temp->type != SQUOTE && temp->next != NULL)
+			token = token->next;
+			while (token->type != SQUOTE && token->next != NULL)
 			{
-				temp->type = WORD;
-				temp = temp->next;
+				token->type = WORD;
+				token = token->next;
 			}
 		}
-		else if (temp->type == DQUOTE && temp->next != NULL)
+		else if (token->type == DQUOTE && token->next != NULL)
 		{
-			temp = temp->next;
-			while (temp->type != DQUOTE && temp->next != NULL)
+			token = token->next;
+			while (token->type != DQUOTE && token->type != DOLLAR
+				&& token->next != NULL)
 			{
-				temp->type = WORD;
-				temp = temp->next;
+				token->type = WORD;
+				token = token->next;
 			}
 		}
-		temp = temp->next;
+		token = token->next;
 	}
 }
