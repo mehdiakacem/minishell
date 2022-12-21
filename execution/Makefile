@@ -6,17 +6,23 @@
 #    By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/09 13:39:43 by nmoussam          #+#    #+#              #
-#    Updated: 2022/12/20 16:46:43 by nmoussam         ###   ########.fr        #
+#    Updated: 2022/12/21 23:24:17 by nmoussam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 INC  = ./include/minishell.h \
 		./include/get_next_line.h
-SRCS = 	srcs/main.c \
-		srcs/echo.c \
+SRCS = 	builtins/main.c \
+		builtins/echo.c \
+		builtins/pwd.c \
+		builtins/env.c \
 		utils/ft_strcmp.c \
-		srcs/pwd.c
+		utils/substr.c \
+		utils/ft_strlen.c \
+		utils/ft_strchr.c \
+		utils/ft_lstadd_back.c \
+		utils/ft_lstnew.c
 
 		
 OBJS = $(SRCS:.c=.o)
