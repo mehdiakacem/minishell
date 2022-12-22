@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:18:30 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/18 13:54:56 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/22 21:02:57 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # define PARSER_H
 
-#include "../lexer/lexer.h"
+# include "../lexer/lexer.h"
 
 int	ft_pars(t_token *token_list);
 int	ft_pars_error(void);

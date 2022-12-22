@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/17 15:34:01 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/18 13:50:28 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/21 11:53:12 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,18 @@ int	ft_check_redirections(t_token *token_list)
 int	ft_diff_redirec(t_token *token_list)
 {
 	t_token	*token;
+	char	*temp;
 
 	token = token_list;
 	token = token->next;
 	while (token != NULL)
 	{
-		if ((ft_strncmp(token->name, ">", 1) == 0
-				&& ft_strncmp(token->next->name, "<", 1) == 0)
-			|| (ft_strncmp(token->name, "<", 1) == 0
-				&& ft_strncmp(token->next->name, ">", 1) == 0))
-			return (1);
+		if (token->type == REDIRECTION && ft_strlen(token->name) == 2)
+		{
+			temp = token->name;
+			if (*temp != *(temp + 1))
+				return (1);
+		}
 		token = token->next;
 	}
 	return (0);
@@ -71,10 +73,10 @@ int	ft_more_redirec(t_token *token_list)
 	while (token != NULL)
 	{
 		count = 0;
-		while (token->type == REDIRECTION)
+		if (token->type == REDIRECTION)
 		{
-			count++;
-			if (count == 3)
+			count = ft_strlen(token->name);
+			if (count > 2)
 				return (1);
 			token = token->next;
 		}

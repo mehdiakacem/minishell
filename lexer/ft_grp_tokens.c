@@ -6,13 +6,15 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 15:34:05 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/20 14:37:33 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/22 20:57:40 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
 
 t_token	*ft_join_tokens(char **str, t_token *token);
+int		ft_check_type_diff_wsr(int token_type);
+int		ft_check_type_is_wsr(int token_type);
 
 t_token	*ft_grp_tokens(t_token *token)
 {
@@ -27,9 +29,9 @@ t_token	*ft_grp_tokens(t_token *token)
 	while (token != NULL)
 	{
 		str = NULL;
-		if (token->next == NULL || token->type != WORD || token->type != SPACE)
+		if (token->next == NULL || ft_check_type_diff_wsr(token->type))
 			str = ft_strjoin(&token->value, "");
-		else if (token->next == NULL || token->type == WORD || token->type == 0)
+		else if (token->next == NULL || ft_check_type_is_wsr(token->type))
 			str = ft_strjoin(&token->value, "");
 		token = ft_join_tokens(&str, token);
 		new_token = (t_token *)malloc(sizeof(t_token));
@@ -49,7 +51,8 @@ t_token	*ft_join_tokens(char **str, t_token *token)
 
 	while (token->next != NULL && ((token->type == WORD
 				&& token->next->type == WORD) || (token->type == SPACE
-				&& token->next->type == SPACE)))
+				&& token->next->type == SPACE) || (token->type == REDIRECTION
+				&& token->next->type == REDIRECTION)))
 	{
 		if (*str == NULL)
 		{
@@ -63,4 +66,18 @@ t_token	*ft_join_tokens(char **str, t_token *token)
 		token = token->next;
 	}
 	return (token);
+}
+
+int	ft_check_type_diff_wsr(int token_type)
+{
+	if (token_type != WORD || token_type != SPACE || token_type != REDIRECTION)
+		return (1);
+	return (0);
+}
+
+int	ft_check_type_is_wsr(int token_type)
+{
+	if (token_type == WORD || token_type == SPACE || token_type == REDIRECTION)
+		return (1);
+	return (0);
 }

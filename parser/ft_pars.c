@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:22:31 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/18 14:34:01 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/22 20:59:56 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ void	ft_print_token_content(t_token *token_list);
 
 int	ft_pars(t_token *token_list)
 {
-	ft_print_type(token_list);
-	ft_print_token_content(token_list);
 	if (ft_check_dquotes(token_list) == 1)
 		return (1);
 	else if (ft_check_squotes(token_list) == 1)

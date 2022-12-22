@@ -6,26 +6,69 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/17 14:10:53 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/22 21:23:23 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int main(void)
+void	ft_free_tokens(t_token *token_list);
+
+int	main(void)
 {
-	char	*line;
-	int		error;
+	char		*line;
+	int			error;
+	t_token		*token_list;
+	t_treenode	*root;
 
 	while (1)
 	{
 		line = readline("minishell$ ");
 		add_history(line);
-		error = ft_pars(ft_lex(line));
+		token_list = ft_lex(line);
+		error = ft_pars(token_list);
 		if (error == 1)
+		{
 			ft_pars_error();
+			free(line);
+			ft_free_tokens(token_list);
+		}
+		else
+		{
+			root = ft_tree(token_list->next);
+			free(line);
+			ft_free_tokens(token_list);
+		}
 		// system("leaks minishell");
 		// exit(0);
 	}
 	return (0);
+}
+
+int	ft_count_words(t_token *token)
+{
+	int	count;
+
+	count = 0;
+	while (token != NULL)
+	{
+		if (token->type == WORD || token->type == REDIRECTION)
+			count++;
+		else if (token->type == PIPE)
+			return (count);
+		token = token->next;
+	}
+	return (count);
+}
+
+void	ft_free_tokens(t_token *token_list)
+{
+	free(token_list);
+	token_list = token_list->next;
+	while (token_list != NULL)
+	{
+		free(token_list->name);
+		free(token_list);
+		token_list = token_list->next;
+	}
 }

@@ -6,7 +6,7 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2022/12/17 15:35:32 by makacem          ###   ########.fr        #
+#    Updated: 2022/12/22 21:28:48 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,9 @@ SRC = main.c \
 	parser/ft_check_dquotes.c \
 	parser/ft_check_pipes.c \
 	parser/ft_check_redirections.c \
+	tree/ft_tree.c \
+	tree/ft_pipe_links.c \
+	tree/ft_cmd_links.c \
 
 OBJ = $(SRC:.c=.o)
 
