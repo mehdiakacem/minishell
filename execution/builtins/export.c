@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:41:35 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/22 13:35:18 by nmoussam         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:00:33 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,24 +14,34 @@
 
 t_env *sort_env(t_env *head)
 {    
-    t_env *temp;
-    t_env *temp_next;
+    char    *temp_var;
+    char    *temp_content;
     t_env *temp_head;
+    int  i;
 
     temp_head = head;
-    int  i;
-    i = 0;
-    while (temp_head != NULL && temp_head->next != NULL)
+    while (temp_head != NULL)
     {
-        if (temp_head->var[0] > temp_head->next->var[0])
-        {
-            temp = temp_head;
-            temp_head = temp_head->next;
-            temp->next = temp_head->next;
-            temp_head->next = temp;
-        }
-        // printf("%c   %c\n\n", temp_head->var[0], temp_head->next->var[0]);
         temp_head = temp_head->next;
+        i++;
+    }
+    while (i > 0)
+    {
+        temp_head = head;
+        while (temp_head != NULL && temp_head->next != NULL)
+        {
+            if (temp_head->var[0] > temp_head->next->var[0])
+            {
+                temp_var = temp_head->var;
+                temp_content = temp_head->content;
+                temp_head->var = temp_head->next->var;
+                temp_head->content = temp_head->next->content;
+                temp_head->next->var = temp_var;
+                temp_head->next->content = temp_content;
+            }
+            temp_head = temp_head->next;
+        }
+        i--;
     }
     return(head);
 }
@@ -41,7 +51,7 @@ void export(int argc, char **argv, char **en) //nzid f env and tertib
 {
     t_env   *temp;
     t_env   *tmp;
-    
+
     temp = get_env(en);
     tmp = sort_env(temp);
     if(argc > 2 && (ft_isdigit(argv[2][0]) == 1 || (argv[2][0] == '-' && argv[2][1] == '\0')))
