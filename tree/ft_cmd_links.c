@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:26:43 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/22 21:35:47 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/23 18:02:28 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ t_token	*ft_skip_tonextpipe(t_token *token_list)
 }
 
 t_treenode	*ft_create_cmd(t_token *token_list)
-{	
+{
 	t_treenode	*root;
 
 	root = malloc(sizeof(t_treenode));
@@ -90,4 +90,20 @@ char	**ft_creat_args(t_token *token)
 	}
 	*args = NULL;
 	return (cmd);
+}
+
+int	ft_count_words(t_token *token)
+{
+	int	count;
+
+	count = 0;
+	while (token != NULL)
+	{
+		if (token->type == WORD || token->type == REDIRECTION)
+			count++;
+		else if (token->type == PIPE)
+			return (count);
+		token = token->next;
+	}
+	return (count);
 }

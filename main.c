@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/22 21:23:23 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/24 12:56:35 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,30 +35,16 @@ int	main(void)
 		}
 		else
 		{
+			ft_expand(token_list->next);
 			root = ft_tree(token_list->next);
+			//ft_execute(root);
 			free(line);
 			ft_free_tokens(token_list);
-		}
+		} 
 		// system("leaks minishell");
 		// exit(0);
 	}
 	return (0);
-}
-
-int	ft_count_words(t_token *token)
-{
-	int	count;
-
-	count = 0;
-	while (token != NULL)
-	{
-		if (token->type == WORD || token->type == REDIRECTION)
-			count++;
-		else if (token->type == PIPE)
-			return (count);
-		token = token->next;
-	}
-	return (count);
 }
 
 void	ft_free_tokens(t_token *token_list)
