@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
+#    By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2022/12/26 14:31:12 by makacem          ###   ########.fr        #
+#    Updated: 2022/12/26 17:46:30 by nmoussam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,6 +33,14 @@ SRC = main.c \
 	tree/ft_tree.c \
 	tree/ft_pipe_links.c \
 	tree/ft_cmd_links.c \
+	builtins/check_builtins.c \
+	builtins/echo.c \
+	builtins/env.c \
+	builtins/pwd.c \
+	utils/ft_lstnew.c \
+	utils/ft_lstlast.c \
+	utils/ft_lstadd_back.c \
+	utils/ft_strcmp.c
 
 OBJ = $(SRC:.c=.o)
 

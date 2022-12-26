@@ -6,11 +6,11 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/18 15:04:20 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/18 15:05:00 by nmoussam         ###   ########.fr       */
+/*   Updated: 2022/12/26 15:11:41 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../minishell.h"
 
 int	ft_strcmp(char *s1, char *s2)
 {

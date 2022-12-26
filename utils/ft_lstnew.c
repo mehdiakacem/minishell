@@ -1,40 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_substr.c                                        :+:      :+:    :+:   */
+/*   ft_lstnew.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 22:12:35 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/21 22:19:48 by nmoussam         ###   ########.fr       */
+/*   Created: 2022/12/21 22:16:01 by nmoussam          #+#    #+#             */
+/*   Updated: 2022/12/26 15:19:34 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../minishell.h"
 
-char	*ft_substr(char *s, unsigned int start, int len)
+t_env	*ft_lstnew(char *lst)
 {
-	char	*new;
-	int	j;
+	t_env	*new;
+	int len;
 
-	if (!s)
-		return (NULL);
-	if (start > ft_strlen(s))
-	{
-		new = malloc(sizeof(char));
-		if (!new)
-			return (NULL);
-		new[0] = '\0';
-		return (new);
-	}
-	if (len > ft_strlen(s))
-		len = ft_strlen(s);
-	new = (char *)malloc(len + 1);
+	new = (t_env *)malloc(sizeof(t_env));
 	if (!new)
-		return (new);
-	j = 0;
-	while (j < len)
-		new[j++] = s[start++];
-	new[j] = '\0';
+		return (NULL);
+    new->var = ft_substr(lst, 0, ft_strlen(lst) - ft_strlen(ft_strchr(lst, '=')));
+	len = ft_strlen(lst) - ft_strlen(ft_strchr(lst, '='));
+	new->content = ft_substr(lst, ft_strlen(lst) - ft_strlen(ft_strchr(lst, '=')), ft_strlen(lst+len));
+	new->next = NULL;
 	return (new);
 }
