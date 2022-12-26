@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:19:44 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/21 23:23:07 by nmoussam         ###   ########.fr       */
+/*   Updated: 2022/12/23 18:23:48 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,8 @@ void echo(int argc, char **argv)
         }
     }
     
+}
+int main(int argc, char **argv)
+{
+    echo(argc, argv);
 }

@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/24 12:56:35 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/24 14:59:28 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	main(void)
 			//ft_execute(root);
 			free(line);
 			ft_free_tokens(token_list);
-		} 
+		}
 		// system("leaks minishell");
 		// exit(0);
 	}

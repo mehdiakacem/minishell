@@ -6,7 +6,7 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/07 15:25:02 by makacem           #+#    #+#              #
-#    Updated: 2022/06/15 10:32:51 by makacem          ###   ########.fr        #
+#    Updated: 2022/12/26 14:29:51 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,7 @@ $(NAME) : $(OBJ)
 	@ar -rc $(NAME) $(OBJ)
 
 %.o : %.c $(HEADER)
-	@gcc $(FLAGS) -c $<
+	@cc $(FLAGS) -c $<
 
 clean :
 	@rm -f $(OBJ)

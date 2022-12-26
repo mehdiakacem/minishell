@@ -6,13 +6,13 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2022/12/24 11:30:10 by makacem          ###   ########.fr        #
+#    Updated: 2022/12/26 14:31:12 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-CC = gcc
+CC = cc
 
 FLAGS = -Wall -Werror -Wextra -lreadline 
 \\ -fsanitize=address 

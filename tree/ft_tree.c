@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:02:58 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/23 18:14:53 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/26 14:42:11 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,11 @@ void		printtree(t_treenode *root);
 
 t_treenode	*ft_tree(t_token *token_list)
 {
-	t_treenode	*temp;
 	t_treenode	*root;
 
 	root = ft_pipe_links(token_list);
 	root = ft_cmd_links(root, token_list);
-	temp = root;
-	printtree(root);
+	//printtree(root);
 	return (root);
 }
 
@@ -42,7 +40,7 @@ void	printtree_rec(t_treenode *root, int level)
 	{
 		printtabs(level);
 		printf("--<empty>--\n");
-		return ;	
+		return ;
 	}
 	printtabs(level);
 	if (root->type == PIPE)
