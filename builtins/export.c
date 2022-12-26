@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:41:35 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/26 15:09:52 by nmoussam         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:34:03 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,20 +47,20 @@ t_env *sort_env(t_env *head)
 }
 
 
-void export(int argc, char **argv, char **en) //nzid f env and tertib
+void export(t_treenode *tree, char **en) //nzid f env and tertib
 {
     t_env   *temp;
     t_env   *tmp;
 
     temp = get_env(en);
     tmp = sort_env(temp);
-    if(argc > 2 && (ft_isdigit(argv[2][0]) == 1 || (argv[2][0] == '-' && argv[2][1] == '\0')))
-        printf("minishell: export: '%s': not a valid identifier\n", argv[2]); //env -- # - () &
-    if (argc > 2 && argv[2][0] == '-' && argv[2][1] != '\0')
+    if(tree->nb_cmd > 1 && (ft_isdigit(tree->cmd[1][0]) == 1 || (tree->cmd[1][0] == '-' && tree->cmd[1][1] == '\0')))
+        printf("minishell: export: '%s': not a valid identifier\n", tree->cmd[1]); //env -- # - () &
+    if (tree->nb_cmd > 1 && tree->cmd[1][0] == '-' && tree->cmd[1][1] != '\0')
     {
-        printf("minishell: export: -%c: invalid option\nexport: usage: export [-nf] [name[=value] ...] or export -p", argv[2][1]);
+        printf("minishell: export: -%c: invalid option\nexport: usage: export [-nf] [name[=value] ...] or export -p", tree->cmd[1][1]);
     }
-    else if(ft_strcmp(argv[1], "export") == 0) 
+    else if(ft_strcmp(tree->cmd[0], "export") == 0) 
     {      
         while(tmp)
         {
@@ -73,9 +73,4 @@ void export(int argc, char **argv, char **en) //nzid f env and tertib
             tmp = tmp->next;
         }
     }
-}
-int main(int argc, char **argv, char **en)
-{
-    // t_env *cmd = get_env(en);
-    export(argc, argv, en);
 }

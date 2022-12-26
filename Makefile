@@ -6,7 +6,7 @@
 #    By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2022/12/26 17:46:30 by nmoussam         ###   ########.fr        #
+#    Updated: 2022/12/26 18:31:46 by nmoussam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ SRC = main.c \
 	builtins/echo.c \
 	builtins/env.c \
 	builtins/pwd.c \
+	builtins/export.c \
 	utils/ft_lstnew.c \
 	utils/ft_lstlast.c \
 	utils/ft_lstadd_back.c \

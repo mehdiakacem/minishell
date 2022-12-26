@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 17:32:20 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/26 17:45:03 by nmoussam         ###   ########.fr       */
+/*   Updated: 2022/12/26 18:32:54 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,12 +40,15 @@ typedef struct t_treenode {
 
 int		check_alphabet(char *str, char alphabet);
 void 	echo(t_treenode *tree);
+t_env   *get_env(char **env);
 void 	env(t_treenode *tree, char **en);
 void	pwd(t_treenode *tree);
+void    export(t_treenode *tree, char **en);
+t_env   *sort_env(t_env *head);
 void	builtins(t_treenode *tree, char **en);
 void	ft_lstadd_back(t_env **alst, t_env *new_env);
 t_env	*ft_lstlast(t_env *lst);
 t_env	*ft_lstnew(char *lst);
-int	ft_strcmp(char *s1, char *s2);
+int	    ft_strcmp(char *s1, char *s2);
 
 #endif
