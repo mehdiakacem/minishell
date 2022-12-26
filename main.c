@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/26 17:55:35 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/26 18:24:00 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ int	main(int argc, char **argv, char **en)
 		{
 			ft_expand(token_list->next);
 			root = ft_tree(token_list->next);
-			// echo(root);
-			// env(root, en);
-			pwd(root);
+			builtins(root, en);
 			free(line);
 			ft_free_tokens(token_list);
 		}
