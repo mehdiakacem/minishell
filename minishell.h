@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/26 14:35:05 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/26 17:53:54 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ typedef struct t_treenode {
 	struct t_treenode	*left;
 	struct t_treenode	*right;
 }	t_treenode;
+
+int	a;
 
 t_treenode	*ft_tree(t_token *token_list);
 t_treenode	*ft_pipe_links(t_token *token_list);

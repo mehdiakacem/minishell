@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:26:43 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/26 14:42:42 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/26 17:20:40 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,9 +84,7 @@ int	ft_redirect_output(t_token *redirec_token)
 		file_name = redirec_token->next->name;
 		redirec_token->next->type = SPACE;
 	}
-	fd = open(file_name, O_CREAT | O_TRUNC | O_WRONLY, 0744);
-	//printf("file name: %s\n", file_name);
-	close(fd);
+	fd = open(file_name, O_CREAT | O_TRUNC | O_WRONLY, 0644);
 	return (fd);
 }
 
