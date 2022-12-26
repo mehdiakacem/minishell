@@ -1,18 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   is_digit.c                                         :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 23:47:10 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/21 23:47:21 by nmoussam         ###   ########.fr       */
+/*   Created: 2022/12/21 22:17:29 by nmoussam          #+#    #+#             */
+/*   Updated: 2022/12/26 17:46:20 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../minishell.h"
 
-int	ft_isdigit(int c)
+void	ft_lstadd_back(t_env **alst, t_env *new_env)
 {
-	return (c >= '0' && c <= '9');
+	t_env	*last;
+
+	if (!alst || !new_env)
+		return ;
+	if (!*alst)
+		*alst = new_env;
+	else
+	{
+		last = ft_lstlast(*alst);
+		last->next = new_env;
+	}
 }

@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/26 16:53:26 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/26 17:55:35 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	ft_free_tokens(t_token *token_list);
 
-int	main(void)
+int	main(int argc, char **argv, char **en)
 {
 	char		*line;
 	int			error;
@@ -37,7 +37,9 @@ int	main(void)
 		{
 			ft_expand(token_list->next);
 			root = ft_tree(token_list->next);
-			//ft_execute(root);
+			// echo(root);
+			// env(root, en);
+			pwd(root);
 			free(line);
 			ft_free_tokens(token_list);
 		}

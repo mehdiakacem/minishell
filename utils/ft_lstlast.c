@@ -1,28 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/09 13:39:53 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/21 23:26:50 by nmoussam         ###   ########.fr       */
+/*   Created: 2022/12/21 23:18:29 by nmoussam          #+#    #+#             */
+/*   Updated: 2022/12/26 15:11:26 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/minishell.h"
+#include "../minishell.h"
 
-int main(int argc, char **argv, char **env)
+t_env	*ft_lstlast(t_env *lst)
 {
-	char	*line;
-	int 	i;
-	i = 0;
-	while (1)
+	t_env	*ptr;
+
+	ptr = lst;
+	while (ptr && ptr->next)
 	{
-		line = readline("minishell$ ");
-		add_history(line);
-		builtins(argc, argv, env);
-		printf("%s", env[0]);
+		ptr = ptr->next;
 	}
-	
+	return (ptr);
 }
