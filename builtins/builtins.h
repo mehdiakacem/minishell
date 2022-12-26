@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 17:32:20 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/26 20:30:19 by nmoussam         ###   ########.fr       */
+/*   Updated: 2022/12/26 21:48:05 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include <stdlib.h>
 # include <signal.h>
 # include <fcntl.h>
+# include <unistd.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 typedef struct s_env
