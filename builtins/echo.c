@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 18:19:44 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/26 18:30:06 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/27 15:44:33 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ void echo(t_treenode *tree)
             printf("\n");
         else
         {
-
             while (i < tree->nb_cmd && tree->cmd[i][0] == '-' && tree->cmd[i][1] == 'n' && check_alphabet(tree->cmd[i], 'n') == 1)
             {
                     val = 1;
@@ -58,12 +57,11 @@ void echo(t_treenode *tree)
                 printf("\n");
             while (val == 1 && i < tree->nb_cmd && tree->cmd[i] != NULL)
             {
-                printf("%s", tree->cmd[i]);
+                ft_printf("%s", tree->cmd[i]);
                 if (i != tree->nb_cmd - 1)
-                    printf(" ");
+                    ft_printf(" ");
                 i++;
             }
         }
     }
-    
 }

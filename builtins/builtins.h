@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 17:32:20 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/26 18:11:16 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/27 15:03:55 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,10 @@
 # include <signal.h>
 # include <fcntl.h>
 # include <unistd.h>
+# include "../libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
+
 typedef struct s_env
 {
 	char *var;
