@@ -6,12 +6,12 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:28:34 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/26 17:48:56 by nmoussam         ###   ########.fr       */
+/*   Updated: 2022/12/26 21:35:54 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 
-#include "builtins.h"
+#include "../minishell.h"
 
 t_env   *get_env(char **env)
 {
@@ -31,9 +31,7 @@ t_env   *get_env(char **env)
 void env(t_treenode *tree, char **en) 
 {
     t_env   *tmp;
-    char *str;
     
-
     tmp = get_env(en);
     if(tree->nb_cmd > 1)
         printf("env: %s: No such file or directory\n", tree->cmd[1]); //env -- # - () &
@@ -44,6 +42,7 @@ void env(t_treenode *tree, char **en)
             if(tmp->content)
             {
                 printf("%s",tmp->var);
+                printf("=");
                 printf("%s\n", tmp->content);
             }
             tmp = tmp->next;
