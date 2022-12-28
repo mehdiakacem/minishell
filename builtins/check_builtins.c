@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/21 23:26:31 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/27 16:19:12 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/27 20:51:36 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	builtins(t_treenode *tree, char **en)
 	else if (ft_strcmp(tree->cmd[0], "pwd") == 0)
 		pwd(tree);
 	else if (ft_strcmp(tree->cmd[0], "env") == 0)
-		env(tree, en);
+		env(&tree, en);
 	else if (ft_strcmp(tree->cmd[0], "export") == 0)
 		export(tree, en);
 	// else if (ft_strcmp(tree->cmd[0], "cd") == 0)
@@ -43,3 +43,5 @@ void	builtins(t_treenode *tree, char **en)
 		close(tree->stdout_fd);
 	}
 }
+
+

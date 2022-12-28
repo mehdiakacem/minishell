@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:28:34 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/26 21:35:54 by nmoussam         ###   ########.fr       */
+/*   Updated: 2022/12/27 20:52:11 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ t_env   *get_env(char **env)
     return(tmp);
 }
 
-void env(t_treenode *tree, char **en) 
+void env(t_treenode **tree, char **en) 
 {
     t_env   *tmp;
     
     tmp = get_env(en);
-    if(tree->nb_cmd > 1)
-        printf("env: %s: No such file or directory\n", tree->cmd[1]); //env -- # - () &
-    else if(ft_strcmp(tree->cmd[0], "env") == 0) 
+    if((*tree)->nb_cmd > 1)
+        printf("env: %s: No such file or directory\n", (*tree)->cmd[1]); //env -- # - () &
+    else if(ft_strcmp((*tree)->cmd[0], "env") == 0) 
     {      
         while(tmp)
         {

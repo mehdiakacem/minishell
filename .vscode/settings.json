@@ -5,6 +5,7 @@
         "stdlib.h": "c",
         "stdio.h": "c",
         "history.h": "c",
-        "fcntl.h": "c"
+        "fcntl.h": "c",
+        "executor.h": "c"
     }
 }
