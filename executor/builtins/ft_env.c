@@ -1,33 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lex.c                                           :+:      :+:    :+:   */
+/*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/11 13:08:39 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/28 18:59:35 by makacem          ###   ########.fr       */
+/*   Created: 2022/12/28 15:06:52 by makacem           #+#    #+#             */
+/*   Updated: 2022/12/28 21:53:58 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lexer.h"
+#include "../../minishell.h"
 
-t_token	*ft_lex(char	*line)
+char	**ft_env(int n_cmd, char **cmd, char **env)
 {
-	t_token	*token;
-	t_token	*token_list;
-	t_token	*temp;
+	char	**arr;
 
-	line = ft_strtrim(line, " ");
-	token = ft_create_token_list(line);
-	ft_tokenize(token);
-	ft_wordnize(token);
-	token_list = ft_grp_tokens(token);
-	while (token != NULL)
+	if (n_cmd > 1)
 	{
-		free(token);
-		token = token->next;
+		printf("env: usage: with no options or arguments\n");
+		return (env);
 	}
-	free(line);
-	return (token_list);
+	arr = env;
+	while (*arr != NULL)
+	{
+		if (ft_strchr(*arr, '=') != NULL)
+			printf("%s\n", *arr);
+		arr++;
+	}
+	return (env);
 }

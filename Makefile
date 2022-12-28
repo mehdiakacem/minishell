@@ -6,7 +6,7 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2022/12/27 17:48:39 by makacem          ###   ########.fr        #
+#    Updated: 2022/12/28 16:09:52 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,6 +43,8 @@ SRC = main.c \
 	utils/ft_lstadd_back.c \
 	utils/ft_strcmp.c \
 	executor/ft_execute.c \
+	executor/builtins/ft_env.c \
+	executor/builtins/ft_export.c \
 
 OBJ = $(SRC:.c=.o)
 

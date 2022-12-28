@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/28 11:31:36 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/28 21:40:06 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	ft_shlvl_plus(char **env)
 	char	*shlvl;
 
 	arr = env;
+	shlvl = ft_getenv(env, "SHLVL");
 	while (*arr != '\0')
 	{
 		if (ft_strncmp(*arr, "SHLVL", 5) == 0)
@@ -99,6 +100,18 @@ char	**ft_create_new_env(char **old_env)
 	return (new_env);
 }
 
+void	ft_free_env(char **env)
+{
+	char	**arr;
+
+	arr = env;
+	while (*arr != NULL)
+	{
+		free(*arr);
+		arr++;
+	}
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	char		*line;
@@ -121,14 +134,13 @@ int	main(int argc, char **argv, char **env)
 		}
 		else
 		{
-			ft_expand(token_list->next);
+			ft_expand(token_list->next, env);
 			root = ft_tree(token_list->next);
-			ft_execute(root);
+			env = ft_execute(root, env);
 			free(line);
 			ft_free_tokens(token_list);
 		}
-		// system("leaks minishell");
-		// exit(0);
+		//ft_free_env(env);
 	}
 	return (0);
 }

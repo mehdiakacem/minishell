@@ -6,13 +6,13 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 11:21:25 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/24 12:59:08 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/28 11:38:37 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "expander.h"
 
-void	ft_expand(t_token *token_list)
+void	ft_expand(t_token *token_list, char **env)
 {
 	char	*var;
 	char	*content;
@@ -28,7 +28,7 @@ void	ft_expand(t_token *token_list)
 			else if (token_list->next->type == WORD)
 			{
 				var = token_list->next->name;
-				content = getenv(var);
+				content = ft_getenv(env, var);
 				if (content == NULL)
 					content = "";
 				content_len = ft_strlen(content) + 1;
