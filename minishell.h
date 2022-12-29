@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/28 21:38:33 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/29 16:07:01 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ char		**ft_populate(char **new_env, char **old_env);
 char        **ft_execute(t_treenode *root, char **env);
 char		**ft_env(int n_cmd, char **cmd, char **env);
 char		**ft_export(int n_cmd, char **cmd, char **env);
+char        **ft_unset(int n_cmd, char **cmd, char **env);
 void		ft_free_env(char **env);
+int		ft_search_env(char	**env, char *var);
 
 #endif

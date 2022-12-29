@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:45:58 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/28 21:40:50 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/29 16:04:55 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,11 +39,9 @@ char	**ft_exec_builtin(int n_cmd, char **cmd, char **env)
 	if (ft_strcmp(*cmd, "env") == 0)
 		env = ft_env(n_cmd, cmd, env);
 	else if (ft_strcmp(*cmd, "export") == 0)
-	{
 		env = ft_export(n_cmd, cmd, env);
-		// system("leaks minishell");
-		// exit(0);
-	}
+	else if (ft_strcmp(*cmd, "unset") == 0)
+		env = ft_unset(n_cmd, cmd, env);
 	return (env);
 }
 
@@ -60,10 +58,12 @@ char	**ft_execute_rec(t_treenode *root, char **env)
 	else if (root->type == CMD)
 	{
 		if (ft_check_builtin(*(root->cmd)) == 1)
-			env = ft_exec_builtin(root->nb_cmd, root->cmd, env);			
+			env = ft_exec_builtin(root->nb_cmd, root->cmd, env);	
+
+		free(root->cmd);		
 	}
-	ft_execute_rec(root->left, env);
-	ft_execute_rec(root->right, env);
+	// ft_execute_rec(root->left, env);
+	// ft_execute_rec(root->right, env);
 	return (env);
 }
 

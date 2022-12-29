@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/28 21:40:06 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/29 10:14:13 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ char	**ft_create_new_env(char **old_env)
 	nbrof_env_var = ft_count_env_var(old_env);
 	new_env = malloc((nbrof_env_var + 1) * sizeof(char **));
 	new_env = ft_populate(new_env, old_env);
-	ft_shlvl_plus(new_env);
+	//ft_shlvl_plus(new_env);
 
 	return (new_env);
 }
@@ -110,7 +110,9 @@ void	ft_free_env(char **env)
 		free(*arr);
 		arr++;
 	}
+	free(env);
 }
+
 
 int	main(int argc, char **argv, char **env)
 {
@@ -139,9 +141,10 @@ int	main(int argc, char **argv, char **env)
 			env = ft_execute(root, env);
 			free(line);
 			ft_free_tokens(token_list);
+			free(root);
 		}
-		//ft_free_env(env);
 	}
+	ft_free_env(env);
 	return (0);
 }
 

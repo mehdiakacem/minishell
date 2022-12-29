@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:03:39 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/28 21:48:31 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/29 11:33:39 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 char	**ft_sort_env(char **env);
 void	ft_print_env(char **env);
 char	**ft_add_var(char *var, char **env);
+int		ft_search_env(char	**env, char *var);
 
 char	**ft_export(int n_cmd, char **cmd, char **env)
 {
@@ -31,11 +32,39 @@ char	**ft_export(int n_cmd, char **cmd, char **env)
 		arg++;
 		while (*arg != NULL)
 		{
-			env = ft_add_var(*arg, env);
+			if (ft_search_env(env, *arg) == 0)
+				env = ft_add_var(*arg, env);
+			else if (ft_search_env(env, *arg) == 1 && ft_strchr(*arg, '=') != NULL)
+			{
+				
+			}
 			arg++;
 		}
 	}
 	return (env);
+}
+
+int		ft_search_env(char	**env, char *var)
+{
+	char	**arr;
+	int		var_len;
+	char 	*temp;
+
+	arr = env;
+	var_len = 0;
+	temp = var;
+	while (*temp != '\0' && *temp != '=')
+	{
+		var_len++;
+		temp++;
+	}
+	while (*arr != '\0')
+	{
+		if (ft_strncmp(*arr, var, var_len) == 0)
+			return (1);
+		arr++;
+	}
+	return (0);
 }
 
 char	**ft_add_var(char *var, char **env)
@@ -48,46 +77,42 @@ char	**ft_add_var(char *var, char **env)
 	new_env = ft_populate(new_env, env);
 	last_place = new_env;
 	while (*last_place != NULL)
-	{
 		last_place++;
-	}
 	*last_place = ft_strdup(var);
 	last_place++;
 	*last_place = NULL;
-	// 	var = ft_strdup(var);
-	// new_env = ft_populate_ad(new_env, env, var);
-	temp = new_env;
-	// while (*temp != NULL)
-	// {
-	// 	printf("%s\n", *temp);
-	// 	temp++;
-	// }
+	ft_free_env(env);
 	return (new_env);
 }
 
 void	ft_print_env(char **env)
 {
 	char	**arr;
+	char	**temp;
 	char	*var;
 	char	*content;
 
 	arr = ft_sort_env(env);
-	while (*arr != NULL)
+	temp = arr;
+	while (*temp != NULL)
 	{
 		ft_printf("declare -x ");
-		var = *arr;
+		var = *temp;
 		while (*var != '=' && *var != '\0')
 		{
 			ft_putchar(*var);
 			var++;
 		}
-		ft_putchar('=');
-		var++;
-		ft_putchar('"');
-		ft_printf("%s", var);
-		ft_putchar('"');
+		if (*var != '\0')
+		{	
+			ft_putchar('=');
+			var++;
+			ft_putchar('"');
+			ft_printf("%s", var);
+			ft_putchar('"');
+		}
 		ft_putchar('\n');
-		arr++;
+		temp++;
 	}
 	ft_free_env(arr);
 }
