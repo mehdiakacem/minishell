@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 10:02:58 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/28 19:00:47 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/02 14:16:25 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		printtree(t_treenode *root);
 t_treenode	*ft_tree(t_token *token_list)
 {
 	t_treenode	*root;
-
+	
 	if (ft_strlen(token_list->name) == 0)
 		return (NULL);
 	root = ft_pipe_links(token_list);

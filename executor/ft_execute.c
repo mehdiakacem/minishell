@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:45:58 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/02 13:47:29 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/02 14:18:44 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,13 @@ char	**ft_execute_rec(t_treenode *root, char **env)
 	}
 	else if (root->type == CMD)
 	{
-		if (ft_check_builtin(*(root->cmd)) == 1)
+		if (*(root->cmd) == NULL)
+			printf("minishell: : command not found\n");
+		else if (ft_check_builtin(*(root->cmd)) == 1)
 			env = ft_exec_builtin(root->nb_cmd, root->cmd, env);
 		else
 			ft_exec_cmd(root, env);	
 		free(root->cmd);		
-
 	}
 	return (env);
 }
