@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:54:15 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/29 19:07:01 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/01 16:20:50 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ char	**ft_execute_rec(t_treenode *root, char **env)
 	if (root->type == PIPE)
 	{
 		ft_pipe(root, env);
+	
 		return (env);
 	}
 	else if (root->type == CMD)

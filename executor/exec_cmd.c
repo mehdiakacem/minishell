@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/29 19:23:31 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/01 16:17:09 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	exec_file(t_treenode *root, char *path, char **env)
 		else if (pid == 0)
 		{
 			if (execve(path, root->cmd, env) == -1)
-				printf("minishell: %s\n", strerror(errno));
+				printf("%s", strerror(errno));
 		}
 	}
 }
