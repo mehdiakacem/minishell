@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/02 21:23:30 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/02 22:11:10 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,11 +53,12 @@ char		**ft_env(int n_cmd, char **cmd, char **env);
 char		**ft_export(int n_cmd, char **cmd, char **env);
 char        **ft_unset(int n_cmd, char **cmd, char **env);
 char		**ft_echo(int n_cmd, char **cmd, char **env);
+char		**ft_pwd(int n_cmd, char **cmd, char **env);
 int			check_alphabet(char *str, char alphabet);
 void		ft_free_env(char **env);
 int			ft_search_env(char	**env, char *var);
-int			ft_check_builtin(char *cmd);
-char		**ft_exec_builtin(int n_cmd, char **cmd, char **env);
+// int			ft_check_builtin(char *cmd);
+// char		**ft_exec_builtin(int n_cmd, char **cmd, char **env);
 int 		path_exist(char *path);
 char 		**path(t_treenode *root, char **env);
 void		exec_file(t_treenode *root, char *path, char **env);
@@ -67,7 +68,9 @@ char		**ft_execute_rec(t_treenode *root, char **env);
 char		**ft_execute(t_treenode *root, char **env);
 void		execute_left(int *fd, t_treenode *left, char **env);
 void		execute_right(int *fd, t_treenode *right, char **env);
+void	execution_cmd(t_treenode *root, char **env);
 void		ft_pipe(t_treenode *root, char **env);
 int			ft_strcmp(char *s1, char *s2);
+void    	ft_to_lower(char *str);
 
 #endif

@@ -1,24 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   ft_lower.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 19:50:21 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/02 22:10:36 by nmoussam         ###   ########.fr       */
+/*   Created: 2023/01/02 21:46:28 by nmoussam          #+#    #+#             */
+/*   Updated: 2023/01/02 21:47:08 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
-char	**ft_pwd(int n_cmd, char **cmd, char **env)
+void    ft_to_lower(char *str)
 {
-    if (n_cmd > 1 && cmd[1][0] == '-')
-	{
-		printf("minishell: pwd: -%c invalid option\npwd: usage: pwd [-LP]\n", cmd[1][1]);
-        return ;
-	}
-	printf("%s\n", getenv("PWD"));
-	return (env);
+	int	i;
+
+	i = 0;
+	while (str[i])
+    {
+		str[i] = ft_tolower(str[i]);
+        i++;
+    }
 }
