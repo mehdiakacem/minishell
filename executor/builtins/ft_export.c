@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:03:39 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/29 11:33:39 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/29 16:12:36 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	**ft_export(int n_cmd, char **cmd, char **env)
 		{
 			if (ft_search_env(env, *arg) == 0)
 				env = ft_add_var(*arg, env);
-			else if (ft_search_env(env, *arg) == 1 && ft_strchr(*arg, '=') != NULL)
+			else if (ft_search_env(env, *arg) == 0 && ft_strchr(*arg, '=') != NULL)
 			{
 				
 			}
