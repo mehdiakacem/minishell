@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.h                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/26 17:32:20 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/28 14:59:44 by makacem          ###   ########.fr       */
+/*   Updated: 2022/12/29 19:23:06 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ typedef struct t_treenode {
 int		check_alphabet(char *str, char alphabet);
 void 	echo(t_treenode *tree);
 t_env   *get_env(char **env);
-void 	env(t_treenode *root);
+// void 	env(t_treenode *root);
 void	pwd(t_treenode *tree);
 void    export(t_treenode *tree, char **en);
 t_env   *sort_env(t_env *head);

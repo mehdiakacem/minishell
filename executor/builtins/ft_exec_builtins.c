@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_execute.c                                       :+:      :+:    :+:   */
+/*   ft_exec_builtins.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/27 17:45:58 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/02 13:47:29 by makacem          ###   ########.fr       */
+/*   Created: 2022/12/29 19:05:47 by nmoussam          #+#    #+#             */
+/*   Updated: 2022/12/31 12:02:32 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-int	ft_check_builtin(char	*cmd)
+int	ft_check_builtin(char *cmd)
 {
 	if (ft_strcmp(cmd, "echo") == 0)
 		return (1);
@@ -32,45 +32,13 @@ int	ft_check_builtin(char	*cmd)
 		return (0);
 }
 
-
-
 char	**ft_exec_builtin(int n_cmd, char **cmd, char **env)
 {
 	if (ft_strcmp(*cmd, "env") == 0)
 		env = ft_env(n_cmd, cmd, env);
 	else if (ft_strcmp(*cmd, "export") == 0)
+	{
 		env = ft_export(n_cmd, cmd, env);
-	// else if (ft_strcmp(*cmd, "unset") == 0)
-	// 	env = ft_unset(n_cmd, cmd, env);
-	return (env);
-}
-
-char	**ft_execute_rec(t_treenode *root, char **env)
-{
-	if (root == NULL)
-	{
-		return (env);
 	}
-	if (root->type == PIPE)
-	{
-		ft_pipe(root, env);
-	
-		return (env);
-	}
-	else if (root->type == CMD)
-	{
-		if (ft_check_builtin(*(root->cmd)) == 1)
-			env = ft_exec_builtin(root->nb_cmd, root->cmd, env);
-		else
-			ft_exec_cmd(root, env);	
-		free(root->cmd);		
-
-	}
-	return (env);
-}
-
-char	**ft_execute(t_treenode *root, char **env)
-{
-	env = ft_execute_rec(root, env);
 	return (env);
 }

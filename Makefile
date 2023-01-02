@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
+#    By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2022/12/29 16:06:16 by makacem          ###   ########.fr        #
+#    Updated: 2022/12/29 19:13:38 by nmoussam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,9 +43,14 @@ SRC = main.c \
 	utils/ft_lstadd_back.c \
 	utils/ft_strcmp.c \
 	executor/ft_execute.c \
+	executor/exec_cmd.c \
+	executor/pipe.c \
 	executor/builtins/ft_env.c \
 	executor/builtins/ft_export.c \
 	executor/builtins/ft_unset.c \
+	executor/builtins/ft_exec_builtins.c \
+	
+	
 
 OBJ = $(SRC:.c=.o)
 
