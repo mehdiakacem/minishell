@@ -1,28 +1,14 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
+/*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 22:17:29 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/26 17:46:20 by nmoussam         ###   ########.fr       */
+/*   Created: 2023/01/02 17:01:45 by nmoussam          #+#    #+#             */
+/*   Updated: 2023/01/02 17:02:01 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-void	ft_lstadd_back(t_env **alst, t_env *new_env)
-{
-	t_env	*last;
-
-	if (!alst || !new_env)
-		return ;
-	if (!*alst)
-		*alst = new_env;
-	else
-	{
-		last = ft_lstlast(*alst);
-		last->next = new_env;
-	}
-}

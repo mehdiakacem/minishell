@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:45:58 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/02 14:18:44 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/02 21:12:54 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ char	**ft_exec_builtin(int n_cmd, char **cmd, char **env)
 		env = ft_export(n_cmd, cmd, env);
 	// else if (ft_strcmp(*cmd, "unset") == 0)
 	// 	env = ft_unset(n_cmd, cmd, env);
+	else if (ft_strcmp(*cmd, "echo") == 0)
+		env = ft_echo(n_cmd, cmd, env);
 	return (env);
 }
 
@@ -54,7 +56,6 @@ char	**ft_execute_rec(t_treenode *root, char **env)
 	if (root->type == PIPE)
 	{
 		ft_pipe(root, env);
-	
 		return (env);
 	}
 	else if (root->type == CMD)

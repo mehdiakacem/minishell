@@ -1,25 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstlast.c                                       :+:      :+:    :+:   */
+/*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/21 23:18:29 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/26 15:11:26 by nmoussam         ###   ########.fr       */
+/*   Created: 2023/01/02 19:50:21 by nmoussam          #+#    #+#             */
+/*   Updated: 2023/01/02 19:50:37 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../minishell.h"
+#include "../../minishell.h"
 
-t_env	*ft_lstlast(t_env *lst)
+void	pwd(t_treenode *tree)
 {
-	t_env	*ptr;
-
-	ptr = lst;
-	while (ptr && ptr->next)
+    if (tree->nb_cmd > 1 && tree->cmd[1][0] == '-')
 	{
-		ptr = ptr->next;
+		printf("minishell: pwd: -%c invalid option\npwd: usage: pwd [-LP]\n", tree->cmd[1][1]);
+        return ;
 	}
-	return (ptr);
+	printf("%s\n", getenv("PWD"));
 }
