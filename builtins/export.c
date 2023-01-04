@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 16:41:35 by nmoussam          #+#    #+#             */
-/*   Updated: 2022/12/28 16:32:22 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/03 15:17:48 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,19 +46,19 @@ t_env *sort_env(t_env *head)
     return(head);
 }
 
-// int	find_ch(char *str, char ch)
-// {
-// 	int i;
+int	find_ch(char *str, char ch)
+{
+	int i;
 
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == '=')
-// 			return (1);
-// 		i++;
-// 	}
-// 	return(0);
-// }
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '=')
+			return (1);
+		i++;
+	}
+	return(0);
+}
 
 
 
