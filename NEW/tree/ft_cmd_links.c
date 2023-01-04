@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:26:43 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/28 14:59:59 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/04 18:29:50 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,27 @@ int	ft_redirect_output(t_token *redirec_token)
 	return (fd);
 }
 
+int	ft_append_output(t_token *redirec_token)
+{
+	int	fd;
+	char	*file_name;
+
+	fd = 0;
+	redirec_token->type = SPACE;
+	if (redirec_token->next->type == SPACE)
+	{
+		file_name = redirec_token->next->next->name;
+		redirec_token->next->next->type = SPACE;
+	}
+	else
+	{
+		file_name = redirec_token->next->name;
+		redirec_token->next->type = SPACE;
+	}
+	fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	return (fd);
+}
+
 int	ft_fdout(t_token *token_list)
 {
 	int	fd_out;
@@ -100,7 +121,7 @@ int	ft_fdout(t_token *token_list)
 		if (ft_strncmp(redirection->name, ">", 2) == 0)
 			fd_out = ft_redirect_output(redirection);
 		else if (ft_strncmp(redirection->name, ">>", 2) == 0)
-		{}
+			fd_out = ft_append_output(redirection);
 	}
 	return (fd_out);
 }

@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:45:58 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/04 18:31:46 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/04 18:39:50 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,13 @@
 char	**execution_cmd(t_treenode *root, char **env)
 {
 	char *tmp;
+	int temp_fdout;
 
+ 	if (root->stdout_fd != 0)
+ 	{
+ 		temp_fdout = dup(STDOUT_FILENO);
+ 		dup2(root->stdout_fd, STDOUT_FILENO);
+	}
 	tmp = ft_strdup(root->cmd[0]);
 	ft_to_lower(tmp);
 	if (ft_strcmp(tmp, "echo") == 0)
@@ -37,6 +43,11 @@ char	**execution_cmd(t_treenode *root, char **env)
 	else
 		ft_exec_cmd(root, env);
 	free(tmp);
+	if (root->stdout_fd != 0)
+ 	{
+ 		dup2(temp_fdout, STDOUT_FILENO);
+ 		close(root->stdout_fd);
+ 	}
 	return (env);
 }
 
