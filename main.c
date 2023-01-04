@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/02 14:04:05 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/03 19:04:36 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,6 +93,8 @@ char	**ft_create_new_env(char **old_env)
 	int		nbrof_env_var;
 
 	nbrof_env_var = ft_count_env_var(old_env);
+	if (nbrof_env_var == 0)
+		return (NULL);
 	new_env = malloc((nbrof_env_var + 1) * sizeof(char **));
 	new_env = ft_populate(new_env, old_env);
 	//ft_shlvl_plus(new_env);
@@ -113,7 +115,6 @@ void	ft_free_env(char **env)
 	free(env);
 }
 
-
 int	main(int argc, char **argv, char **env)
 {
 	char		*line;
@@ -122,10 +123,13 @@ int	main(int argc, char **argv, char **env)
 	t_treenode	*root;
 
 	env = ft_create_new_env(env);
+	if(!env)
+		exit(0);		
 	while (1)
 	{
 		line = readline("minishell$ ");
-		add_history(line);
+		if (ft_strlen(line) != 0)
+			add_history(line);
 		token_list = ft_lex(line);
 		error = ft_pars(token_list);
 		if (error == 1)

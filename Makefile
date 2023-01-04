@@ -6,7 +6,7 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/02 13:53:01 by makacem          ###   ########.fr        #
+#    Updated: 2023/01/03 13:53:34 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ SRC = main.c \
 	executor/pipe.c \
 	executor/builtins/ft_env.c \
 	executor/builtins/ft_export.c \
+	executor/builtins/export_utils.c \
 	executor/builtins/ft_unset.c \
 	
 	

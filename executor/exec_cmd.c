@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/01 16:17:09 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/02 19:57:15 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,9 @@ void	exec_file(t_treenode *root, char *path, char **env)
 		{
 			if (execve(path, root->cmd, env) == -1)
 				printf("%s", strerror(errno));
+		}
+		else {
+			wait(0);
 		}
 	}
 }
