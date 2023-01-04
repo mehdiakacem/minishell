@@ -6,11 +6,12 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/02 21:40:46 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/03 19:01:30 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
 
 int path_exist(char *path)
 {
@@ -51,9 +52,13 @@ void	exec_file(t_treenode *root, char *path, char **env)
 		else if (pid == 0)
 		{
 			if (execve(path, root->cmd, env) == -1)
-				printf("%s", strerror(errno));
+			{
+				printf("minishell: %s: \n", strerror(errno));
+				// exit(127);
+			}
 		}
 	}
+	wait(NULL);
 }
 
 void	find_and_exec(t_treenode *root, char **str, char **env)
@@ -70,9 +75,17 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 	{
 		path = ft_strjoin(str[i], tmp);
 		if (!path)
+		{
+			printf("niullllll\n");
 			return ;
+		}
 		exec_file(root, path, env);
 		i++;
+	}
+	if (str[i] == NULL)
+	{
+		printf("minishell: %s: command not found\n", root->cmd[0]);
+
 	}
 }
 void	ft_exec_cmd(t_treenode *root, char **env)

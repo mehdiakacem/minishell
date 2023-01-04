@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 12:31:56 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/24 11:27:26 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/03 17:27:43 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # define REDIRECTION 3
 # define DQUOTE 4
 # define SQUOTE 5
-# define DOLLAR 6
+# define DOLLAR 6 
 
 # include <stdio.h>
 # include <stdlib.h>

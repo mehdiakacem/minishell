@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 19:49:15 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/02 21:23:24 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/03 14:17:52 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,37 +31,32 @@ char    **ft_echo(int n_cmd, char **cmd, char **env)
     int i;
     int val;
 
-    char *str;
     val = 0;
     i = 1;
-    str = "echo";
-    if (cmd[0] != NULL && ft_strcmp(cmd[0], str) == 0)
+    if (cmd[i] == NULL)
+        printf("\n");
+    else
     {
-        if (cmd[i] == NULL)
-            printf("\n");
-        else
+        while (i < n_cmd && cmd[i][0] == '-' && cmd[i][1] == 'n' && check_alphabet(cmd[i], 'n') == 1)
         {
-            while (i < n_cmd && cmd[i][0] == '-' && cmd[i][1] == 'n' && check_alphabet(cmd[i], 'n') == 1)
-            {
-                    val = 1;
-                    i++;
-                }
-            while (val == 0 && i < n_cmd)
-            {
-                printf("%s", cmd[i]);
-                if (i != n_cmd - 1)
-                    printf(" ");
-                i++;
-            }
-            if (val == 0)
-                printf("\n");
-            while (val == 1 && i < n_cmd && cmd[i] != NULL)
-            {
-                ft_printf("%s", cmd[i]);
-                if (i != n_cmd - 1)
-                    ft_printf(" ");
-                i++;
-            }
+            val = 1;
+            i++;
+        }
+        while (val == 0 && i < n_cmd)
+        {
+            printf("%s", cmd[i]);
+            if (i != n_cmd - 1)
+                printf(" ");
+            i++;
+        }
+        if (val == 0)
+            printf("\n");
+        while (val == 1 && i < n_cmd && cmd[i] != NULL)
+        {
+            ft_printf("%s", cmd[i]);
+            if (i != n_cmd - 1)
+                ft_printf(" ");
+            i++;
         }
     }
     return(env);

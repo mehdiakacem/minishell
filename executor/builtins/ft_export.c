@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:03:39 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/02 21:20:36 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/03 14:10:49 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,6 +145,10 @@ char	**ft_sort_env(char **env)
 	}
 	return (temp_env);
 }
+
+
+
+
 
 
 // int	find_ch(char *str, char ch)

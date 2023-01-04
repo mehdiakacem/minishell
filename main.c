@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/02 14:04:05 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/03 19:08:54 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,11 +122,15 @@ int	main(int argc, char **argv, char **env)
 	t_treenode	*root;
 
 	env = ft_create_new_env(env);
+	
+	// continue;
 	while (1)
 	{
 		line = readline("minishell$ ");
-		add_history(line);
+		if (ft_strlen(line) != 0)
+			add_history(line);
 		token_list = ft_lex(line);
+	
 		error = ft_pars(token_list);
 		if (error == 1)
 		{
