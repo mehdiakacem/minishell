@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/02 22:11:10 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/04 17:01:15 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,14 @@ char		**ft_execute_rec(t_treenode *root, char **env);
 char		**ft_execute(t_treenode *root, char **env);
 void		execute_left(int *fd, t_treenode *left, char **env);
 void		execute_right(int *fd, t_treenode *right, char **env);
-void	execution_cmd(t_treenode *root, char **env);
+char		**execution_cmd(t_treenode *root, char **env);
 void		ft_pipe(t_treenode *root, char **env);
 int			ft_strcmp(char *s1, char *s2);
 void    	ft_to_lower(char *str);
+char		**ft_add_var(char *var, char **env);
+void		ft_print_env(char **env);
+char		**ft_sort_env(char **env);
+int			ft_search_env(char	**env, char *var);
+char	**ft_remove_var(char	**env, char *var);
 
 #endif
