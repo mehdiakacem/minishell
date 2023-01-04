@@ -6,7 +6,7 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/03 13:53:34 by makacem          ###   ########.fr        #
+#    Updated: 2023/01/04 13:27:50 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,14 +33,6 @@ SRC = main.c \
 	tree/ft_tree.c \
 	tree/ft_pipe_links.c \
 	tree/ft_cmd_links.c \
-	builtins/check_builtins.c \
-	builtins/echo.c \
-	builtins/env.c \
-	builtins/pwd.c \
-	builtins/export.c \
-	utils/ft_lstnew.c \
-	utils/ft_lstlast.c \
-	utils/ft_lstadd_back.c \
 	utils/ft_strcmp.c \
 	executor/ft_execute.c \
 	executor/exec_cmd.c \
@@ -49,6 +41,8 @@ SRC = main.c \
 	executor/builtins/ft_export.c \
 	executor/builtins/export_utils.c \
 	executor/builtins/ft_unset.c \
+	executor/builtins/ft_echo.c \
+	executor/builtins/ft_pwd.c 
 	
 	
 

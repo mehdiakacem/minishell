@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/02 19:57:15 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/04 13:28:22 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	exec_file(t_treenode *root, char *path, char **env)
 {
 	int pid;
 
-	if (access(path, X_OK) == 0)
+	if (access(path, X_OK) == 0 && access(path, F_OK) == 0)
 	{
 		pid = fork();
 		if (pid == -1)

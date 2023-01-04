@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/03 13:50:33 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/04 13:23:44 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,21 @@
 # include "./lexer/lexer.h"
 # include "./parser/parser.h"
 # include "./expander/expander.h"
-# include "./builtins/builtins.h"
+
 
 # define CMD 7
 # define PIPE 1
+
+typedef struct t_treenode {
+	int					type;
+	char				**cmd;
+	int					nb_cmd;
+	int					stdin_fd;
+	int					stdout_fd;
+	struct t_treenode	*left;
+	struct t_treenode	*right;
+}	t_treenode;
+
 
 t_treenode	*ft_tree(t_token *token_list);
 t_treenode	*ft_pipe_links(t_token *token_list);
@@ -47,14 +58,17 @@ void		ft_print_env(char **env);
 char		**ft_add_var(char *var, char **env);
 int			ft_search_env(char	**env, char *var);
 char		**ft_unset(int n_cmd, char **cmd, char **env);
+char		**ft_echo(int n_cmd, char **cmd, char **env);
+char		**ft_pwd(int n_cmd, char **cmd, char **env);
+int			check_alphabet(char *str, char alphabet);
 char		**ft_remove_var(char	**env, char *var);
 int			ft_cmpin_env(char	**env, char *var);
 void		ft_free_env(char **env);
 int			ft_search_env(char	**env, char *var);
 int			ft_check_builtin(char *cmd);
 char		**ft_exec_builtin(int n_cmd, char **cmd, char **env);
-int			path_exist(char *path);
-char		**path(t_treenode *root, char **env);
+int 		path_exist(char *path);
+char 		**path(t_treenode *root, char **env);
 void		exec_file(t_treenode *root, char *path, char **env);
 void		find_and_exec(t_treenode *root, char **str, char **env);
 void		ft_exec_cmd(t_treenode *root, char **env);
@@ -62,6 +76,9 @@ char		**ft_execute_rec(t_treenode *root, char **env);
 char		**ft_execute(t_treenode *root, char **env);
 void		execute_left(int *fd, t_treenode *left, char **env);
 void		execute_right(int *fd, t_treenode *right, char **env);
+void	execution_cmd(t_treenode *root, char **env);
 void		ft_pipe(t_treenode *root, char **env);
+int			ft_strcmp(char *s1, char *s2);
+void    	ft_to_lower(char *str);
 
 #endif
