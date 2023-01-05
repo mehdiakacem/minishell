@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:26:43 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/04 18:29:50 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/05 17:18:33 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,15 +113,19 @@ int	ft_fdout(t_token *token_list)
 {
 	int	fd_out;
 	t_token *redirection;
+	t_token	*temp_token;
 
 	fd_out = 0;
-	redirection = ft_rediction(token_list);
-	if (redirection != NULL)
+	while (redirection != NULL)
 	{
-		if (ft_strncmp(redirection->name, ">", 2) == 0)
-			fd_out = ft_redirect_output(redirection);
-		else if (ft_strncmp(redirection->name, ">>", 2) == 0)
-			fd_out = ft_append_output(redirection);
+		redirection = ft_rediction(token_list);
+		if (redirection != NULL)
+		{
+			if (ft_strncmp(redirection->name, ">", 2) == 0)
+				fd_out = ft_redirect_output(redirection);
+			else if (ft_strncmp(redirection->name, ">>", 2) == 0)
+				fd_out = ft_append_output(redirection);
+		}
 	}
 	return (fd_out);
 }
