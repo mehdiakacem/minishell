@@ -6,11 +6,9 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:45:58 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/04 18:39:50 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/05 19:24:56 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "../minishell.h"
 
 #include "../minishell.h"
 
@@ -34,10 +32,10 @@ char	**execution_cmd(t_treenode *root, char **env)
 		env = ft_export(root->nb_cmd, root->cmd, env);
 	else if (ft_strcmp(tmp, "env") == 0)
 		env = ft_env(root->nb_cmd, root->cmd, env);
-	// else if (ft_strcmp(root->cmd[0], "cd") == 0)
-	// 	env = ft_cd(root->nb_cmd, root->cmd, env);
-	// else if (ft_strcmp(root->cmd[0], "unset") == 0)
-	// 	env = ft_unset(root->nb_cmd, root->cmd, env);
+	else if (ft_strcmp(root->cmd[0], "cd") == 0)
+		env = ft_cd(root->nb_cmd, root->cmd, env);
+	else if (ft_strcmp(root->cmd[0], "unset") == 0)
+		env = ft_unset(root->nb_cmd, root->cmd, env);
 	// else if (ft_strcmp(root->cmd[0], "exit") == 0)
 	// 	env = ft_exit(root->nb_cmd, root->cmd, env);
 	else

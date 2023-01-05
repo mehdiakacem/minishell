@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/04 18:46:19 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/05 19:20:42 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,10 @@ char **path(t_treenode *root, char **env)
 	return(split_path);
 }
 
-void	exec_file(t_treenode *root, char *path, char **env)
+int	exec_file(t_treenode *root, char *path, char **env)
 {
 	int pid;
-
+	// int val;
 	if (access(path, X_OK) == 0 && access(path, F_OK) == 0)
 	{
 		pid = fork();
@@ -54,11 +54,14 @@ void	exec_file(t_treenode *root, char *path, char **env)
 			if (execve(path, root->cmd, env) == -1)
 			{
 				printf("minishell: %s: \n", strerror(errno));
-				exit(127);
+				return (0);
+				// exit(127);
 			}
 		}
+		wait(NULL);
+		return (1);
 	}
-	wait(NULL);
+	return (0);
 }
 
 void	find_and_exec(t_treenode *root, char **str, char **env)
@@ -79,8 +82,10 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 			printf("niullllll\n");
 			return ;
 		}
-		exec_file(root, path, env);
-		i++;
+		if (exec_file(root, path, env) == 0)
+			i++;
+		else
+			return ;
 	}
 	if (str[i] == NULL)
 	{
