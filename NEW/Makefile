@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+         #
+#    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/05 14:27:55 by nmoussam         ###   ########.fr        #
+#    Updated: 2023/01/06 13:21:43 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,7 @@ FLAGS = -Wall -Werror -Wextra -lreadline
 HEADER = minishell.h
 
 SRC = main.c \
+	ft_signalhandler.c \
 	lexer/ft_lex.c \
 	lexer/ft_create_token_list.c \
 	lexer/ft_tokenize.c \

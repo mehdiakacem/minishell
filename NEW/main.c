@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/03 19:08:54 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/06 13:23:51 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,26 +65,22 @@ char	*ft_getenv(char	**env, char *var)
 	return (content);
 }
 
-void	ft_shlvl_plus(char **env)
+char	**ft_shlvl_plus(char **env)
 {
 	int shlvl_i;
-	char	**arr;
+	char **old_val;
 	char	*shlvl;
+	char **temp;
 
-	arr = env;
 	shlvl = ft_getenv(env, "SHLVL");
-	while (*arr != '\0')
-	{
-		if (ft_strncmp(*arr, "SHLVL", 5) == 0)
-		{
-			shlvl = ft_strchr(*arr, '=');
-			shlvl++;
-			shlvl_i = ft_atoi(shlvl);
-			shlvl_i++;
-			*shlvl = *ft_itoa(shlvl_i);
-		}
-		arr++;
-	}
+	shlvl_i = ft_atoi(shlvl);
+	shlvl_i++;
+	shlvl = ft_itoa(shlvl_i);
+	shlvl = ft_strjoin("SHLVL=", shlvl);
+	old_val = ft_search_val(env, shlvl);
+	free(*old_val);
+	*old_val = shlvl;
+	return (env);
 }
 
 char	**ft_create_new_env(char **old_env)
@@ -95,8 +91,7 @@ char	**ft_create_new_env(char **old_env)
 	nbrof_env_var = ft_count_env_var(old_env);
 	new_env = malloc((nbrof_env_var + 1) * sizeof(char **));
 	new_env = ft_populate(new_env, old_env);
-	//ft_shlvl_plus(new_env);
-
+	new_env = ft_shlvl_plus(new_env);
 	return (new_env);
 }
 
@@ -113,7 +108,6 @@ void	ft_free_env(char **env)
 	free(env);
 }
 
-
 int	main(int argc, char **argv, char **env)
 {
 	char		*line;
@@ -121,9 +115,9 @@ int	main(int argc, char **argv, char **env)
 	t_token		*token_list;
 	t_treenode	*root;
 
+	ft_signalhandler();
 	env = ft_create_new_env(env);
 	
-	// continue;
 	while (1)
 	{
 		line = readline("minishell$ ");

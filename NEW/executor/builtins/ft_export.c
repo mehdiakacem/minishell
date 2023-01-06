@@ -6,15 +6,14 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:03:39 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/05 17:05:59 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/06 13:09:52 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	ft_pars_export(char *arg);
+int		ft_pars_export(char *arg);
 char	**ft_jointo_old(char **env, char *arg);
-char	**ft_search_val(char	**env, char *var);
 
 char	**ft_export(int n_cmd, char **cmd, char **env)
 {
