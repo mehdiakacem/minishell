@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/06 13:10:11 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/06 21:50:26 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ t_treenode	*ft_tree(t_token *token_list);
 t_treenode	*ft_pipe_links(t_token *token_list);
 int			ft_count_pipes(t_token *token_list);
 t_treenode	*ft_cmd_links(t_treenode *root, t_token *token_list);
+int			ft_fdout(t_token *token_list);
+int			ft_fdin(t_token *token_list);
 int			ft_count_words(t_token *token);
 int			ft_count_env_var(char	**env);
 char		**ft_populate(char **new_env, char **old_env);

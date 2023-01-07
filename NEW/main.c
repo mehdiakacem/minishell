@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/06 13:23:51 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/07 11:11:50 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,7 +124,6 @@ int	main(int argc, char **argv, char **env)
 		if (ft_strlen(line) != 0)
 			add_history(line);
 		token_list = ft_lex(line);
-	
 		error = ft_pars(token_list);
 		if (error == 1)
 		{

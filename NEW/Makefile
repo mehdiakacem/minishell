@@ -6,7 +6,7 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/06 13:21:43 by makacem          ###   ########.fr        #
+#    Updated: 2023/01/06 16:59:40 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,6 +34,8 @@ SRC = main.c \
 	tree/ft_tree.c \
 	tree/ft_pipe_links.c \
 	tree/ft_cmd_links.c \
+	tree/ft_fdout.c \
+	tree/ft_fdin.c \
 	utils/ft_strcmp.c \
 	utils/ft_lower.c \
 	executor/ft_execute.c \

@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:26:43 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/05 17:18:33 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/07 10:25:38 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,83 +53,6 @@ t_token	*ft_skip_tonextpipe(t_token *token_list)
 	return (token_list);
 }
 
-t_token	*ft_rediction(t_token *tokne_list)
-{
-	t_token *token;
-
-	token = tokne_list;
-	while (token != NULL)
-	{
-		if (token->type == REDIRECTION)
-			return (token);
-		token = token->next;
-	}
-	return (NULL);
-}
-
-int	ft_redirect_output(t_token *redirec_token)
-{
-	int	fd;
-	char	*file_name;
-
-	fd = 0;
-	redirec_token->type = SPACE;
-	if (redirec_token->next->type == SPACE)
-	{
-		file_name = redirec_token->next->next->name;
-		redirec_token->next->next->type = SPACE;
-	}
-	else
-	{
-		file_name = redirec_token->next->name;
-		redirec_token->next->type = SPACE;
-	}
-	fd = open(file_name, O_CREAT | O_TRUNC | O_WRONLY, 0644);
-	return (fd);
-}
-
-int	ft_append_output(t_token *redirec_token)
-{
-	int	fd;
-	char	*file_name;
-
-	fd = 0;
-	redirec_token->type = SPACE;
-	if (redirec_token->next->type == SPACE)
-	{
-		file_name = redirec_token->next->next->name;
-		redirec_token->next->next->type = SPACE;
-	}
-	else
-	{
-		file_name = redirec_token->next->name;
-		redirec_token->next->type = SPACE;
-	}
-	fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
-	return (fd);
-}
-
-int	ft_fdout(t_token *token_list)
-{
-	int	fd_out;
-	t_token *redirection;
-	t_token	*temp_token;
-
-	fd_out = 0;
-	while (redirection != NULL)
-	{
-		redirection = ft_rediction(token_list);
-		if (redirection != NULL)
-		{
-			if (ft_strncmp(redirection->name, ">", 2) == 0)
-				fd_out = ft_redirect_output(redirection);
-			else if (ft_strncmp(redirection->name, ">>", 2) == 0)
-				fd_out = ft_append_output(redirection);
-		}
-	}
-	return (fd_out);
-}
-
 int	ft_count_cmds(char	**cmd)
 {
 	char	**temp;
@@ -151,12 +74,10 @@ t_treenode	*ft_create_cmd(t_token *token_list)
 
 	root = malloc(sizeof(t_treenode));
 	root->type = CMD;
+	root->stdin_fd = ft_fdin(token_list);
 	root->stdout_fd = ft_fdout(token_list);
 	root->cmd = ft_creat_args(token_list);
 	root->nb_cmd = ft_count_cmds(root->cmd);
-	root->stdin_fd = 0;
-	// printf("stdin %d\n", root->stdin_fd);
-	// printf("stdout %d\n", root->stdout_fd);
 	root->left = NULL;
 	root->right = NULL;
 	return (root);

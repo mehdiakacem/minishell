@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:45:58 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/05 19:24:56 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/07 11:02:26 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,17 @@ char	**execution_cmd(t_treenode *root, char **env)
 {
 	char *tmp;
 	int temp_fdout;
+	int temp_fdin;
 
  	if (root->stdout_fd != 0)
  	{
  		temp_fdout = dup(STDOUT_FILENO);
  		dup2(root->stdout_fd, STDOUT_FILENO);
+	}
+	if (root->stdin_fd != 0)
+	{
+		temp_fdin = dup(STDIN_FILENO);
+ 		dup2(root->stdin_fd, STDIN_FILENO);
 	}
 	tmp = ft_strdup(root->cmd[0]);
 	ft_to_lower(tmp);
@@ -45,6 +51,11 @@ char	**execution_cmd(t_treenode *root, char **env)
  	{
  		dup2(temp_fdout, STDOUT_FILENO);
  		close(root->stdout_fd);
+ 	}
+	if (root->stdin_fd != 0)
+ 	{
+ 		dup2(temp_fdin, STDIN_FILENO);
+ 		close(root->stdin_fd);
  	}
 	return (env);
 }
