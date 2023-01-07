@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 17:01:45 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/05 19:00:21 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/07 12:56:57 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ char	**ft_home(int n_cmd, char **cmd, char **env)
 
 	home = ft_getenv(env, "HOME");
 	tmp_pwd = ft_getenv(env, "PWD");
-	if (!home || !pwd)
+	if (!home || !tmp_pwd)
 	{
 		printf("error2\n");
 		return (env);
 	}
-	if(chdir(home) == -1)
+	if (chdir(home) == -1)
         printf("minishell: cd: %s:\n", strerror(errno));
 	else 
 	{
@@ -39,6 +39,34 @@ char	**ft_home(int n_cmd, char **cmd, char **env)
 	}
 	return (env);
 }
+
+char	**ft_old_pwd(int n_cmd, char **cmd, char **env)
+{
+	char	**old_pwd;
+	char	*tmp_pwd;
+
+	tmp_pwd = ft_getenv(env, "PWD");
+	if (!tmp_pwd)
+	{
+		printf("error3\n");
+		return(env);
+	}
+	old_pwd = ft_search_val(env, "OLDPWD=");
+	*old_pwd = ft_strjoin("OLDPWD=", tmp_pwd);
+	return (env);
+}
+
+char	**ft_new_pwd(int n_cmd, char **cmd, char **env)
+{
+	char	*new_pwd;
+	char	**pwd;
+	
+	new_pwd = getcwd(NULL, 0);
+	pwd = ft_search_val(env, "PWD");
+	*pwd = ft_strjoin("PWD=", new_pwd);
+	return(env);
+}
+
 char	**ft_cd(int n_cmd, char **cmd, char **env)
 {
 	char	*pwd;
@@ -52,14 +80,18 @@ char	**ft_cd(int n_cmd, char **cmd, char **env)
 		return (env);
 	}
 	if (n_cmd == 1 || (n_cmd == 2 && (ft_strcmp(cmd[1], "~") == 0 || ft_strcmp(cmd[1], "--") == 0 || ft_strcmp(cmd[1], "#") == 0 )))
-	{
 		env = ft_home(n_cmd, cmd, env);
+	else
+	{
+		if (chdir(cmd[1]) == -1)
+		{
+			printf("minishell: cd: %s:\n", strerror(errno));
+			return (env);
+		}
+		env = ft_old_pwd(n_cmd, cmd, env);
+		env = ft_new_pwd(n_cmd, cmd, env);
 	}
-	// else if (n_cmd > 1 && (ft_strcmp(cmd[1], ".."))) 
-	// cd /
-	// cd .
 	
-		
 	return (env);
 	
 	
