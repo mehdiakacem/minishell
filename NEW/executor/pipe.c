@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:56:41 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/04 15:58:17 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/07 13:40:32 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void	ft_pipe(t_treenode *root, char **env)
 {
 	int	fd[2];
 	int	pid;
-	int val;
+	int	val;
 
 	val = pipe(fd);
 	if (val == -1)
@@ -46,5 +46,5 @@ void	ft_pipe(t_treenode *root, char **env)
 	close(fd[0]);
 	close(fd[1]);
 	wait(NULL);
-	wait(NULL); // why 2 wait(NULL)
+	wait(NULL);
 }

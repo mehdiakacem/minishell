@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fdout.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:54:02 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/07 11:07:54 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/07 13:27:02 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ t_token	*ft_redictionfor_output(t_token *tokne_list);
 
 int	ft_fdout(t_token *token_list)
 {
-	int	fd_out;
-	t_token *redirection;
+	int		fd_out;
+	t_token	*redirection;
 	t_token	*temp_token;
 
 	fd_out = 0;
@@ -40,7 +40,7 @@ int	ft_fdout(t_token *token_list)
 
 int	ft_redirect_output(t_token *redirec_token)
 {
-	int	fd;
+	int		fd;
 	char	*file_name;
 
 	fd = 0;
@@ -61,7 +61,7 @@ int	ft_redirect_output(t_token *redirec_token)
 
 int	ft_append_output(t_token *redirec_token)
 {
-	int	fd;
+	int		fd;
 	char	*file_name;
 
 	fd = 0;
@@ -82,13 +82,13 @@ int	ft_append_output(t_token *redirec_token)
 
 t_token	*ft_redictionfor_output(t_token *tokne_list)
 {
-	t_token *token;
+	t_token	*token;
 
 	token = tokne_list;
 	while (token != NULL)
 	{
 		if (token->type == REDIRECTION
-			&& (ft_strncmp(token->name, ">", 2) == 0
+			&& (ft_strncmp(token->name, ">", 2) == 0 \
 			|| ft_strncmp(token->name, ">>", 2) == 0))
 			return (token);
 		token = token->next;

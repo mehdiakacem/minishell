@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signalhandler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:47:52 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/06 16:08:29 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/07 13:21:27 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	handler(int sig)
 
 void	ft_signalhandler(void)
 {
-	struct sigaction sa;
+	struct sigaction	sa;
 
 	sa.sa_handler = &handler;
 	sa.sa_flags = SA_RESTART;

@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 19:50:21 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/05 14:19:19 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/07 13:35:30 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 char	**ft_pwd(int n_cmd, char **cmd, char **env)
 {
-    if (n_cmd > 1 && cmd[1][0] == '-' && cmd[1][1] != '\0')
+	if (n_cmd > 1 && cmd[1][0] == '-' && cmd[1][1] != '\0')
 	{
-		printf("minishell: pwd: -%c invalid option\npwd: usage: pwd [-LP]\n", cmd[1][1]);
-        return (env);
+		printf("minishell: pwd: -%c invalid option\npwd: usage: pwd [-LP]\n", \
+		cmd[1][1]);
+		return (env);
 	}
 	printf("%s\n", ft_getenv(env, "PWD"));
 	return (env);

@@ -3,23 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fdin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:59:14 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/07 11:10:10 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/07 13:27:50 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 t_token	*ft_redictionfor_input(t_token *tokne_list);
-int	    ft_redirect_input(t_token *redirec_token);
+int		ft_redirect_input(t_token *redirec_token);
 int		ft_append_input(t_token *redirec_token);
 
 int	ft_fdin(t_token *token_list)
 {
-	int	fd_in;
-	t_token *redirection;
+	int		fd_in;
+	t_token	*redirection;
 	t_token	*temp_token;
 
 	fd_in = 0;
@@ -40,7 +40,7 @@ int	ft_fdin(t_token *token_list)
 
 int	ft_redirect_input(t_token *redirec_token)
 {
-	int	fd;
+	int		fd;
 	char	*file_name;
 
 	fd = 0;
@@ -56,17 +56,17 @@ int	ft_redirect_input(t_token *redirec_token)
 		redirec_token->next->type = SPACE;
 	}
 	fd = open(file_name, O_RDONLY, 0644);
-    if (fd == -1)
-    {
-        ft_printf("minishell: %s: No such file or directory\n", file_name);
+	if (fd == -1)
+	{
+		ft_printf("minishell: %s: No such file or directory\n", file_name);
 		exit (0);
-    }
+	}
 	return (fd);
 }
 
 int	ft_append_input(t_token *redirec_token)
 {
-	int	fd;
+	int		fd;
 	char	*file_name;
 
 	fd = 0;
@@ -87,13 +87,13 @@ int	ft_append_input(t_token *redirec_token)
 
 t_token	*ft_redictionfor_input(t_token *tokne_list)
 {
-	t_token *token;
+	t_token	*token;
 
 	token = tokne_list;
 	while (token != NULL)
 	{
 		if (token->type == REDIRECTION
-			&& (ft_strncmp(token->name, "<", 2) == 0
+			&& (ft_strncmp(token->name, "<", 2) == 0 \
 			|| ft_strncmp(token->name, "<<", 2) == 0))
 			return (token);
 		token = token->next;

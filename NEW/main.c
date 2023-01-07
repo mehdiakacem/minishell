@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/07 11:11:50 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/07 13:22:33 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_free_tokens(t_token *token_list);
 
 int	ft_count_env_var(char	**env)
 {
-	int nbrof_env_var;
+	int	nbrof_env_var;
 
 	nbrof_env_var = 0;
 	while (*env != '\0')
@@ -41,7 +41,7 @@ char	**ft_populate(char **new_env, char **old_env)
 		old_env++;
 	}
 	*temp = NULL;
-	return (new_env); 
+	return (new_env);
 }
 
 char	*ft_getenv(char	**env, char *var)
@@ -67,10 +67,10 @@ char	*ft_getenv(char	**env, char *var)
 
 char	**ft_shlvl_plus(char **env)
 {
-	int shlvl_i;
-	char **old_val;
+	int		shlvl_i;
+	char	**old_val;
 	char	*shlvl;
-	char **temp;
+	char	**temp;
 
 	shlvl = ft_getenv(env, "SHLVL");
 	shlvl_i = ft_atoi(shlvl);
@@ -117,7 +117,6 @@ int	main(int argc, char **argv, char **env)
 
 	ft_signalhandler();
 	env = ft_create_new_env(env);
-	
 	while (1)
 	{
 		line = readline("minishell$ ");

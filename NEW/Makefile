@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
+#    By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/06 16:59:40 by makacem          ###   ########.fr        #
+#    Updated: 2023/01/07 13:04:19 by nmoussam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -48,9 +48,6 @@ SRC = main.c \
 	executor/builtins/ft_cd.c \
 	executor/builtins/ft_unset.c \
 	executor/builtins/export_utils.c \
-
-	
-	
 
 OBJ = $(SRC:.c=.o)
 

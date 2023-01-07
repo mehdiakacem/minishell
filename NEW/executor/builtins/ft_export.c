@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:03:39 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/06 13:09:52 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/07 13:35:06 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ char	**ft_export(int n_cmd, char **cmd, char **env)
 {
 	char	**arg;
 
-	if (n_cmd == 1 || (n_cmd > 1 && (ft_strcmp(*(cmd+1), "--") == 0
-		|| ft_strncmp(*(cmd+1), "#", 1) == 0 || ft_strcmp(*(cmd+1), ";") == 0)))
+	if (n_cmd == 1 || (n_cmd > 1 && (ft_strcmp(*(cmd + 1), "--") == 0 || \
+	ft_strncmp(*(cmd + 1), "#", 1) == 0 || ft_strcmp(*(cmd + 1), ";") == 0)))
 	{
 		ft_print_env(env);
 		return (env);
@@ -32,7 +32,8 @@ char	**ft_export(int n_cmd, char **cmd, char **env)
 		while (*arg != NULL)
 		{
 			if (ft_isalpha(**arg) == 0 || ft_pars_export(*arg) == 0)
-				printf("minishell: export: `%s': not a valid identifier\n", *arg);
+				printf("minishell: export: `%s': not a valid identifier\n", \
+				*arg);
 			else if (ft_search_env(env, *arg) == 0)
 			{
 				env = ft_add_var(*arg, env);
@@ -57,8 +58,8 @@ char	**ft_export(int n_cmd, char **cmd, char **env)
 
 char	**ft_jointo_old(char **env, char *arg)
 {
-	char **old_val;
-	char **temp;
+	char	**old_val;
+	char	**temp;
 
 	old_val = ft_search_val(env, arg);
 	while (*arg != '\0' && *arg != '=')

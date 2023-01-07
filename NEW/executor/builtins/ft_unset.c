@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 11:34:37 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/04 16:52:09 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/07 13:35:35 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-int	ft_cmpin_env(char	**env, char *var);
+int		ft_cmpin_env(char	**env, char *var);
 char	**ft_populate_unset(char **new_env, char **old_env, char *var);
 
 char	**ft_unset(int n_cmd, char **cmd, char **env)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/06 21:50:26 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/07 13:38:18 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,6 @@
 # include "./lexer/lexer.h"
 # include "./parser/parser.h"
 # include "./expander/expander.h"
-
-
 # define CMD 7
 # define PIPE 1
 
@@ -40,7 +38,6 @@ typedef struct t_treenode {
 	struct t_treenode	*right;
 }	t_treenode;
 
-
 t_treenode	*ft_tree(t_token *token_list);
 t_treenode	*ft_pipe_links(t_token *token_list);
 int			ft_count_pipes(t_token *token_list);
@@ -52,11 +49,9 @@ int			ft_count_env_var(char	**env);
 char		**ft_populate(char **new_env, char **old_env);
 void		ft_free_env(char **env);
 void		ft_signalhandler(void);
-
-/* ---------builtins -----------*/
 char		**ft_env(int n_cmd, char **cmd, char **env);
 char		**ft_export(int n_cmd, char **cmd, char **env);
-char        **ft_unset(int n_cmd, char **cmd, char **env);
+char		**ft_unset(int n_cmd, char **cmd, char **env);
 char		**ft_echo(int n_cmd, char **cmd, char **env);
 char		**ft_pwd(int n_cmd, char **cmd, char **env);
 char		**ft_cd(int n_cmd, char **cmd, char **env);
@@ -69,22 +64,18 @@ int			ft_search_env(char	**env, char *var);
 char		**ft_remove_var(char	**env, char *var);
 int			ft_search_env(char	**env, char *var);
 char		**ft_home(int n_cmd, char **cmd, char **env);
-
-/* --------execution ----------*/
 void		execute_left(int *fd, t_treenode *left, char **env);
 void		execute_right(int *fd, t_treenode *right, char **env);
-char        **ft_execute(t_treenode *root, char **env);
-int 		path_exist(char *path);
-char 		**path(t_treenode *root, char **env);
-int		exec_file(t_treenode *root, char *path, char **env);
+char		**ft_execute(t_treenode *root, char **env);
+int			path_exist(char *path);
+char		**path(t_treenode *root, char **env);
+int			exec_file(t_treenode *root, char *path, char **env);
 void		find_and_exec(t_treenode *root, char **str, char **env);
 void		ft_exec_cmd(t_treenode *root, char **env);
 char		**ft_execute_rec(t_treenode *root, char **env);
 char		**execution_cmd(t_treenode *root, char **env);
 void		ft_pipe(t_treenode *root, char **env);
-
-/* ----------utils--------*/
 int			ft_strcmp(char *s1, char *s2);
-void    	ft_to_lower(char *str);
+void		ft_to_lower(char *str);
 
 #endif
