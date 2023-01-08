@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/07 13:22:33 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/08 16:23:29 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,8 @@ char	**ft_shlvl_plus(char **env)
 	return (env);
 }
 
+int		ft_cmpin_env(char	**env, char *var);
+
 char	**ft_create_new_env(char **old_env)
 {
 	char	**new_env;
@@ -92,6 +94,8 @@ char	**ft_create_new_env(char **old_env)
 	new_env = malloc((nbrof_env_var + 1) * sizeof(char **));
 	new_env = ft_populate(new_env, old_env);
 	new_env = ft_shlvl_plus(new_env);
+	if (ft_cmpin_env(new_env, "OLDPWD") == 1)
+		new_env = ft_remove_var(new_env, "OLDPWD");
 	return (new_env);
 }
 

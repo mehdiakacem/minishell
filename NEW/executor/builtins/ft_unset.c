@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 11:34:37 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/07 13:35:35 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/08 16:19:19 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ char	**ft_populate_unset(char **new_env, char **old_env, char *var);
 char	**ft_unset(int n_cmd, char **cmd, char **env)
 {
 	char	**arg;
-	char	**temp_env;
 
 	if (n_cmd == 1)
 		return (env);
@@ -26,7 +25,6 @@ char	**ft_unset(int n_cmd, char **cmd, char **env)
 	{
 		arg = cmd;
 		arg++;
-		temp_env = env;
 		while (*arg != NULL)
 		{
 			if (ft_cmpin_env(env, *arg) == 1)

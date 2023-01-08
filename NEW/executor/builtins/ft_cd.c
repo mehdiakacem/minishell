@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 17:01:45 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/07 13:29:47 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/08 16:08:52 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,28 @@ char	**ft_home(int n_cmd, char **cmd, char **env)
 
 	home = ft_getenv(env, "HOME");
 	tmp_pwd = ft_getenv(env, "PWD");
-	if (!home || !tmp_pwd)
+	if (!home)
+	{
+		printf("minishell: cd: HOME not set\n");
+		return (env);
+	}
+	if (!tmp_pwd)
 	{
 		printf("error2\n");
 		return (env);
 	}
 	if (chdir(home) == -1)
+	{
 		printf("minishell: cd: %s:\n", strerror(errno));
+		return (env);
+	}
 	else
 	{
 		pwd = ft_search_val(env, "PWD=");
 		oldpwd = ft_search_val(env, "OLDPWD=");
 		*pwd = ft_strjoin("PWD=", home);
 		*oldpwd = ft_strjoin("OLDPWD=", tmp_pwd);
+		printf("2\n");
 	}
 	return (env);
 }
@@ -68,21 +77,24 @@ char	**ft_new_pwd(int n_cmd, char **cmd, char **env)
 	return (env);
 }
 
+char	**ft_cd_point(char **cmd, char **env)
+{
+	printf("cd: error retrieving current directory: \
+		getcwd: cannot access parent directories: No such file or directory");
+	return (env);
+}
+
 char	**ft_cd(int n_cmd, char **cmd, char **env)
 {
 	char	*pwd;
 	char	*oldpwd;
 
-	pwd = ft_getenv(env, "PWD");
-	oldpwd = ft_getenv(env, "OLDPWD");
-	if (!pwd || !oldpwd)
-	{
-		printf("error1\n");
-		return (env);
-	}
 	if (n_cmd == 1 || (n_cmd == 2 && (ft_strcmp(cmd[1], "~") == 0 \
 	|| ft_strcmp(cmd[1], "--") == 0 || ft_strcmp(cmd[1], "#") == 0)))
+	{
 		env = ft_home(n_cmd, cmd, env);
+		return (env);	
+	}
 	else
 	{
 		if (chdir(cmd[1]) == -1)
@@ -92,6 +104,11 @@ char	**ft_cd(int n_cmd, char **cmd, char **env)
 		}
 		env = ft_old_pwd(n_cmd, cmd, env);
 		env = ft_new_pwd(n_cmd, cmd, env);
+	}
+	if (ft_strcmp(cmd[1], ".") == 0 && !getcwd(NULL, 0))
+	{
+		env = ft_cd_point(cmd, env);
+		return (env);
 	}
 	return (env);
 }
