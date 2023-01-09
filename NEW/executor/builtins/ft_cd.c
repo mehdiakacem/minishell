@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 17:01:45 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/08 16:08:52 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/08 19:11:30 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 char	**ft_jointo_old(char **env, char *arg);
 char	**ft_search_val(char **env, char *var);
 
-char	**ft_home(int n_cmd, char **cmd, char **env)
+char	**ft_home(int n_cmd, char **cmd, char **env, char *old_pwd)
 {
 	char	*home;
 	char	**pwd;
@@ -23,18 +23,13 @@ char	**ft_home(int n_cmd, char **cmd, char **env)
 	char	*tmp_pwd;
 
 	home = ft_getenv(env, "HOME");
-	tmp_pwd = ft_getenv(env, "PWD");
+	tmp_pwd = getcwd(NULL,0);
 	if (!home)
 	{
 		printf("minishell: cd: HOME not set\n");
 		return (env);
 	}
-	if (!tmp_pwd)
-	{
-		printf("error2\n");
-		return (env);
-	}
-	if (chdir(home) == -1)
+	else if (chdir(home) == -1)
 	{
 		printf("minishell: cd: %s:\n", strerror(errno));
 		return (env);
@@ -84,15 +79,27 @@ char	**ft_cd_point(char **cmd, char **env)
 	return (env);
 }
 
+char	**ft_add_var(char *var, char **env);
+
 char	**ft_cd(int n_cmd, char **cmd, char **env)
 {
+	char	*oldpwd_added;
+	char	*old_pwd;
 	char	*pwd;
-	char	*oldpwd;
 
+	printf("h1\n");
+	old_pwd = ft_getenv(env, "OLDPWD");
+	pwd = getcwd(NULL, 0);
 	if (n_cmd == 1 || (n_cmd == 2 && (ft_strcmp(cmd[1], "~") == 0 \
 	|| ft_strcmp(cmd[1], "--") == 0 || ft_strcmp(cmd[1], "#") == 0)))
 	{
-		env = ft_home(n_cmd, cmd, env);
+		if (!old_pwd)
+		{
+			oldpwd_added = ft_strjoin("OLDPWD=", pwd);
+			env = ft_add_var(oldpwd_added, env);
+			printf("h111\n");
+		}
+		env = ft_home(n_cmd, cmd, env, oldpwd_added);
 		return (env);	
 	}
 	else
