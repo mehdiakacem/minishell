@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fdin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:59:14 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/07 13:27:50 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/09 11:21:12 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_token	*ft_redictionfor_input(t_token *tokne_list);
 int		ft_redirect_input(t_token *redirec_token);
-int		ft_append_input(t_token *redirec_token);
+int	ft_heredoc_input(t_token *redirec_token);
 
 int	ft_fdin(t_token *token_list)
 {
@@ -32,7 +32,7 @@ int	ft_fdin(t_token *token_list)
 			if (ft_strncmp(redirection->name, "<", 2) == 0)
 				fd_in = ft_redirect_input(redirection);
 			else if (ft_strncmp(redirection->name, "<<", 2) == 0)
-				fd_in = ft_append_input(redirection);
+				fd_in = ft_heredoc_input(redirection);
 		}
 	}
 	return (fd_in);
@@ -64,24 +64,40 @@ int	ft_redirect_input(t_token *redirec_token)
 	return (fd);
 }
 
-int	ft_append_input(t_token *redirec_token)
+int	ft_heredoc_input(t_token *redirec_token)
 {
 	int		fd;
-	char	*file_name;
+	char	*delimiter;
+	char	*line;
 
 	fd = 0;
 	redirec_token->type = SPACE;
 	if (redirec_token->next->type == SPACE)
 	{
-		file_name = redirec_token->next->next->name;
+		delimiter = redirec_token->next->next->name;
 		redirec_token->next->next->type = SPACE;
 	}
 	else
 	{
-		file_name = redirec_token->next->name;
+		delimiter = redirec_token->next->name;
 		redirec_token->next->type = SPACE;
 	}
-	fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	fd = open("/tmp/heredoc", O_CREAT | O_TRUNC | O_RDWR, 0644);
+	line = "";
+	delimiter = ft_strjoin(delimiter, "\n");
+	while (ft_strcmp(line, delimiter) != 0)
+	{
+		line = readline("> ");
+		line = ft_strjoin(line, "\n");
+		if (ft_strcmp(line, delimiter) != 0)
+		{
+			ft_putstr_fd(line, fd);
+			free(line);
+		}
+	}
+	free(line);
+	close(fd);
+	fd = open("/tmp/heredoc", O_RDONLY, 0644);
 	return (fd);
 }
 
