@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/08 16:23:29 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/10 13:26:37 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,6 +124,12 @@ int	main(int argc, char **argv, char **env)
 	while (1)
 	{
 		line = readline("minishell$ ");
+		
+		if (!(line))
+		{
+			printf("exit\n");
+			exit(0);
+		}
 		if (ft_strlen(line) != 0)
 			add_history(line);
 		token_list = ft_lex(line);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fdout.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:54:02 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/07 13:27:02 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/09 21:15:08 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int	ft_append_output(t_token *redirec_token)
 		file_name = redirec_token->next->name;
 		redirec_token->next->type = SPACE;
 	}
-	fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0777);
 	return (fd);
 }
 

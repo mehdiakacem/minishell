@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signalhandler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:47:52 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/07 18:40:23 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/10 13:36:15 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,12 @@ void	handler(int sig)
 {
 	if (sig == SIGQUIT)
 		return ;
-	// else if (sig == SIGSEGV)
-	// {
-	// 	ft_printf("exit\n");
-	// 	exit(0);
-	// }
 	else if (sig == SIGINT)
 	{
-		return ;
+		printf("\n");
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
 	}
 }
 
@@ -33,7 +31,6 @@ void	ft_signalhandler(void)
 
 	sa.sa_handler = &handler;
 	sa.sa_flags = SA_RESTART;
-	sigaction(SIGSEGV, &sa, NULL);
 	sigaction(SIGQUIT, &sa, NULL);
 	sigaction(SIGINT, &sa, NULL);
 }
