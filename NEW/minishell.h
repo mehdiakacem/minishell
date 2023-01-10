@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/10 11:03:11 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/10 13:44:55 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ char		**ft_sort_env(char **env);
 int			ft_search_env(char	**env, char *var);
 char		**ft_remove_var(char	**env, char *var);
 int			ft_search_env(char	**env, char *var);
-char		**ft_home(int n_cmd, char **cmd, char **env, char *old_pwd);
+char		**ft_home(int n_cmd, char **cmd, char **env);
 void		execute_left(int *fd, t_treenode *left, char **env);
 void		execute_right(int *fd, t_treenode *right, char **env);
 char		**ft_execute(t_treenode *root, char **env);
