@@ -6,7 +6,7 @@
 #    By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/07 13:04:19 by nmoussam         ###   ########.fr        #
+#    Updated: 2023/01/10 13:41:41 by nmoussam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,7 @@ NAME = minishell
 
 CC = cc
 
-FLAGS = -Wall -Werror -Wextra -lreadline 
-\\ -fsanitize=address 
+FLAGS = -Wall -Werror -Wextra -lreadline
 HEADER = minishell.h
 
 SRC = main.c \
