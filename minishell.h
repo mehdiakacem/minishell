@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/10 20:53:47 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/11 23:37:48 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 # include "./expander/expander.h"
 # define CMD 7
 # define PIPE 1
-
+int	exit_status;
+int val;
 typedef struct t_treenode {
 	int					type;
 	char				**cmd;
@@ -64,13 +65,13 @@ char		**ft_sort_env(char **env);
 int			ft_search_env(char	**env, char *var);
 char		**ft_remove_var(char	**env, char *var);
 int			ft_search_env(char	**env, char *var);
-char		**ft_home(int n_cmd, char **cmd, char **env);
+char		**ft_home(char **env);
 void		execute_left(int *fd, t_treenode *left, char **env);
 void		execute_right(int *fd, t_treenode *right, char **env);
 char		**ft_execute(t_treenode *root, char **env);
 int			path_exist(char *path);
 char		**path(t_treenode *root, char **env);
-int			exec_file(t_treenode *root, char *path, char **env);
+int			exec_file(t_treenode *root, char *path, char **env, int i);
 void		find_and_exec(t_treenode *root, char **str, char **env);
 void		ft_exec_cmd(t_treenode *root, char **env);
 char		**ft_execute_rec(t_treenode *root, char **env);

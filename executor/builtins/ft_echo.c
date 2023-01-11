@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 19:49:15 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/07 13:32:42 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/11 22:44:11 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,5 +60,6 @@ char	**ft_echo(int n_cmd, char **cmd, char **env)
 			i++;
 		}
 	}
+	exit_status = 0;
 	return (env);
 }

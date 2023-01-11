@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 11:34:37 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/08 16:19:19 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/11 23:02:56 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ char	**ft_unset(int n_cmd, char **cmd, char **env)
 	char	**arg;
 
 	if (n_cmd == 1)
+	{
+		exit_status = 0;
 		return (env);
+	}
 	else if (n_cmd > 1)
 	{
 		arg = cmd;
@@ -32,6 +35,7 @@ char	**ft_unset(int n_cmd, char **cmd, char **env)
 			arg++;
 		}
 	}
+	exit_status = 0;
 	return (env);
 }
 
@@ -67,8 +71,6 @@ char	**ft_populate_unset(char **new_env, char **old_env, char *var)
 char	**ft_remove_var(char	**env, char *var)
 {
 	char	**new_env;
-	char	**last_place;
-	char	**temp;
 
 	new_env = malloc(ft_count_env_var(env) * sizeof(char **));
 	new_env = ft_populate_unset(new_env, env, var);

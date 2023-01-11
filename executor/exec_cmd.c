@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/10 22:47:30 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/11 23:43:42 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,14 +34,20 @@ char	**path(t_treenode *root, char **env)
 	root = NULL;
 	str = ft_getenv(env, "PATH");
 	if (!str)
+	{
+		exit_status = 127;
 		return (NULL);
-	split_path = ft_split(str, ':');
-	if (!split_path)
-		return (NULL);
-	return (split_path);
+	}
+	else
+	{
+		split_path = ft_split(str, ':');
+		if (!split_path)
+			return (NULL);
+		return (split_path);
+	}
 }
 
-int	exec_file(t_treenode *root, char *path, char **env)
+int	exec_file(t_treenode *root, char *path, char **env, int i)
 {
 	int	pid;
 
@@ -49,7 +55,7 @@ int	exec_file(t_treenode *root, char *path, char **env)
 	{
 		pid = fork();
 		if (pid == -1)
-			printf("minishell1: %s\n", strerror(errno));
+			printf("minishell: %s\n", strerror(errno));
 		else if (pid == 0)
 		{
 			if (execve(path, root->cmd, env) == -1)
@@ -61,6 +67,12 @@ int	exec_file(t_treenode *root, char *path, char **env)
 		wait(NULL);
 		return (1);
 	}
+	else if (i == 6)
+	{
+		printf("minishell100: %s\n", strerror(errno));
+		exit_status = 127;
+		return (0);
+	}
 	return (0);
 }
 
@@ -70,37 +82,51 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 	char	*tmp;
 	char	*path;
 
-	tmp = ft_strjoin("/", root->cmd[0]);
-	if (!tmp)
-		return ;// free
+
+		tmp = ft_strjoin("/", root->cmd[0]);
+		if (!tmp)
+			return ;// free
+	
 	i = 0;
 	while (str[i])
 	{
-		path = ft_strjoin(str[i], tmp);
-		if (!path)
-		{
-			printf("niullllll\n");
-			return ;
-		}
-		if (exec_file(root, path, env) == 0)
-			i++;
-		else
-			return ;
+
+			path = ft_strjoin(str[i], tmp);
+			if (!path)
+			{
+				printf("niullllll\n");
+				return ;
+			}
+			if (exec_file(root, path, env, i) == 0)
+				i++;
+			else
+				return ;
+		
 	}
-	if (str[i] == NULL)
-	{
-		printf("minishell4: %s: command not found\n", root->cmd[0]);
-	}
+	// if (str[i] == NULL)
+	// {
+	// 	printf("i = %d\n", i);
+	// 	printf("minishell4: %s: command not found\n", root->cmd[0]);
+	// }
 }
 
 void	ft_exec_cmd(t_treenode *root, char **env)
 {
 	char	**str;
+	int i = 0;
 
 	str = path(root, env);
+	if (!str)
+	{
+		printf("minishell: %s\n", strerror(errno));
+		exit_status = 127;
+		return ;
+	}
 	if (path_exist(root->cmd[0]) == 1)
 	{
-		exec_file(root, root->cmd[0], env);
+		val = 1;
+		find_and_exec(root, str, env);
+		exec_file(root, root->cmd[0], env, i);
 	}
 	else
 	{

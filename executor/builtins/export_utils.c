@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:49:34 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/04 16:50:01 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/11 17:48:03 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ char	**ft_add_var(char *var, char **env)
 {
 	char	**new_env;
 	char	**last_place;
-	char	**temp;
 
 	new_env = malloc((ft_count_env_var(env) + 2) * sizeof(char **));
 	new_env = ft_populate(new_env, env);
