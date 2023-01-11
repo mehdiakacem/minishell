@@ -6,6 +6,8 @@
         "stdio.h": "c",
         "history.h": "c",
         "fcntl.h": "c",
-        "executor.h": "c"
+        "executor.h": "c",
+        "readline.h": "c",
+        "rltypedefs.h": "c"
     }
 }
