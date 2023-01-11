@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/12 18:40:33 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/18 14:33:06 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/10 22:37:59 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	ft_tokenize(t_token *token)
 	while (temp != NULL)
 	{
 		if (temp->value == ' ')
-			temp->type = SPACE;
+			temp->type = SPACEE;
 		else if (temp->value == 39)
 			temp->type = SQUOTE;
 		else if (temp->value == '"')

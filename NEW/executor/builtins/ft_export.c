@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:03:39 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/07 13:35:06 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/10 22:48:45 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	**ft_jointo_old(char **env, char *arg)
 	char	**old_val;
 	char	**temp;
 
+	temp = NULL;
 	old_val = ft_search_val(env, arg);
 	while (*arg != '\0' && *arg != '=')
 		arg++;

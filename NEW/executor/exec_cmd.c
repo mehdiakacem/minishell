@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/09 20:22:07 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/10 22:47:30 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ char	**path(t_treenode *root, char **env)
 	char	*str;
 	char	**split_path;
 
+	root = NULL;
 	str = ft_getenv(env, "PATH");
 	if (!str)
 		return (NULL);

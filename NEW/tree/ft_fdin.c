@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:59:14 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/09 11:21:12 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/10 22:44:17 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	ft_fdin(t_token *token_list)
 {
 	int		fd_in;
 	t_token	*redirection;
-	t_token	*temp_token;
 
 	fd_in = 0;
 	redirection = token_list;
@@ -44,16 +43,16 @@ int	ft_redirect_input(t_token *redirec_token)
 	char	*file_name;
 
 	fd = 0;
-	redirec_token->type = SPACE;
-	if (redirec_token->next->type == SPACE)
+	redirec_token->type = SPACEE;
+	if (redirec_token->next->type == SPACEE)
 	{
 		file_name = redirec_token->next->next->name;
-		redirec_token->next->next->type = SPACE;
+		redirec_token->next->next->type = SPACEE;
 	}
 	else
 	{
 		file_name = redirec_token->next->name;
-		redirec_token->next->type = SPACE;
+		redirec_token->next->type = SPACEE;
 	}
 	fd = open(file_name, O_RDONLY, 0644);
 	if (fd == -1)
@@ -71,16 +70,16 @@ int	ft_heredoc_input(t_token *redirec_token)
 	char	*line;
 
 	fd = 0;
-	redirec_token->type = SPACE;
-	if (redirec_token->next->type == SPACE)
+	redirec_token->type = SPACEE;
+	if (redirec_token->next->type == SPACEE)
 	{
 		delimiter = redirec_token->next->next->name;
-		redirec_token->next->next->type = SPACE;
+		redirec_token->next->next->type = SPACEE;
 	}
 	else
 	{
 		delimiter = redirec_token->next->name;
-		redirec_token->next->type = SPACE;
+		redirec_token->next->type = SPACEE;
 	}
 	fd = open("/tmp/heredoc", O_CREAT | O_TRUNC | O_RDWR, 0644);
 	line = "";

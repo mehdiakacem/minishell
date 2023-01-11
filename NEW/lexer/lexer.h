@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 12:31:56 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/03 17:27:43 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/10 22:35:04 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 # define LEXER_H
 
-# define SPACE 0
+# define SPACEE 0
 # define PIPE 1
 # define WORD 2
 # define REDIRECTION 3

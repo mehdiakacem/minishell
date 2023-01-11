@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/10 13:45:22 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/10 22:55:41 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ char	*ft_getenv(char	**env, char *var)
 {
 	char	*content;
 	char	**arr;
-	char	*shlvl;
 
 	arr = env;
 	content = NULL;
@@ -70,7 +69,6 @@ char	**ft_shlvl_plus(char **env)
 	int		shlvl_i;
 	char	**old_val;
 	char	*shlvl;
-	char	**temp;
 
 	shlvl = ft_getenv(env, "SHLVL");
 	shlvl_i = ft_atoi(shlvl);
@@ -122,6 +120,8 @@ int	main(int argc, char **argv, char **env)
 	t_token		*token_list;
 	t_treenode	*root;
 
+	argc = 0;
+	argv = NULL;
 	ft_signalhandler();
 	env = ft_create_new_env(env);
 	while (1)
@@ -130,7 +130,7 @@ int	main(int argc, char **argv, char **env)
 		
 		if (!(line))
 		{
-			printf("exit\n");
+			printf("minishell$ exit\n");
 			exit(0);
 		}
 		if (ft_strlen(line) != 0)

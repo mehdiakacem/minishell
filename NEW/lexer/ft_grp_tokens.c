@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 15:34:05 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/22 20:57:40 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/10 22:37:03 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ t_token	*ft_join_tokens(char **str, t_token *token)
 	char	*temp_str;
 
 	while (token->next != NULL && ((token->type == WORD
-				&& token->next->type == WORD) || (token->type == SPACE
-				&& token->next->type == SPACE) || (token->type == REDIRECTION
+				&& token->next->type == WORD) || (token->type == SPACEE
+				&& token->next->type == SPACEE) || (token->type == REDIRECTION
 				&& token->next->type == REDIRECTION)))
 	{
 		if (*str == NULL)
@@ -70,14 +70,14 @@ t_token	*ft_join_tokens(char **str, t_token *token)
 
 int	ft_check_type_diff_wsr(int token_type)
 {
-	if (token_type != WORD || token_type != SPACE || token_type != REDIRECTION)
+	if (token_type != WORD || token_type != SPACEE || token_type != REDIRECTION)
 		return (1);
 	return (0);
 }
 
 int	ft_check_type_is_wsr(int token_type)
 {
-	if (token_type == WORD || token_type == SPACE || token_type == REDIRECTION)
+	if (token_type == WORD || token_type == SPACEE || token_type == REDIRECTION)
 		return (1);
 	return (0);
 }

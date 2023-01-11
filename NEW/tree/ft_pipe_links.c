@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:16:01 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/28 14:59:03 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/10 22:43:51 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ t_treenode	*ft_create_pipe(t_token *token_list)
 {
 	t_treenode	*root;
 
+	token_list = NULL;
 	root = malloc(sizeof(t_treenode));
 	root->type = PIPE;
 	root->left = NULL;

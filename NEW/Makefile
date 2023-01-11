@@ -6,7 +6,7 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/10 13:45:39 by makacem          ###   ########.fr        #
+#    Updated: 2023/01/10 22:51:03 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,8 +14,10 @@ NAME = minishell
 
 CC = cc
 
-FLAGS = -Wall -Werror -Wextra -lreadline
+FLAGS = -Wall -Wextra
 HEADER = minishell.h
+LFLAGS = -L /Users/makacem/homebrew/Cellar/readline/8.2.1/lib
+IFLAGS = -I /Users/makacem/homebrew/Cellar/readline/8.2.1/include
 
 SRC = main.c \
 	ft_signalhandler.c \
@@ -52,9 +54,12 @@ OBJ = $(SRC:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(OBJ)
+$(NAME) : $(OBJ) $(HEADER)
 	make -C ./libft
-	$(CC) $(FLAGS) $(OBJ) -o $(NAME) libft/libft.a
+	$(CC) $(FLAGS)  $(OBJ) -o $(NAME) -lreadline $(LFLAGS) libft/libft.a
+	
+%.o : %.c $(HEADER)
+	$(CC) $(FLAGS) $(IFLAGS) -c $< -o $@
 
 clean :
 	@rm -f $(OBJ)

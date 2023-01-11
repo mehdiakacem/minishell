@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/10 13:44:55 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/10 20:53:47 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <string.h>
-# include <readline/readline.h>
-# include <readline/history.h>
+#include <readline/readline.h>
+#include <readline/history.h>
+
 # include "./lexer/lexer.h"
 # include "./parser/parser.h"
 # include "./expander/expander.h"

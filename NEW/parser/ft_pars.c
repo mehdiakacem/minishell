@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:22:31 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/28 19:01:35 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/10 22:39:02 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ void	ft_print_type(t_token *token_list)
 			printf("WORD ");
 		else if (temp->type == REDIRECTION)
 			printf("REDIRECTION ");
-		else if (temp->type == SPACE)
+		else if (temp->type == SPACEE)
 			printf("SPACE ");
 		else if (temp->type == DQUOTE)
 			printf("DQUOTE ");

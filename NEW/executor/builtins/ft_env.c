@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:06:52 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/07 13:33:16 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/10 22:47:52 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ char	**ft_env(int n_cmd, char **cmd, char **env)
 	char	**arr;
 	char	*var;
 
+	cmd = NULL;
 	if (n_cmd > 1)
 	{
 		ft_printf("env: usage: with no options or arguments\n");

@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/16 17:31:57 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/18 12:46:12 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/10 22:38:22 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	ft_check_pipes(t_token *token_list)
 int	ft_pipe_space_pipe(t_token *token)
 {
 	token = token->next;
-	while (token->type == SPACE)
+	while (token->type == SPACEE)
 	{
 		token = token->next;
 		if (token->type == PIPE)

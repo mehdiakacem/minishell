@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 11:21:25 by makacem           #+#    #+#             */
-/*   Updated: 2022/12/28 11:38:37 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/10 22:36:21 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	ft_expand(t_token *token_list, char **env)
 	{
 		if (token_list->type == DOLLAR)
 		{
-			if (token_list->next == NULL || token_list->next->type == SPACE)
+			if (token_list->next == NULL || token_list->next->type == SPACEE)
 				token_list->type = WORD;
 			else if (token_list->next->type == WORD)
 			{

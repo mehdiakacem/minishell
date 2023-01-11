@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:45:58 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/09 11:04:36 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/10 22:44:29 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 char	**execution_cmd(t_treenode *root, char **env)
 {
 	char	*tmp;
-	char	*arr;
 	int		temp_fdout;
 	int		temp_fdin;
 
