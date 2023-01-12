@@ -8,6 +8,7 @@
         "fcntl.h": "c",
         "executor.h": "c",
         "readline.h": "c",
-        "rltypedefs.h": "c"
+        "rltypedefs.h": "c",
+        "typeinfo": "c"
     }
 }

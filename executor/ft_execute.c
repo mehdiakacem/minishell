@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:45:58 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/10 22:44:29 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/12 11:53:34 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,11 @@
 char	**execution_cmd(t_treenode *root, char **env)
 {
 	char	*tmp;
-	int		temp_fdout;
 	int		temp_fdin;
+	int		temp_fdout;
 
-	if (root->stdout_fd != 0)
-	{
-		temp_fdout = dup(STDOUT_FILENO);
-		dup2(root->stdout_fd, STDOUT_FILENO);
-	}
-	if (root->stdin_fd != 0)
-	{
-		temp_fdin = dup(STDIN_FILENO);
-		dup2(root->stdin_fd, STDIN_FILENO);
-	}
+	temp_fdin = ft_dupin_open(root->stdin_fd);
+	temp_fdout = ft_dupout_open(root->stdout_fd);
 	tmp = ft_strdup(root->cmd[0]);
 	ft_to_lower(tmp);
 	if (ft_strcmp(tmp, "echo") == 0)
@@ -47,25 +39,15 @@ char	**execution_cmd(t_treenode *root, char **env)
 	else
 		ft_exec_cmd(root, env);
 	free(tmp);
-	if (root->stdout_fd != 0)
-	{
-		dup2(temp_fdout, STDOUT_FILENO);
-		close(root->stdout_fd);
-	}
-	if (root->stdin_fd != 0)
-	{
-		dup2(temp_fdin, STDIN_FILENO);
-		close(root->stdin_fd);
-	}
+	ft_dupin_close(root->stdin_fd, temp_fdin);
+	ft_dupout_close(root->stdout_fd, temp_fdout);
 	return (env);
 }
 
 char	**ft_execute_rec(t_treenode *root, char **env)
 {
 	if (root == NULL)
-	{
 		return (env);
-	}
 	if (root->type == PIPE)
 	{
 		ft_pipe(root, env);
@@ -73,12 +55,13 @@ char	**ft_execute_rec(t_treenode *root, char **env)
 	}
 	else if (root->type == CMD)
 	{
-		if (*(root->cmd) == NULL)
+		if (*(root->cmd) == NULL && root->stdin_fd == 0 && root->stdout_fd == 0)
 		{
 			printf("minishell: : command not found\n");
 			return (env);
 		}
-		env = execution_cmd(root, env);
+		if (*(root->cmd) != NULL)
+			env = execution_cmd(root, env);
 		free(root->cmd);
 	}
 	return (env);
