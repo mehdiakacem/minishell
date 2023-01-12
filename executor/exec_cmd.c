@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/12 18:11:46 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/12 22:29:31 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,19 +102,22 @@ void	ft_exec_cmd(t_treenode	*root, char **env)
 	str = path(root, env);
 	if (!str)
 	{
-		printf("minishell: %s\n", strerror(errno));
+		printf("minishell: %s: No such file or directory\n", root->cmd[0]);
 		exit_status = 127;
 		return ;
 	}
 	if (path_exist(root->cmd[0]) == 1)
 	{
-		if (root->cmd[0][1] == '\0' || exec_file(root, root->cmd[0], env) == 0)
+		if (root->cmd[0][1] == '\0')
 		{
-			printf("minishell127: %s: %s\n", root->cmd[0], strerror(errno));
-			if (ft_strcmp(strerror(errno), "Not a directory") == 0 || ft_strcmp(strerror(errno), "is a directory") == 0 || ft_strcmp(strerror(errno), "Permission denied") == 0)
-				exit_status = 126;
-			else 
-				exit_status = 127;
+			printf("minishell: %s: is a directory\n", root->cmd[0]);
+			exit_status = 126;
+			return ;
+		}
+		else if (exec_file(root, root->cmd[0], env) == 0)
+		{
+			printf("minishell: %s: %s\n", root->cmd[0], strerror(errno));
+			exit_status = 127;
 			return ;
 		}
 		exit_status = 0;

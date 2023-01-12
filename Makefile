@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
+#    By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/12 17:28:17 by makacem          ###   ########.fr        #
+#    Updated: 2023/01/12 21:15:02 by nmoussam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME = minishell
 
 CC = cc
 
-FLAGS = -Wall -Wextra 
+FLAGS = -Wall -Wextra -Werror
 HEADER = minishell.h
-# LFLAGS = -L readline/8.2.1/lib
-# IFLAGS = -I readline/8.2.1/include
+LFLAGS = -L/goinfre/nmoussam/homebrew/opt/readline/lib
+IFLAGS = -I/goinfre/nmoussam/homebrew/opt/readline/include
 
 SRC = main.c \
 	ft_signalhandler.c \
