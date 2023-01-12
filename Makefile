@@ -6,7 +6,7 @@
 #    By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/12 21:15:02 by nmoussam         ###   ########.fr        #
+#    Updated: 2023/01/12 23:09:21 by nmoussam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ SRC = main.c \
 	executor/builtins/ft_pwd.c \
 	executor/builtins/ft_cd.c \
 	executor/builtins/ft_unset.c \
+	executor/builtins/ft_exit.c \
 	executor/builtins/export_utils.c \
 	executor/ft_dup_open.c \
 	executor/ft_dup_close.c \
