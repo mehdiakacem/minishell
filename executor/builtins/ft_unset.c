@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 11:34:37 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/12 10:11:44 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/12 17:30:54 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,10 @@ char	**ft_unset(int n_cmd, char **cmd, char **env)
 	char	**arg;
 
 	if (n_cmd == 1)
+	{
+		exit_status = 0;
 		return (env);
+	}
 	else if (n_cmd > 1)
 	{
 		arg = cmd;
@@ -32,6 +35,7 @@ char	**ft_unset(int n_cmd, char **cmd, char **env)
 			arg++;
 		}
 	}
+	exit_status = 0;
 	return (env);
 }
 

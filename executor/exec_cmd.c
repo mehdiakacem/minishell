@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/12 13:41:55 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/12 17:29:02 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,17 @@ char	**path(t_treenode *root, char **env)
 	root = NULL;
 	str = ft_getenv(env, "PATH");
 	if (!str)
+	{
+		exit_status = 127;
 		return (NULL);
-	split_path = ft_split(str, ':');
-	if (!split_path)
-		return (NULL);
-	return (split_path);
+	}
+	else
+	{
+		split_path = ft_split(str, ':');
+		if (!split_path)
+			return (NULL);
+		return (split_path);
+	}
 }
 
 int	exec_file(t_treenode *root, char *path, char **env)
@@ -49,7 +55,7 @@ int	exec_file(t_treenode *root, char *path, char **env)
 	{
 		pid = fork();
 		if (pid == -1)
-			printf("minishell1: %s\n", strerror(errno));
+			printf("minishell: %s\n", strerror(errno));
 		else if (pid == 0)
 		{
 			if (execve(path, root->cmd, env) == -1)
@@ -87,23 +93,33 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 		else
 			return ;
 	}
-	if (str[i] == NULL)
+	if (str[i] == NULL) 
 	{
 		printf("minishell4: %s: command not found\n", root->cmd[0]);
 	}
 }
 
-void	ft_exec_cmd(t_treenode *root, char **env)
+void	ft_exec_cmd(t_treenode	*root, char **env)
 {
-	char	**str;
+	char **str;
 
 	str = path(root, env);
+	if (!str)
+	{
+		printf("minishell: %s\n", strerror(errno));
+		exit_status = 127;
+		return ;
+	}
 	if (path_exist(root->cmd[0]) == 1)
 	{
-		exec_file(root, root->cmd[0], env);
+		if (exec_file(root, root->cmd[0], env) == 0)
+		{
+			printf("minishell: %s\n", strerror(errno));
+			exit_status = 127;
+			return ;
+		}
+		exit_status = 0;
 	}
 	else
-	{
 		find_and_exec(root, str, env);
-	}
 }

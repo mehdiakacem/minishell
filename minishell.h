@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/12 11:03:41 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/12 17:27:30 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@
 # include "./expander/expander.h"
 # define CMD 7
 # define PIPE 1
-
+int	exit_status;
+int val;
 typedef struct t_treenode {
 	int					type;
 	char				**cmd;
@@ -64,7 +65,7 @@ char		**ft_sort_env(char **env);
 int			ft_search_env(char	**env, char *var);
 char		**ft_remove_var(char	**env, char *var);
 int			ft_search_env(char	**env, char *var);
-char		**ft_home(int n_cmd, char **cmd, char **env);
+char		**ft_home(char **env);
 void		execute_left(int *fd, t_treenode *left, char **env);
 void		execute_right(int *fd, t_treenode *right, char **env);
 char		**ft_execute(t_treenode *root, char **env);

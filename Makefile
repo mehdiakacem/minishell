@@ -6,7 +6,7 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/12 11:08:31 by makacem          ###   ########.fr        #
+#    Updated: 2023/01/12 17:28:17 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ CC = cc
 
 FLAGS = -Wall -Wextra 
 HEADER = minishell.h
-LFLAGS = -L readline/8.2.1/lib
-IFLAGS = -I readline/8.2.1/include
+# LFLAGS = -L readline/8.2.1/lib
+# IFLAGS = -I readline/8.2.1/include
 
 SRC = main.c \
 	ft_signalhandler.c \

@@ -6,12 +6,14 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/12 10:45:47 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/12 17:27:00 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+exit_status = 0;
+val = 0;
 int	main(int argc, char **argv, char **env)
 {
 	char		*line;
