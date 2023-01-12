@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/12 15:48:05 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/12 16:39:11 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	exec_file(t_treenode *root, char *path, char **env)
 		{
 			if (execve(path, root->cmd, env) == -1)
 			{
-				printf("minishell2: %s: \n", strerror(errno));
+				//printf("minishell2: %s: \n", strerror(errno));
 				return (0);
 			}
 		}
@@ -83,11 +83,6 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 	while (str[i])
 	{
 		path = ft_strjoin(str[i], tmp);
-		if (!path)
-		{
-			printf("niullllll\n");
-			return ;
-		}
 		if (exec_file(root, path, env) == 0)
 			i++;
 		else
@@ -95,7 +90,8 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 	}
 	if (str[i] == NULL) 
 	{
-		printf("minishell4: %s: command not found\n", root->cmd[0]);
+		printf("minishell: %s: command not found\n", root->cmd[0]);
+		exit_status = 127;
 	}
 }
 
@@ -112,10 +108,13 @@ void	ft_exec_cmd(t_treenode	*root, char **env)
 	}
 	if (path_exist(root->cmd[0]) == 1)
 	{
-		if (exec_file(root, root->cmd[0], env) == 0)
+		if (root->cmd[0][1] == '\0' || exec_file(root, root->cmd[0], env) == 0)
 		{
-			printf("minishell: %s\n", strerror(errno));
-			exit_status = 127;
+			printf("minishell127: %s: %s\n", root->cmd[0], strerror(errno));
+			if (ft_strcmp(strerror(errno), "Not a directory") == 0 || ft_strcmp(strerror(errno), "is a directory") == 0 || ft_strcmp(strerror(errno), "Permission denied") == 0)
+				exit_status = 126;
+			else 
+				exit_status = 127;
 			return ;
 		}
 		exit_status = 0;
