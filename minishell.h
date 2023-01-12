@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/11 23:37:48 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/12 13:04:46 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ void		execute_right(int *fd, t_treenode *right, char **env);
 char		**ft_execute(t_treenode *root, char **env);
 int			path_exist(char *path);
 char		**path(t_treenode *root, char **env);
-int			exec_file(t_treenode *root, char *path, char **env, int i);
+int			exec_file(t_treenode *root, char *path, char **env);
 void		find_and_exec(t_treenode *root, char **str, char **env);
 void		ft_exec_cmd(t_treenode *root, char **env);
 char		**ft_execute_rec(t_treenode *root, char **env);
