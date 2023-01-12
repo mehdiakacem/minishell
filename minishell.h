@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/12 13:04:46 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/12 17:27:30 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,18 @@ char		**execution_cmd(t_treenode *root, char **env);
 void		ft_pipe(t_treenode *root, char **env);
 int			ft_strcmp(char *s1, char *s2);
 void		ft_to_lower(char *str);
+char		**ft_shlvl_plus(char **env);
+int			ft_count_env_var(char	**env);
+char		*ft_getenv(char	**env, char *var);
+void		ft_free_tokens(t_token *token_list);
+char		**ft_create_new_env(char **old_env);
+int			ft_cmpin_env(char	**env, char *var);
+char		**ft_populate(char **new_env, char **old_env);
+int			ft_dupin_open(int fd_stdin);
+int			ft_dupout_open(int fd_stdout);
+void    	ft_dupin_close(int fd_stdin, int temp_fdin);
+void    	ft_dupout_close(int fd_stdout, int temp_fdout);
+
+
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+         #
+#    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/11 22:41:42 by nmoussam         ###   ########.fr        #
+#    Updated: 2023/01/12 17:28:17 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,13 @@ SRC = main.c \
 	tree/ft_fdin.c \
 	utils/ft_strcmp.c \
 	utils/ft_lower.c \
+	utils/ft_count_env_var.c \
+	utils/ft_create_new_env.c \
+	utils/ft_free_env.c \
+	utils/ft_free_tokens.c \
+	utils/ft_getenv.c \
+	utils/ft_populate.c \
+	utils/ft_shlvl_plus.c \
 	executor/ft_execute.c \
 	executor/exec_cmd.c \
 	executor/pipe.c \
@@ -49,6 +56,8 @@ SRC = main.c \
 	executor/builtins/ft_cd.c \
 	executor/builtins/ft_unset.c \
 	executor/builtins/export_utils.c \
+	executor/ft_dup_open.c \
+	executor/ft_dup_close.c \
 
 OBJ = $(SRC:.c=.o)
 
@@ -57,7 +66,7 @@ all : $(NAME)
 $(NAME) : $(OBJ) $(HEADER)
 	make -C ./libft
 	$(CC) $(FLAGS)  $(OBJ) -o $(NAME) -lreadline $(LFLAGS) libft/libft.a
-	
+
 %.o : %.c $(HEADER)
 	$(CC) $(FLAGS) $(IFLAGS) -c $< -o $@
 
