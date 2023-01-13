@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:59:14 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/11 14:29:10 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/13 18:08:39 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int	ft_redirect_input(t_token *redirec_token)
 	fd = open(file_name, O_RDONLY, 0644);
 	if (fd == -1)
 	{
-		ft_printf("minishell: %s: No such file or directory\n", file_name);
-		exit (0);
+		ft_printf("minishell: %s: %s\n", file_name, strerror(errno));
+		exit_status = 1;
 	}
 	return (fd);
 }

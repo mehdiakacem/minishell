@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:54:02 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/10 22:44:09 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/13 21:02:19 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,18 +43,25 @@ int	ft_redirect_output(t_token *redirec_token)
 	char	*file_name;
 
 	fd = 0;
+	while (redirec_token != NULL && redirec_token->type != WORD && redirec_token->type != 15)
+	{
+		redirec_token->type = SPACEE;
+		redirec_token = redirec_token->next;
+	}
+	if (redirec_token->type == 15)
+	{
+		ft_printf("minishell: $%s: ambiguous redirect\n", redirec_token->name);
+		exit_status = 1 * 256;
+		return (-1);
+	}
+	file_name = redirec_token->name;
 	redirec_token->type = SPACEE;
-	if (redirec_token->next->type == SPACEE)
-	{
-		file_name = redirec_token->next->next->name;
-		redirec_token->next->next->type = SPACEE;
-	}
-	else
-	{
-		file_name = redirec_token->next->name;
-		redirec_token->next->type = SPACEE;
-	}
 	fd = open(file_name, O_CREAT | O_TRUNC | O_WRONLY, 0644);
+	if (fd == -1)
+	{
+		ft_printf("minishell: %s: %s\n", file_name, strerror(errno));
+		exit_status = 1 * 256;
+	}
 	return (fd);
 }
 
@@ -64,18 +71,25 @@ int	ft_append_output(t_token *redirec_token)
 	char	*file_name;
 
 	fd = 0;
+	while (redirec_token != NULL && redirec_token->type != WORD && redirec_token->type != 15)
+	{
+		redirec_token->type = SPACEE;
+		redirec_token = redirec_token->next;
+	}
+	if (redirec_token->type == 15)
+	{
+		ft_printf("minishell: $%s: ambiguous redirect\n", redirec_token->name);
+		exit_status = 1 * 256;
+		return (-1);
+	}
+	file_name = redirec_token->name;
 	redirec_token->type = SPACEE;
-	if (redirec_token->next->type == SPACEE)
+	fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0644);
+	if (fd == -1)
 	{
-		file_name = redirec_token->next->next->name;
-		redirec_token->next->next->type = SPACEE;
+		ft_printf("minishell: %s: %s\n", file_name, strerror(errno));
+		exit_status = 1 * 256;
 	}
-	else
-	{
-		file_name = redirec_token->next->name;
-		redirec_token->next->type = SPACEE;
-	}
-	fd = open(file_name, O_CREAT | O_WRONLY | O_APPEND, 0777);
 	return (fd);
 }
 

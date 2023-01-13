@@ -3,14 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/12 21:31:51 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/13 16:03:22 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	ft_print_type(t_token *token_list);
+void	ft_print_token_content(t_token *token_list);
 
 int exit_status = 0;
 int val = 0;
@@ -46,6 +49,8 @@ int	main(int argc, char **argv, char **env)
 		else
 		{
 			ft_expand(token_list->next, env);
+			// ft_print_token_content(token_list);
+			// ft_print_type(token_list);
 			root = ft_tree(token_list->next);
 			env = ft_execute(root, env);
 			free(line);
