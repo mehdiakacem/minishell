@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:56:41 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/07 13:40:32 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/13 19:18:23 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,6 @@ void	ft_pipe(t_treenode *root, char **env)
 		execute_left(fd, root->left, env);
 	close(fd[0]);
 	close(fd[1]);
-	wait(NULL);
-	wait(NULL);
+	wait(&exit_status);
+	wait(&exit_status);
 }
