@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 19:50:21 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/11 22:49:46 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/13 19:05:31 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	**ft_pwd(int n_cmd, char **cmd, char **env)
 	{
 		printf("minishell: pwd: -%c invalid option\npwd: usage: pwd [-LP]\n", \
 		cmd[1][1]);
-		exit_status = 1;
+		exit_status = 1 * 256;
 		return (env);
 	}
 	printf("%s\n", getcwd(NULL, 0));

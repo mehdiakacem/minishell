@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 17:01:45 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/12 21:35:03 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/13 19:04:11 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	**ft_home(char **env)
 	if (!home)
 	{
 		printf("minishell: cd: HOME not set\n");
-		exit_status = 1;
+		exit_status = 1 * 256;
 		return (env);
 	}
 	else if (chdir(home) == -1)
@@ -128,7 +128,7 @@ char	**ft_cd(int n_cmd, char **cmd, char **env)
 		if (chdir(cmd[1]) == -1)
 		{
 			printf("minishell: cd: %s\n", strerror(errno));
-			exit_status = 1;
+			exit_status = 1 * 256;
 			return (env);
 		}
 		else

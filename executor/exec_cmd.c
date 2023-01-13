@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/12 22:29:31 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/13 19:18:01 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**path(t_treenode *root, char **env)
 	str = ft_getenv(env, "PATH");
 	if (!str)
 	{
-		exit_status = 127;
+		exit_status = 127 * 256;
 		return (NULL);
 	}
 	else
@@ -59,12 +59,9 @@ int	exec_file(t_treenode *root, char *path, char **env)
 		else if (pid == 0)
 		{
 			if (execve(path, root->cmd, env) == -1)
-			{
-				//printf("minishell2: %s: \n", strerror(errno));
 				return (0);
-			}
 		}
-		wait(NULL);
+		wait(&exit_status);
 		return (1);
 	}
 	return (0);
@@ -91,7 +88,7 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 	if (str[i] == NULL) 
 	{
 		printf("minishell: %s: command not found\n", root->cmd[0]);
-		exit_status = 127;
+		exit_status = 127 * 256;
 	}
 }
 
@@ -103,7 +100,7 @@ void	ft_exec_cmd(t_treenode	*root, char **env)
 	if (!str)
 	{
 		printf("minishell: %s: No such file or directory\n", root->cmd[0]);
-		exit_status = 127;
+		exit_status = 127 * 256;
 		return ;
 	}
 	if (path_exist(root->cmd[0]) == 1)
@@ -111,13 +108,13 @@ void	ft_exec_cmd(t_treenode	*root, char **env)
 		if (root->cmd[0][1] == '\0')
 		{
 			printf("minishell: %s: is a directory\n", root->cmd[0]);
-			exit_status = 126;
+			exit_status = 126 * 256;
 			return ;
 		}
 		else if (exec_file(root, root->cmd[0], env) == 0)
 		{
 			printf("minishell: %s: %s\n", root->cmd[0], strerror(errno));
-			exit_status = 127;
+			exit_status = 127 * 256;
 			return ;
 		}
 		exit_status = 0;

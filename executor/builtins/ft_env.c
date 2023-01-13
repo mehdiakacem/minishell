@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:06:52 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/11 23:01:56 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/13 19:04:23 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**ft_env(int n_cmd, char **cmd, char **env)
 	if (n_cmd > 1)
 	{
 		ft_printf("env: usage: with no options or arguments\n");
-		exit_status = 1;
+		exit_status = 1 * 256;
 		return (env);
 	}
 	arr = env;
