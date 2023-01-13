@@ -6,7 +6,7 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/13 09:09:10 by makacem          ###   ########.fr        #
+#    Updated: 2023/01/13 09:16:56 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@ NAME = minishell
 
 CC = cc
 
-FLAGS = -Wall -Wextra 
+FLAGS = -Wall -Wextra -Werror
 HEADER = minishell.h
-LFLAGS = -L readline/8.2.1/lib
-IFLAGS = -I readline/8.2.1/include
+LFLAGS = -L/goinfre/nmoussam/homebrew/opt/readline/lib
+IFLAGS = -I/goinfre/nmoussam/homebrew/opt/readline/include
 
 SRC = main.c \
 	ft_signalhandler.c \
@@ -55,6 +55,7 @@ SRC = main.c \
 	executor/builtins/ft_pwd.c \
 	executor/builtins/ft_cd.c \
 	executor/builtins/ft_unset.c \
+	executor/builtins/ft_exit.c \
 	executor/builtins/export_utils.c \
 	executor/ft_dup_open.c \
 	executor/ft_dup_close.c \

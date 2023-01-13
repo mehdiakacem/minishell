@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:45:58 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/12 11:53:34 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/12 23:17:10 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,8 @@ char	**execution_cmd(t_treenode *root, char **env)
 		env = ft_cd(root->nb_cmd, root->cmd, env);
 	else if (ft_strcmp(root->cmd[0], "unset") == 0)
 		env = ft_unset(root->nb_cmd, root->cmd, env);
-	// else if (ft_strcmp(root->cmd[0], "exit") == 0)
-	// 	env = ft_exit(root->nb_cmd, root->cmd, env);
+	else if (ft_strcmp(root->cmd[0], "exit") == 0)
+		env = ft_exit(root->nb_cmd, root->cmd, env);
 	else
 		ft_exec_cmd(root, env);
 	free(tmp);

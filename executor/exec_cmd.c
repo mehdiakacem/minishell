@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/12 17:29:02 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/12 22:29:31 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	exec_file(t_treenode *root, char *path, char **env)
 		{
 			if (execve(path, root->cmd, env) == -1)
 			{
-				printf("minishell2: %s: \n", strerror(errno));
+				//printf("minishell2: %s: \n", strerror(errno));
 				return (0);
 			}
 		}
@@ -83,11 +83,6 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 	while (str[i])
 	{
 		path = ft_strjoin(str[i], tmp);
-		if (!path)
-		{
-			printf("niullllll\n");
-			return ;
-		}
 		if (exec_file(root, path, env) == 0)
 			i++;
 		else
@@ -95,7 +90,8 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 	}
 	if (str[i] == NULL) 
 	{
-		printf("minishell4: %s: command not found\n", root->cmd[0]);
+		printf("minishell: %s: command not found\n", root->cmd[0]);
+		exit_status = 127;
 	}
 }
 
@@ -106,15 +102,21 @@ void	ft_exec_cmd(t_treenode	*root, char **env)
 	str = path(root, env);
 	if (!str)
 	{
-		printf("minishell: %s\n", strerror(errno));
+		printf("minishell: %s: No such file or directory\n", root->cmd[0]);
 		exit_status = 127;
 		return ;
 	}
 	if (path_exist(root->cmd[0]) == 1)
 	{
-		if (exec_file(root, root->cmd[0], env) == 0)
+		if (root->cmd[0][1] == '\0')
 		{
-			printf("minishell: %s\n", strerror(errno));
+			printf("minishell: %s: is a directory\n", root->cmd[0]);
+			exit_status = 126;
+			return ;
+		}
+		else if (exec_file(root, root->cmd[0], env) == 0)
+		{
+			printf("minishell: %s: %s\n", root->cmd[0], strerror(errno));
 			exit_status = 127;
 			return ;
 		}

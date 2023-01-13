@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/13 08:47:59 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/13 09:17:06 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ int			ft_dupin_open(int fd_stdin);
 int			ft_dupout_open(int fd_stdout);
 void    	ft_dupin_close(int fd_stdin, int temp_fdin);
 void    	ft_dupout_close(int fd_stdout, int temp_fdout);
+char    **ft_exit(int n_cmd, char **cmd, char **env);
 
 
 
