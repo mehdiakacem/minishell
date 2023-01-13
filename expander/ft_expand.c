@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 11:21:25 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/13 21:04:50 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/13 21:54:35 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,20 @@ void	ft_expand(t_token *token_list, char **env)
 				ft_strlcpy(allocated_cont, content, content_len);
 				free(token_list->next->name);
 				token_list->next->name = allocated_cont;
+			}
+		}
+		else if (token_list->type == REDIRECTION && ft_strncmp(token_list->name, "<<", 2) == 0)
+		{
+			while(token_list->next != NULL)
+			{
+				if (token_list->type == DOLLAR && token_list->next->type == WORD)
+				{
+					token_list->type = SPACEE;
+					var = token_list->next->name;
+					token_list->next->name = ft_strjoin("$", var);
+					free(var);
+				}
+				token_list = token_list->next;
 			}
 		}
 		token_list = token_list->next;

@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:59:14 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/13 18:08:39 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/13 21:30:07 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,24 @@ int	ft_redirect_input(t_token *redirec_token)
 	char	*file_name;
 
 	fd = 0;
+	while (redirec_token != NULL && redirec_token->type != WORD && redirec_token->type != 15)
+	{
+		redirec_token->type = SPACEE;
+		redirec_token = redirec_token->next;
+	}
+	if (redirec_token->type == 15)
+	{
+		ft_printf("minishell: $%s: ambiguous redirect\n", redirec_token->name);
+		exit_status = 1 * 256;
+		return (-1);
+	}
+	file_name = redirec_token->name;
 	redirec_token->type = SPACEE;
-	if (redirec_token->next->type == SPACEE)
-	{
-		file_name = redirec_token->next->next->name;
-		redirec_token->next->next->type = SPACEE;
-	}
-	else
-	{
-		file_name = redirec_token->next->name;
-		redirec_token->next->type = SPACEE;
-	}
 	fd = open(file_name, O_RDONLY, 0644);
 	if (fd == -1)
 	{
 		ft_printf("minishell: %s: %s\n", file_name, strerror(errno));
-		exit_status = 1;
+		exit_status = 1 * 256;
 	}
 	return (fd);
 }
@@ -71,16 +73,13 @@ int	ft_heredoc_input(t_token *redirec_token)
 
 	fd = 0;
 	redirec_token->type = SPACEE;
-	if (redirec_token->next->type == SPACEE)
+	while (redirec_token != NULL && redirec_token->type != WORD && redirec_token->type != 15)
 	{
-		delimiter = redirec_token->next->next->name;
-		redirec_token->next->next->type = SPACEE;
+		redirec_token->type = SPACEE;
+		redirec_token = redirec_token->next;
 	}
-	else
-	{
-		delimiter = redirec_token->next->name;
-		redirec_token->next->type = SPACEE;
-	}
+	delimiter = redirec_token->name;
+	redirec_token->type = SPACEE;
 	fd = open("/tmp/heredoc", O_CREAT | O_TRUNC | O_RDWR, 0644);
 	line = "";
 	delimiter = ft_strjoin(delimiter, "\n");
