@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/12 17:27:30 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/13 08:47:59 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,10 @@
 # include "./expander/expander.h"
 # define CMD 7
 # define PIPE 1
+
 int	exit_status;
 int val;
+
 typedef struct t_treenode {
 	int					type;
 	char				**cmd;
