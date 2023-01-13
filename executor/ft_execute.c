@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_execute.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:45:58 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/12 23:17:10 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/13 13:16:39 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ char	**ft_execute_rec(t_treenode *root, char **env)
 			printf("minishell: : command not found\n");
 			return (env);
 		}
-		if (*(root->cmd) != NULL)
+		if (*(root->cmd) != NULL && root->stdin_fd >= 0 && root->stdout_fd >= 0)
 			env = execution_cmd(root, env);
 		free(root->cmd);
 	}
