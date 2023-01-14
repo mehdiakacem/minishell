@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/14 13:10:37 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/14 13:56:38 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,9 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 	}
 	if (str[i] == NULL) 
 	{
-		ft_printf("minishell256: %s: command not found\n", root->cmd[0]);
+		ft_dupin_close(root->stdin_fd, root->temp_fdin);
+		ft_dupout_close(root->stdout_fd, root->temp_fdout);
+		printf("minishell: %s: command not found\n", root->cmd[0]);
 		exit_status = 127 * 256;
 	}
 }
