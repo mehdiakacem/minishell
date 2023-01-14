@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:56:41 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/14 13:53:49 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/14 23:01:29 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,14 @@ void	ft_pipe(t_treenode *root, char **env)
 		return ;
 	pid = fork();
 	if (pid == 0)
+	{
 		execute_right(fd, root->right, env);
+	}
 	pid = fork();
 	if (pid == 0)
 		execute_left(fd, root->left, env);
 	close(fd[0]);
 	close(fd[1]);
-	wait(&exit_status);
-	wait(&exit_status);
+	wait(&g_exit_status);
+	wait(&g_exit_status);
 }

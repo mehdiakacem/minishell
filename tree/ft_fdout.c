@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fdout.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:54:02 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/13 21:02:19 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/14 23:00:32 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,8 @@ int	ft_redirect_output(t_token *redirec_token)
 	char	*file_name;
 
 	fd = 0;
-	while (redirec_token != NULL && redirec_token->type != WORD && redirec_token->type != 15)
+	while (redirec_token != NULL && redirec_token->type != WORD && \
+	redirec_token->type != 15)
 	{
 		redirec_token->type = SPACEE;
 		redirec_token = redirec_token->next;
@@ -51,7 +52,7 @@ int	ft_redirect_output(t_token *redirec_token)
 	if (redirec_token->type == 15)
 	{
 		ft_printf("minishell: $%s: ambiguous redirect\n", redirec_token->name);
-		exit_status = 1 * 256;
+		g_exit_status = 1 * 256;
 		return (-1);
 	}
 	file_name = redirec_token->name;
@@ -60,7 +61,7 @@ int	ft_redirect_output(t_token *redirec_token)
 	if (fd == -1)
 	{
 		ft_printf("minishell: %s: %s\n", file_name, strerror(errno));
-		exit_status = 1 * 256;
+		g_exit_status = 1 * 256;
 	}
 	return (fd);
 }
@@ -71,7 +72,8 @@ int	ft_append_output(t_token *redirec_token)
 	char	*file_name;
 
 	fd = 0;
-	while (redirec_token != NULL && redirec_token->type != WORD && redirec_token->type != 15)
+	while (redirec_token != NULL && redirec_token->type != WORD && \
+	redirec_token->type != 15)
 	{
 		redirec_token->type = SPACEE;
 		redirec_token = redirec_token->next;
@@ -79,7 +81,7 @@ int	ft_append_output(t_token *redirec_token)
 	if (redirec_token->type == 15)
 	{
 		ft_printf("minishell: $%s: ambiguous redirect\n", redirec_token->name);
-		exit_status = 1 * 256;
+		g_exit_status = 1 * 256;
 		return (-1);
 	}
 	file_name = redirec_token->name;
@@ -88,7 +90,7 @@ int	ft_append_output(t_token *redirec_token)
 	if (fd == -1)
 	{
 		ft_printf("minishell: %s: %s\n", file_name, strerror(errno));
-		exit_status = 1 * 256;
+		g_exit_status = 1 * 256;
 	}
 	return (fd);
 }
@@ -100,9 +102,8 @@ t_token	*ft_redictionfor_output(t_token *tokne_list)
 	token = tokne_list;
 	while (token != NULL)
 	{
-		if (token->type == REDIRECTION
-			&& (ft_strncmp(token->name, ">", 2) == 0
-			|| ft_strncmp(token->name, ">>", 2) == 0))
+		if (token->type == REDIRECTION && (ft_strncmp(token->name, ">", 2) == 0 \
+		|| ft_strncmp(token->name, ">>", 2) == 0))
 			return (token);
 		token = token->next;
 	}

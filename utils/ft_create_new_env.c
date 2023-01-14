@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_create_new_env.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 09:56:35 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/14 13:17:57 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/14 21:51:03 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	**ft_create_new_env(char **old_env)
 	char	**new_env;
 	int		nbrof_env_var;
 
-	if(!(*old_env))
+	if (!(*old_env))
 	{
 		printf("env is not seted\n");
 		exit(0);

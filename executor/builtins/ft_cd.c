@@ -6,15 +6,11 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 17:01:45 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/13 19:04:11 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/14 23:02:17 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-char	**ft_jointo_old(char **env, char *arg);
-char	**ft_search_val(char **env, char *var);
-char	**ft_add_var(char *var, char **env);
 
 char	**ft_home(char **env)
 {
@@ -28,14 +24,14 @@ char	**ft_home(char **env)
 	tmp_pwd = getcwd(NULL, 0);
 	if (!home)
 	{
-		printf("minishell: cd: HOME not set\n");
-		exit_status = 1 * 256;
+		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
+		g_exit_status = 1 * 256;
 		return (env);
 	}
 	else if (chdir(home) == -1)
 	{
-		printf("minishell: cd: %s\n", strerror(errno));
-		exit_status = 256;
+		ft_printf("minishell: cd: %s\n", strerror(errno));
+		g_exit_status = 256;
 		return (env);
 	}
 	else
@@ -47,7 +43,7 @@ char	**ft_home(char **env)
 			env = ft_add_var(new_pwd, env);
 			oldpwd = ft_search_val(env, "OLDPWD=");
 			*oldpwd = ft_strjoin("OLDPWD=", tmp_pwd);
-			exit_status = 0;
+			g_exit_status = 0;
 			return (env);
 		}
 		else
@@ -57,7 +53,7 @@ char	**ft_home(char **env)
 			*oldpwd = ft_strjoin("OLDPWD=", tmp_pwd);
 		}
 	}
-	exit_status = 0;
+	g_exit_status = 0;
 	return (env);
 }
 
@@ -97,9 +93,9 @@ char	**ft_new_pwd(char **env)
 
 char	**ft_cd_point(char **env)
 {
-	printf("cd: error retrieving current directory: \
-	getcwd: cannot access parent directories: No such file or directory\n");
-	exit_status = 0;
+	ft_putstr_fd("cd: error retrieving current directory: \
+	getcwd: cannot access parent directories: No such file or directory\n", 2);
+	g_exit_status = 0;
 	return (env);
 }
 
@@ -127,15 +123,15 @@ char	**ft_cd(int n_cmd, char **cmd, char **env)
 	{
 		if (chdir(cmd[1]) == -1)
 		{
-			printf("minishell: cd: %s\n", strerror(errno));
-			exit_status = 1 * 256;
+			ft_printf("minishell: cd: %s\n", strerror(errno));
+			g_exit_status = 1 * 256;
 			return (env);
 		}
 		else
 		{
 			env = ft_old_pwd(env);
 			env = ft_new_pwd(env);
-			exit_status = 0;
+			g_exit_status = 0;
 			return (env);
 		}
 	}

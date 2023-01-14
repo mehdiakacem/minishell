@@ -1,33 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_getenv.c                                        :+:      :+:    :+:   */
+/*   ft_count.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 09:56:45 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/14 21:50:51 by nmoussam         ###   ########.fr       */
+/*   Created: 2023/01/14 22:02:31 by nmoussam          #+#    #+#             */
+/*   Updated: 2023/01/14 22:03:05 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-char	*ft_getenv(char	**env, char *var)
+int	ft_count_cmds(char	**cmd)
 {
-	char	*content;
-	char	**arr;
+	char	**temp;
+	int		count;
 
-	arr = env;
-	content = NULL;
-	while (*arr != '\0')
+	count = 0;
+	temp = cmd;
+	while (*temp != NULL)
 	{
-		if (ft_strncmp(*arr, var, ft_strlen(var)) == 0)
-		{
-			content = ft_strchr(*arr, '=');
-			content++;
-			return (content);
-		}
-		arr++;
+		count++;
+		temp++;
 	}
-	return (content);
+	return (count);
+}
+
+int	ft_count_words(t_token *token)
+{
+	int	count;
+
+	count = 0;
+	while (token != NULL)
+	{
+		if (token->type == WORD || token->type == REDIRECTION)
+			count++;
+		else if (token->type == PIPE)
+			return (count);
+		token = token->next;
+	}
+	return (count);
 }

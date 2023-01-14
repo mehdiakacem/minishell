@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fdin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:59:14 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/14 11:42:33 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/14 23:00:49 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-t_token	*ft_redictionfor_input(t_token *tokne_list);
-int		ft_redirect_input(t_token *redirec_token);
-int	ft_heredoc_input(t_token *redirec_token);
 
 int	ft_fdin(t_token *token_list)
 {
@@ -43,7 +39,8 @@ int	ft_redirect_input(t_token *redirec_token)
 	char	*file_name;
 
 	fd = 0;
-	while (redirec_token != NULL && redirec_token->type != WORD && redirec_token->type != 15)
+	while (redirec_token != NULL && redirec_token->type != WORD && \
+	redirec_token->type != 15)
 	{
 		redirec_token->type = SPACEE;
 		redirec_token = redirec_token->next;
@@ -51,7 +48,7 @@ int	ft_redirect_input(t_token *redirec_token)
 	if (redirec_token->type == 15)
 	{
 		ft_printf("minishell: $%s: ambiguous redirect\n", redirec_token->name);
-		exit_status = 1 * 256;
+		g_exit_status = 1 * 256;
 		return (-1);
 	}
 	file_name = redirec_token->name;
@@ -60,7 +57,7 @@ int	ft_redirect_input(t_token *redirec_token)
 	if (fd == -1)
 	{
 		ft_printf("minishell: %s: %s\n", file_name, strerror(errno));
-		exit_status = 1 * 256;
+		g_exit_status = 1 * 256;
 	}
 	return (fd);
 }
@@ -74,7 +71,8 @@ int	ft_heredoc_input(t_token *redirec_token)
 
 	fd = 0;
 	redirec_token->type = SPACEE;
-	while (redirec_token != NULL && redirec_token->type != WORD && redirec_token->type != 15)
+	while (redirec_token != NULL && redirec_token->type != WORD && \
+	redirec_token->type != 15)
 	{
 		redirec_token->type = SPACEE;
 		redirec_token = redirec_token->next;
@@ -89,7 +87,7 @@ int	ft_heredoc_input(t_token *redirec_token)
 	{
 		line = readline("> ");
 		if (!(line))
-			break;
+			break ;
 		else
 			linef = ft_strjoin(line, "\n");
 			free(line);

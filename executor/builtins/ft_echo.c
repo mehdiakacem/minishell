@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 19:49:15 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/11 22:44:11 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/14 23:01:47 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,32 @@ int	check_alphabet(char *str, char alphabet)
 	return (1);
 }
 
+void	echo_utils(int n_cmd, char **cmd, int i, int val)
+{
+	while (i < n_cmd && cmd[i][0] == '-' && cmd[i][1] == 'n' \
+		&& check_alphabet(cmd[i], 'n') == 1)
+	{
+		val = 1;
+		i++;
+	}
+	while (val == 0 && i < n_cmd)
+	{
+		ft_printf("%s", cmd[i]);
+		if (i != n_cmd - 1)
+			ft_printf(" ");
+		i++;
+	}
+	if (val == 0)
+		ft_printf("\n");
+	while (val == 1 && i < n_cmd && cmd[i] != NULL)
+	{
+		ft_printf("%s", cmd[i]);
+		if (i != n_cmd - 1)
+			ft_printf(" ");
+		i++;
+	}
+}
+
 char	**ft_echo(int n_cmd, char **cmd, char **env)
 {
 	int	i;
@@ -34,32 +60,9 @@ char	**ft_echo(int n_cmd, char **cmd, char **env)
 	val = 0;
 	i = 1;
 	if (cmd[i] == NULL)
-		printf("\n");
+		ft_printf("\n");
 	else
-	{
-		while (i < n_cmd && cmd[i][0] == '-' && cmd[i][1] == 'n' \
-		&& check_alphabet(cmd[i], 'n') == 1)
-		{
-			val = 1;
-			i++;
-		}
-		while (val == 0 && i < n_cmd)
-		{
-			printf("%s", cmd[i]);
-			if (i != n_cmd - 1)
-				printf(" ");
-			i++;
-		}
-		if (val == 0)
-			printf("\n");
-		while (val == 1 && i < n_cmd && cmd[i] != NULL)
-		{
-			ft_printf("%s", cmd[i]);
-			if (i != n_cmd - 1)
-				ft_printf(" ");
-			i++;
-		}
-	}
-	exit_status = 0;
+		echo_utils(n_cmd, cmd, i, val);
+	g_exit_status = 0;
 	return (env);
 }

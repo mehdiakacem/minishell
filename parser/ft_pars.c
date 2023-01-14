@@ -3,21 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pars.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:22:31 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/12 17:00:22 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/14 22:01:34 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parser.h"
 
-void	ft_print_type(t_token *token_list);
-void	ft_print_token_content(t_token *token_list);
-
 int	ft_pars(t_token *token_list)
 {
-	//ft_print_type(token_list);
 	if (ft_check_dquotes(token_list) == 1)
 		return (1);
 	else if (ft_check_squotes(token_list) == 1)
@@ -34,6 +30,7 @@ int	ft_pars_error(void)
 	printf("minishell: syntax error\n");
 	return (1);
 }
+
 void	ft_print_token_content(t_token *token_list)
 {
 	t_token	*temp;

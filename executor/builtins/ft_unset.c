@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_unset.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 11:34:37 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/13 14:21:21 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/14 23:02:29 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	**ft_unset(int n_cmd, char **cmd, char **env)
 
 	if (n_cmd == 1)
 	{
-		exit_status = 0;
+		g_exit_status = 0;
 		return (env);
 	}
 	else if (n_cmd > 1)
@@ -35,7 +35,7 @@ char	**ft_unset(int n_cmd, char **cmd, char **env)
 			arg++;
 		}
 	}
-	exit_status = 0;
+	g_exit_status = 0;
 	return (env);
 }
 

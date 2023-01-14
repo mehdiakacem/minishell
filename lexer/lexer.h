@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 12:31:56 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/10 22:35:04 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/14 22:25:21 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,5 +42,6 @@ t_token	*ft_create_token_list(char	*line);
 void	ft_tokenize(t_token *token);
 void	ft_wordnize(t_token *token);
 t_token	*ft_grp_tokens(t_token *token);
+void	ft_grp_two_words(t_token *token);
 
 #endif

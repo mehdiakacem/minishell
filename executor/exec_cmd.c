@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/14 13:56:38 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/14 23:09:11 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**path(t_treenode *root, char **env)
 	str = ft_getenv(env, "PATH");
 	if (!str)
 	{
-		exit_status = 127 * 256;
+		g_exit_status = 127 * 256;
 		return (NULL);
 	}
 	else
@@ -47,24 +47,11 @@ char	**path(t_treenode *root, char **env)
 	}
 }
 
-int	exec_file(t_treenode *root, char *path, char **env)
+void	ft_print(char *cmd)
 {
-	int	pid;
-
-	if (access(path, X_OK) == 0 && access(path, F_OK) == 0)
-	{
-		pid = fork();
-		if (pid == -1)
-			ft_printf("minishell: %s\n", strerror(errno));
-		else if (pid == 0)
-		{
-			if (execve(path, root->cmd, env) == -1)
-				return (0);
-		}
-		wait(&exit_status);
-		return (1);
-	}
-	return (0);
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putstr_fd(": command not found\n", 2);
 }
 
 void	find_and_exec(t_treenode *root, char **str, char **env)
@@ -85,41 +72,43 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 		else
 			return ;
 	}
-	if (str[i] == NULL) 
+	if (str[i] == NULL)
 	{
 		ft_dupin_close(root->stdin_fd, root->temp_fdin);
 		ft_dupout_close(root->stdout_fd, root->temp_fdout);
-		printf("minishell: %s: command not found\n", root->cmd[0]);
-		exit_status = 127 * 256;
+		ft_print(root->cmd[0]);
+		g_exit_status = 127 * 256;
 	}
 }
 
 void	ft_exec_cmd(t_treenode	*root, char **env)
 {
-	char **str;
+	char	**str;
 
 	str = path(root, env);
 	if (!str)
 	{
 		ft_printf("minishell: %s: No such file or directory\n", root->cmd[0]);
-		exit_status = 127 * 256;
+		g_exit_status = 127 * 256;
 		return ;
 	}
 	if (path_exist(root->cmd[0]) == 1)
 	{
 		if (root->cmd[0][1] == '\0')
 		{
+			ft_dupin_close(root->stdin_fd, root->temp_fdin);
+			ft_dupout_close(root->stdout_fd, root->temp_fdout);
 			ft_printf("minishell: %s: is a directory\n", root->cmd[0]);
-			exit_status = 126 * 256;
+			g_exit_status = 126 * 256;
 			return ;
 		}
 		else if (exec_file(root, root->cmd[0], env) == 0)
 		{
 			ft_printf("minishell: %s: %s\n", root->cmd[0], strerror(errno));
-			exit_status = 127 * 256;
+			g_exit_status = 127 * 256;
 			return ;
 		}
-		exit_status = 0;
+		g_exit_status = 0;
 	}
 	else
 		find_and_exec(root, str, env);

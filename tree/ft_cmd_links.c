@@ -3,18 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cmd_links.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/22 21:26:43 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/13 16:02:38 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/14 22:02:58 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
-
-t_treenode	*ft_create_cmd(t_token *token_list);
-char		**ft_creat_args(t_token *token);
-t_token		*ft_skip_tonextpipe(t_token *token_list);
 
 t_treenode	*ft_cmd_links(t_treenode *root, t_token *token_list)
 {
@@ -51,21 +47,6 @@ t_token	*ft_skip_tonextpipe(t_token *token_list)
 		token_list = token_list->next;
 	token_list = token_list->next;
 	return (token_list);
-}
-
-int	ft_count_cmds(char	**cmd)
-{
-	char	**temp;
-	int		count;
-
-	count = 0;
-	temp = cmd;
-	while (*temp != NULL)
-	{
-		count++;
-		temp++;
-	}
-	return (count);
 }
 
 t_treenode	*ft_create_cmd(t_token *token_list)
@@ -108,20 +89,4 @@ char	**ft_creat_args(t_token *token)
 	}
 	*args = NULL;
 	return (cmd);
-}
-
-int	ft_count_words(t_token *token)
-{
-	int	count;
-
-	count = 0;
-	while (token != NULL)
-	{
-		if (token->type == WORD || token->type == REDIRECTION)
-			count++;
-		else if (token->type == PIPE)
-			return (count);
-		token = token->next;
-	}
-	return (count);
 }

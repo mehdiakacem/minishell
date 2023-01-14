@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lex.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 13:08:39 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/12 16:57:00 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/14 22:08:01 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lexer.h"
-
-void	ft_grp_two_words(t_token *token);
 
 t_token	*ft_lex(char	*line)
 {
@@ -39,9 +37,10 @@ void	ft_grp_two_words(t_token *token)
 	char	*new_word;
 
 	new_word = NULL;
-	while (token != NULL && token->next !=NULL && token->next->next != NULL)
+	while (token != NULL && token->next != NULL && token->next->next != NULL)
 	{
-		if ((token->type == WORD && token->next->type == DQUOTE && token->next->next->type == WORD))
+		if ((token->type == WORD && token->next->type == DQUOTE && \
+		token->next->next->type == WORD))
 		{
 			new_word = ft_strjoin(token->name, token->next->next->name);
 			free(token->name);

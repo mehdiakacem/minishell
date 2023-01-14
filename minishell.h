@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/14 13:43:36 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/14 22:57:11 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,15 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <string.h>
-#include <readline/readline.h>
-#include <readline/history.h>
-
+# include <readline/readline.h>
+# include <readline/history.h>
 # include "./lexer/lexer.h"
 # include "./parser/parser.h"
 # include "./expander/expander.h"
 # define CMD 7
 # define PIPE 1
 
-int	exit_status;
-int val;
+int	g_exit_status;
 
 typedef struct t_treenode {
 	int					type;
@@ -96,5 +94,22 @@ int			ft_dupout_open(int fd_stdout);
 void    	ft_dupin_close(int fd_stdin, int temp_fdin);
 void    	ft_dupout_close(int fd_stdout, int temp_fdout);
 char    	**ft_exit(int n_cmd, char **cmd, char **env);
+char		**ft_jointo_old(char **env, char *arg);
+char		**ft_search_val(char **env, char *var);
+char		**ft_add_var(char *var, char **env);
+void		ft_print_type(t_token *token_list);
+void		ft_print_token_content(t_token *token_list);
+t_token		*ft_redictionfor_input(t_token *tokne_list);
+int			ft_redirect_input(t_token *redirec_token);
+int			ft_heredoc_input(t_token *redirec_token);
+void		ft_print_type(t_token *token_list);
+void		ft_print_token_content(t_token *token_list);
+t_treenode	*ft_create_cmd(t_token *token_list);
+char		**ft_creat_args(t_token *token);
+t_token		*ft_skip_tonextpipe(t_token *token_list);
+int			ft_pars_export(char *arg);
+char		**ft_jointo_old(char **env, char *arg);
+int			ft_count_cmds(char	**cmd);
+int			ft_count_words(t_token *token);
 
 #endif

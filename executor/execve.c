@@ -1,27 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_pwd.c                                           :+:      :+:    :+:   */
+/*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 19:50:21 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/14 23:01:59 by nmoussam         ###   ########.fr       */
+/*   Created: 2023/01/14 23:08:41 by nmoussam          #+#    #+#             */
+/*   Updated: 2023/01/14 23:09:17 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../minishell.h"
+#include "../minishell.h"
 
-char	**ft_pwd(int n_cmd, char **cmd, char **env)
+int	exec_file(t_treenode *root, char *path, char **env)
 {
-	if (n_cmd > 1 && cmd[1][0] == '-' && cmd[1][1] != '\0')
+	int	pid;
+
+	if (access(path, X_OK) == 0 && access(path, F_OK) == 0)
 	{
-		printf("minishell: pwd: -%c invalid option\npwd: usage: pwd [-LP]\n", \
-		cmd[1][1]);
-		g_exit_status = 1 * 256;
-		return (env);
+		pid = fork();
+		if (pid == -1)
+			ft_printf("minishell: %s\n", strerror(errno));
+		else if (pid == 0)
+		{
+			if (execve(path, root->cmd, env) == -1)
+				return (0);
+		}
+		wait(&g_exit_status);
+		return (1);
 	}
-	printf("%s\n", getcwd(NULL, 0));
-	g_exit_status = 0;
-	return (env);
+	return (0);
 }

@@ -6,19 +6,16 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:45:58 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/14 13:56:47 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/14 22:14:04 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-
-char	**execution_cmd(t_treenode *root, char **env)
+char	**cmd(t_treenode *root, char **env)
 {
 	char	*tmp;
 
-	root->temp_fdin = ft_dupin_open(root->stdin_fd);
-	root->temp_fdout = ft_dupout_open(root->stdout_fd);
 	tmp = ft_strdup(root->cmd[0]);
 	ft_to_lower(tmp);
 	if (ft_strcmp(tmp, "echo") == 0)
@@ -38,6 +35,14 @@ char	**execution_cmd(t_treenode *root, char **env)
 	else
 		ft_exec_cmd(root, env);
 	free(tmp);
+	return (env);
+}
+
+char	**execution_cmd(t_treenode *root, char **env)
+{
+	root->temp_fdin = ft_dupin_open(root->stdin_fd);
+	root->temp_fdout = ft_dupout_open(root->stdout_fd);
+	env = cmd(root, env);
 	ft_dupin_close(root->stdin_fd, root->temp_fdin);
 	ft_dupout_close(root->stdout_fd, root->temp_fdout);
 	return (env);
@@ -56,11 +61,13 @@ char	**ft_execute_rec(t_treenode *root, char **env)
 	{
 		if (*(root->cmd) == NULL && root->stdin_fd == 0 && root->stdout_fd == 0)
 		{
-			ft_printf("minishell: : command not found\n");
+			ft_putstr_fd("minishell: : command not found\n", 2);
 			return (env);
 		}
 		if (*(root->cmd) != NULL && root->stdin_fd >= 0 && root->stdout_fd >= 0)
+		{
 			env = execution_cmd(root, env);
+		}
 		free(root->cmd);
 	}
 	return (env);

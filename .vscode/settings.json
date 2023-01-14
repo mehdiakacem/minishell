@@ -9,6 +9,8 @@
         "executor.h": "c",
         "readline.h": "c",
         "rltypedefs.h": "c",
-        "typeinfo": "c"
+        "typeinfo": "c",
+        "parser.h": "c",
+        "lexer.h": "c"
     }
 }

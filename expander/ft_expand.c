@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 11:21:25 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/14 09:46:48 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/14 22:59:46 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,13 @@ void	ft_expand(t_token *token_list, char **env)
 		if (token_list->type == DOLLAR)
 		{
 			token_list->type = SPACEE;
-			if (token_list->next == NULL || token_list->next->type == SPACEE || token_list->next->type == DOLLAR)
+			if (token_list->next == NULL || token_list->next->type == SPACEE \
+			|| token_list->next->type == DOLLAR)
 				token_list->type = WORD;
 			else if (ft_strncmp(token_list->next->name, "?", 1) == 0)
 			{
 				free(token_list->next->name);
-				token_list->next->name = ft_strjoin(ft_itoa(exit_status / 256), "");
+				token_list->next->name = ft_strjoin(ft_itoa(g_exit_status / 256), "");
 			}
 			else if (token_list->next->type == WORD)
 			{
@@ -47,11 +48,13 @@ void	ft_expand(t_token *token_list, char **env)
 				token_list->next->name = allocated_cont;
 			}
 		}
-		else if (token_list->type == REDIRECTION && ft_strncmp(token_list->name, "<<", 2) == 0)
+		else if (token_list->type == REDIRECTION && \
+		ft_strncmp(token_list->name, "<<", 2) == 0)
 		{
-			while(token_list->next != NULL)
+			while (token_list->next != NULL)
 			{
-				if (token_list->type == DOLLAR && token_list->next->type == WORD)
+				if (token_list->type == DOLLAR && \
+				token_list->next->type == WORD)
 				{
 					token_list->type = SPACEE;
 					var = token_list->next->name;
