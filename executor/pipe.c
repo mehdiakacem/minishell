@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:56:41 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/13 19:18:23 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/14 13:53:49 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	execute_left(int *fd, t_treenode *left, char **env)
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[1]);
 	ft_execute_rec(left, env);
-	exit(127);
+	exit(0);
 }
 
 void	execute_right(int *fd, t_treenode *right, char **env)

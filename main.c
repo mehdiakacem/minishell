@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/13 16:03:22 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/14 13:54:05 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	main(int argc, char **argv, char **env)
 		line = readline("minishell$ ");
 		if (!(line))
 		{
-			printf("minishell$ exit\n");
+			printf("minishell$ exit001\n");
 			exit(1);
 		}
 		if (ft_strlen(line) != 0)
