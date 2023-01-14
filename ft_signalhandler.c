@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_signalhandler.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:47:52 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/12 21:16:47 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/14 11:50:26 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,14 @@ void	handler(int sig)
 	}
 }
 
+void	heredoc_handler(int sig)
+{
+	if (sig == SIGINT)
+	{
+		ft_putstr("^D\n");
+	}
+}
+
 void	ft_signalhandler(void)
 {
 	struct sigaction	sa;
@@ -33,5 +41,15 @@ void	ft_signalhandler(void)
 	sa.sa_handler = &handler;
 	sa.sa_flags = SA_RESTART;
 	sigaction(SIGQUIT, &sa, NULL);
+	sigaction(SIGINT, &sa, NULL);
+}
+
+void	ft_heredoc_signals(void)
+{
+	struct sigaction	sa;
+
+	rl_catch_signals = 0;
+	sa.sa_handler = &heredoc_handler;
+	sa.sa_flags = SA_RESTART;
 	sigaction(SIGINT, &sa, NULL);
 }

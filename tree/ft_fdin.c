@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:59:14 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/13 21:30:07 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/14 11:42:33 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int	ft_heredoc_input(t_token *redirec_token)
 	int		fd;
 	char	*delimiter;
 	char	*line;
+	char	*linef;
 
 	fd = 0;
 	redirec_token->type = SPACEE;
@@ -81,21 +82,26 @@ int	ft_heredoc_input(t_token *redirec_token)
 	delimiter = redirec_token->name;
 	redirec_token->type = SPACEE;
 	fd = open("/tmp/heredoc", O_CREAT | O_TRUNC | O_RDWR, 0644);
-	line = "";
-	delimiter = ft_strjoin(delimiter, "\n");
-	while (ft_strcmp(line, delimiter) != 0)
+	linef = "";
+	delimiter = ft_strjoin(redirec_token->name, "\n");
+	ft_heredoc_signals();
+	while (ft_strcmp(linef, delimiter) != 0)
 	{
 		line = readline("> ");
 		if (!(line))
 			break;
-		line = ft_strjoin(line, "\n");
-		if (ft_strcmp(line, delimiter) != 0)
-		{
-			ft_putstr_fd(line, fd);
+		else
+			linef = ft_strjoin(line, "\n");
 			free(line);
+		if (ft_strcmp(linef, delimiter) != 0)
+		{
+			ft_putstr_fd(linef, fd);
+			free(linef);
 		}
+		else
+			free(linef);
 	}
-	free(line);
+	free(delimiter);
 	close(fd);
 	fd = open("/tmp/heredoc", O_RDONLY, 0644);
 	return (fd);

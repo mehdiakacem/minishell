@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/13 09:17:06 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/14 13:43:36 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ typedef struct t_treenode {
 	int					nb_cmd;
 	int					stdin_fd;
 	int					stdout_fd;
+	int					temp_fdin;
+	int					temp_fdout;
 	struct t_treenode	*left;
 	struct t_treenode	*right;
 }	t_treenode;
@@ -53,6 +55,7 @@ int			ft_count_env_var(char	**env);
 char		**ft_populate(char **new_env, char **old_env);
 void		ft_free_env(char **env);
 void		ft_signalhandler(void);
+void		ft_heredoc_signals(void);
 char		**ft_env(int n_cmd, char **cmd, char **env);
 char		**ft_export(int n_cmd, char **cmd, char **env);
 char		**ft_unset(int n_cmd, char **cmd, char **env);
@@ -92,8 +95,6 @@ int			ft_dupin_open(int fd_stdin);
 int			ft_dupout_open(int fd_stdout);
 void    	ft_dupin_close(int fd_stdin, int temp_fdin);
 void    	ft_dupout_close(int fd_stdout, int temp_fdout);
-char    **ft_exit(int n_cmd, char **cmd, char **env);
-
-
+char    	**ft_exit(int n_cmd, char **cmd, char **env);
 
 #endif

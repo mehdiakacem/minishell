@@ -6,20 +6,19 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:45:58 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/13 13:16:39 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/14 13:44:22 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+
 char	**execution_cmd(t_treenode *root, char **env)
 {
 	char	*tmp;
-	int		temp_fdin;
-	int		temp_fdout;
 
-	temp_fdin = ft_dupin_open(root->stdin_fd);
-	temp_fdout = ft_dupout_open(root->stdout_fd);
+	root->temp_fdin = ft_dupin_open(root->stdin_fd);
+	root->temp_fdout = ft_dupout_open(root->stdout_fd);
 	tmp = ft_strdup(root->cmd[0]);
 	ft_to_lower(tmp);
 	if (ft_strcmp(tmp, "echo") == 0)
@@ -39,8 +38,8 @@ char	**execution_cmd(t_treenode *root, char **env)
 	else
 		ft_exec_cmd(root, env);
 	free(tmp);
-	ft_dupin_close(root->stdin_fd, temp_fdin);
-	ft_dupout_close(root->stdout_fd, temp_fdout);
+	ft_dupin_close(root->stdin_fd, root->temp_fdin);
+	ft_dupout_close(root->stdout_fd, root->temp_fdout);
 	return (env);
 }
 

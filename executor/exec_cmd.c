@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/13 19:18:01 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/14 13:47:55 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,8 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 	}
 	if (str[i] == NULL) 
 	{
+		ft_dupin_close(root->stdin_fd, root->temp_fdin);
+		ft_dupout_close(root->stdout_fd, root->temp_fdout);
 		printf("minishell: %s: command not found\n", root->cmd[0]);
 		exit_status = 127 * 256;
 	}

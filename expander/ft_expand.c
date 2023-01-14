@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 11:21:25 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/13 21:54:35 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/14 09:46:48 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,15 @@ void	ft_expand(t_token *token_list, char **env)
 	char	*content;
 	char	*allocated_cont;
 	int		content_len;
-	int		red;
 
-	red = 0;
 	while (token_list != NULL)
 	{
 		if (token_list->type == DOLLAR)
 		{
 			token_list->type = SPACEE;
-			if (token_list->next == NULL || token_list->next->type == SPACEE)
+			if (token_list->next == NULL || token_list->next->type == SPACEE || token_list->next->type == DOLLAR)
 				token_list->type = WORD;
-			if (ft_strncmp(token_list->next->name, "?", 1) == 0)
+			else if (ft_strncmp(token_list->next->name, "?", 1) == 0)
 			{
 				free(token_list->next->name);
 				token_list->next->name = ft_strjoin(ft_itoa(exit_status / 256), "");
