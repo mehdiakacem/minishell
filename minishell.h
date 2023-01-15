@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/15 00:43:43 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/15 17:54:32 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,35 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <signal.h>
-# include <fcntl.h>
-# include <errno.h>
 # include <string.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include "./lexer/lexer.h"
 # include "./parser/parser.h"
 # include "./expander/expander.h"
+# include <curses.h>
+# include <errno.h>
+# include <fcntl.h>
+# include <readline/history.h>
+# include <readline/readline.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# include <string.h>
+# include <sys/types.h>
+# include <sys/wait.h>
+# include <term.h>
+# include <unistd.h>
+
 # define CMD 7
 # define PIPE 1
+typedef struct s_global
+{
+	int							exit_heredoc;
+	int							sig;
+}								t_global;
 
+extern t_global					g_global;
 int	g_exit_status;
 
 typedef struct t_treenode {
@@ -91,9 +109,9 @@ int			ft_cmpin_env(char	**env, char *var);
 char		**ft_populate(char **new_env, char **old_env);
 int			ft_dupin_open(int fd_stdin);
 int			ft_dupout_open(int fd_stdout);
-void		ft_dupin_close(int fd_stdin, int temp_fdin);
-void		ft_dupout_close(int fd_stdout, int temp_fdout);
-char		**ft_exit(int n_cmd, char **cmd, char **env);
+void    	ft_dupin_close(int fd_stdin, int temp_fdin);
+void    	ft_dupout_close(int fd_stdout, int temp_fdout);
+char    	**ft_exit(int n_cmd, char **cmd, char **env);
 char		**ft_jointo_old(char **env, char *arg);
 char		**ft_search_val(char **env, char *var);
 char		**ft_add_var(char *var, char **env);
@@ -111,5 +129,8 @@ int			ft_pars_export(char *arg);
 char		**ft_jointo_old(char **env, char *arg);
 int			ft_count_cmds(char	**cmd);
 int			ft_count_words(t_token *token);
+void	handling_sig(void);
+void	handler(int sig);
+int ft_putchar22(int  c);
 
 #endif

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
+#    By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/15 16:29:48 by makacem          ###   ########.fr        #
+#    Updated: 2023/01/15 17:56:07 by nmoussam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,9 @@ CC = cc
 
 FLAGS = -Wall -Wextra -Werror
 HEADER = minishell.h
-# LFLAGS = -L/goinfre/nmoussam/homebrew/opt/readline/lib
-# IFLAGS = -I/goinfre/nmoussam/homebrew/opt/readline/include
-LFLAGS = -L /Users/makacem/homebrew/Cellar/readline/8.2.1/lib
-IFLAGS = -I /Users/makacem/homebrew/Cellar/readline/8.2.1/include
+LFLAGS = -L/goinfre/nmoussam/homebrew/opt/readline/lib
+IFLAGS = -I/goinfre/nmoussam/homebrew/opt/readline/include
+
 
 SRC = main.c \
 	ft_signalhandler.c \
@@ -70,7 +69,7 @@ all : $(NAME)
 
 $(NAME) : $(OBJ) $(HEADER)
 	make -C ./libft
-	$(CC) $(FLAGS)  $(OBJ) -o $(NAME) -lreadline $(LFLAGS) libft/libft.a
+	$(CC) $(FLAGS)  $(OBJ) -o $(NAME) -lreadline -lncurses $(LFLAGS) libft/libft.a
 
 %.o : %.c $(HEADER)
 	$(CC) $(FLAGS) $(IFLAGS) -c $< -o $@

@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:54:02 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/14 23:00:32 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/15 21:33:11 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_token	*ft_redictionfor_output(t_token *tokne_list)
 	t_token	*token;
 
 	token = tokne_list;
-	while (token != NULL)
+	while (token != NULL && token->type != PIPE)
 	{
 		if (token->type == REDIRECTION && (ft_strncmp(token->name, ">", 2) == 0 \
 		|| ft_strncmp(token->name, ">>", 2) == 0))

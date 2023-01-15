@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:47:52 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/14 16:38:25 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/15 22:21:46 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,26 @@
 
 void	handler(int sig)
 {
-	if (sig == SIGQUIT)
-		return ;
-	else if (sig == SIGINT)
+	if (sig == SIGINT && g_global.sig == 0)
 	{
 		printf("\n");
-		rl_on_new_line();
 		rl_replace_line("", 0);
+		rl_on_new_line();
 		rl_redisplay();
 	}
-}
-
-void	heredoc_handler(int sig)
-{
-	if (sig == SIGINT)
+	else
 	{
-		ft_putstr("^D\n");
+		rl_done = 1;
+		g_global.exit_heredoc = 0;
 	}
 }
 
-void	ft_signalhandler(void)
+void	handling_sig(void)
 {
-	struct sigaction	sa;
-
 	rl_catch_signals = 0;
-	sa.sa_handler = &handler;
-	sa.sa_flags = SA_RESTART;
-	sigaction(SIGQUIT, &sa, NULL);
-	sigaction(SIGINT, &sa, NULL);
-}
-
-void	ft_heredoc_signals(void)
-{
-	struct sigaction	sa;
-
-	rl_catch_signals = 0;
-	sa.sa_handler = &heredoc_handler;
-	sa.sa_flags = SA_RESTART;
-	sigaction(SIGINT, &sa, NULL);
+	if (signal(SIGINT, handler) == SIG_ERR || signal(SIGQUIT, SIG_IGN) == SIG_ERR)
+	{
+		write(2, "sig error\n", 10);
+		exit(1);
+	}
 }
