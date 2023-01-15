@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fdin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:59:14 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/15 16:08:23 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/15 22:23:18 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
 
 int	ft_fdin(t_token *token_list)
 {
@@ -56,11 +57,7 @@ int	ft_redirect_input(t_token *redirec_token)
 	fd = open(file_name, O_RDONLY, 0644);
 	if (fd == -1)
 	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd(file_name, 2);
-		ft_putstr_fd(":", 2);
-		ft_putstr_fd(strerror(errno), 2);
-		ft_putstr_fd("\n", 2);
+		ft_printf("minishell: %s: %s\n", file_name, strerror(errno));
 		g_exit_status = 1 * 256;
 	}
 	return (fd);
@@ -74,6 +71,7 @@ int	ft_heredoc_input(t_token *redirec_token)
 	char	*linef;
 
 	fd = 0;
+	g_global.sig = 1;
 	redirec_token->type = SPACEE;
 	while (redirec_token != NULL && redirec_token->type != WORD && \
 	redirec_token->type != 15)
@@ -86,15 +84,16 @@ int	ft_heredoc_input(t_token *redirec_token)
 	fd = open("/tmp/heredoc", O_CREAT | O_TRUNC | O_RDWR, 0644);
 	linef = "";
 	delimiter = ft_strjoin(redirec_token->name, "\n");
-	ft_heredoc_signals();
-	while (ft_strcmp(linef, delimiter) != 0)
+	while (ft_strcmp(linef, delimiter) != 0 && g_global.exit_heredoc == 1)
 	{
 		line = readline("> ");
 		if (!(line))
 			break ;
 		else
+		{
 			linef = ft_strjoin(line, "\n");
 			free(line);
+		}
 		if (ft_strcmp(linef, delimiter) != 0)
 		{
 			ft_putstr_fd(linef, fd);
@@ -104,7 +103,9 @@ int	ft_heredoc_input(t_token *redirec_token)
 			free(linef);
 	}
 	free(delimiter);
+	g_global.exit_heredoc = 1;
 	close(fd);
+	
 	fd = open("/tmp/heredoc", O_RDONLY, 0644);
 	return (fd);
 }

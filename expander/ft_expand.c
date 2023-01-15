@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 11:21:25 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/15 16:01:57 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/15 17:14:25 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_expand(t_token *token_list, char **env)
 			{
 				free(token_list->next->name);
 				token_list->next->name = \
-					ft_strjoin(ft_itoa(g_exit_status / 256), "");
+				ft_strjoin(ft_itoa(g_exit_status / 256), "");
 			}
 			else if (token_list->next->type == WORD)
 				ft_tryto_exppend(token_list, env);

@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/15 00:08:47 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/15 22:03:27 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,12 +86,6 @@ void	ft_exec_cmd(t_treenode	*root, char **env)
 	char	**str;
 
 	str = path(root, env);
-	if (!str)
-	{
-		ft_printf("minishell: %s: No such file or directory\n", root->cmd[0]);
-		g_exit_status = 127 * 256;
-		return ;
-	}
 	if (path_exist(root->cmd[0]) == 1)
 	{
 		if (root->cmd[0][1] == '\0')
@@ -112,6 +106,12 @@ void	ft_exec_cmd(t_treenode	*root, char **env)
 			return ;
 		}
 		g_exit_status = 0;
+	}
+	else if (!str)
+	{
+		ft_printf("minishell: %s: No such file or directory\n", root->cmd[0]);
+		g_exit_status = 127 * 256;
+		return ;
 	}
 	else
 		find_and_exec(root, str, env);

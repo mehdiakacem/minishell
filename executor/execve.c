@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 23:08:41 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/15 00:08:19 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/15 22:04:16 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int	exec_file(t_treenode *root, char *path, char **env)
 {
 	int	pid;
+	// int wstatus;
 
 	if (access(path, X_OK) == 0 && access(path, F_OK) == 0)
 	{
@@ -24,14 +25,30 @@ int	exec_file(t_treenode *root, char *path, char **env)
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(strerror(errno), 2);
 			ft_putstr_fd("\n", 2);
+			g_exit_status = 1 * 256;
 		}
 		else if (pid == 0)
 		{
+			signal(SIGQUIT, SIG_DFL);	
 			if (execve(path, root->cmd, env) == -1)
 				return (0);
 		}
 		wait(&g_exit_status);
+		if (WIFSIGNALED(g_exit_status))
+		{
+			if (g_exit_status == SIGINT)
+			{
+				write(2, "\n", 1);
+				g_exit_status = 130 * 256;
+			}
+			else if (g_exit_status == 3)
+			{
+				//printf("g_exit_status = %d\n", g_exit_status);
+				write(2, "^\\Quit: 3\n", 8);
+				g_exit_status = 131 * 256;
+			}
+		}
 		return (1);
 	}
 	return (0);
-}
+	}
