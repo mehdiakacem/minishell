@@ -3,28 +3,36 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:06:52 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/14 22:58:46 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/15 14:29:38 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
+void	ft_print_contenv(char *var);
+char	**ft_env_err(char	**env);
+void	ft_print_envenv(char	**arr);
+
 char	**ft_env(int n_cmd, char **cmd, char **env)
 {
 	char	**arr;
-	char	*var;
 
 	cmd = NULL;
 	if (n_cmd > 1)
-	{
-		ft_printf("env: usage: with no options or arguments\n");
-		g_exit_status = 1 * 256;
-		return (env);
-	}
+		return (ft_env_err(env));
 	arr = env;
+	ft_print_envenv(arr);
+	g_exit_status = 0;
+	return (g_exit_status = 0, env);
+}
+
+void	ft_print_envenv(char	**arr)
+{
+	char	*var;
+
 	while (*arr != NULL)
 	{
 		if (ft_strchr(*arr, '=') != NULL)
@@ -38,15 +46,23 @@ char	**ft_env(int n_cmd, char **cmd, char **env)
 					var++;
 			}
 			if (*var != '\0')
-			{
-				ft_putchar('=');
-				var++;
-				ft_printf("%s", var);
-			}
+				ft_print_contenv(var);
 			ft_putchar('\n');
 		}
 		arr++;
 	}
-	g_exit_status = 0;
+}
+
+void	ft_print_contenv(char *var)
+{
+	ft_putchar('=');
+	var++;
+	ft_printf("%s", var);
+}
+
+char	**ft_env_err(char	**env)
+{
+	ft_printf("env: usage: with no options or arguments\n");
+	g_exit_status = 1 * 256;
 	return (env);
 }
