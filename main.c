@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/14 22:58:21 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/15 00:10:33 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	main(int argc, char **argv, char **env)
 		line = readline("minishell$ ");
 		if (!(line))
 		{
-			printf("minishell$ exit001\n");
+			printf("minishell$ exit\n");
 			exit(1);
 		}
 		if (ft_strlen(line) != 0)

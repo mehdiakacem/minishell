@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:59:14 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/14 23:00:49 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/15 00:02:20 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,11 @@ int	ft_redirect_input(t_token *redirec_token)
 	fd = open(file_name, O_RDONLY, 0644);
 	if (fd == -1)
 	{
-		ft_printf("minishell: %s: %s\n", file_name, strerror(errno));
+		ft_putstr_fd("minishell: ", 2);
+		ft_putstr_fd(file_name, 2);
+		ft_putstr_fd(":", 2);	
+		ft_putstr_fd(strerror(errno), 2);	
+		ft_putstr_fd("\n", 2);	
 		g_exit_status = 1 * 256;
 	}
 	return (fd);

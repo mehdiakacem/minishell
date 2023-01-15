@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/14 23:09:11 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/15 00:08:47 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,7 +104,10 @@ void	ft_exec_cmd(t_treenode	*root, char **env)
 		}
 		else if (exec_file(root, root->cmd[0], env) == 0)
 		{
-			ft_printf("minishell: %s: %s\n", root->cmd[0], strerror(errno));
+			ft_putstr_fd("minishell: ", 2);
+			ft_putstr_fd(root->cmd[0], 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
 			g_exit_status = 127 * 256;
 			return ;
 		}

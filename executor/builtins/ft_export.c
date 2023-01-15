@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:03:39 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/14 23:01:37 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/14 23:45:56 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,29 +29,23 @@ char	**ft_export(int n_cmd, char **cmd, char **env)
 		arg++;
 		while (*arg != NULL)
 		{
-			if (ft_isalpha(**arg) == 0 || ft_pars_export(*arg) == 0)
+			if (**arg == '-')
+			{
+				printf("minishell: export: -%c: invalid option\nexport: usage: export [-nf] [name[=value] ...] \
+or export -p\n", *(*arg + 1));
+				g_exit_status = 2 * 256;
+			}
+			else if (ft_isalpha(**arg) == 0 || ft_pars_export(*arg) == 0)
 				printf("minishell: export: `%s': not a valid identifier\n", \
 				*arg);
-			//     if (ft_pars_export(*arg) == 0)
-			//    {
-			//    		printf("export: usage: export [-nf] [name[=value] ...] or export -p\n");
-			// 		exit_status = 2 * 256;
-			//    }
-			// if (ft_isalpha(**arg) == 0)
-			//    {
-			// 		printf("minishell: export: `%s': not a valid identifier\n", *arg);
-			// 		exit_status = 1 * 256;
-			//    }
 			else if (ft_search_env(env, *arg) == 0)
 			{
 				env = ft_add_var(*arg, env);
 			}
-			else if (ft_search_env(env, *arg) != 0
-				&& ft_strchr(*arg, '=') != NULL
+			else if (ft_search_env(env, *arg) != 0 \
+				&& ft_strchr(*arg, '=') != NULL \
 				&& ft_strchr(*arg, '+') != NULL)
-			{
 				env = ft_jointo_old(env, *arg);
-			}
 			else if (ft_search_env(env, *arg) != 0
 				&& ft_strchr(*arg, '=') != NULL)
 			{

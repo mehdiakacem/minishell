@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 17:01:45 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/14 23:02:17 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/15 00:45:00 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,9 @@ char	**ft_home(char **env)
 	}
 	else if (chdir(home) == -1)
 	{
-		ft_printf("minishell: cd: %s\n", strerror(errno));
+		ft_putstr_fd("minishell: cd: ", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
 		g_exit_status = 256;
 		return (env);
 	}
@@ -102,12 +104,10 @@ char	**ft_cd_point(char **env)
 char	**ft_cd(int n_cmd, char **cmd, char **env)
 {
 	char	*old_pwd;
-	char	*pwd;
 
 	old_pwd = ft_getenv(env, "OLDPWD");
 	if (!old_pwd)
 		env = ft_add_var("OLDPWD=", env);
-	pwd = getcwd(NULL, 0);
 	if (n_cmd == 1 || (n_cmd == 2 && (ft_strcmp(cmd[1], "~") == 0 \
 	|| ft_strcmp(cmd[1], "--") == 0 || ft_strcmp(cmd[1], "#") == 0)))
 	{
@@ -123,7 +123,9 @@ char	**ft_cd(int n_cmd, char **cmd, char **env)
 	{
 		if (chdir(cmd[1]) == -1)
 		{
-			ft_printf("minishell: cd: %s\n", strerror(errno));
+			ft_putstr_fd("minishell: cd: ", 2);
+			ft_putstr_fd(strerror(errno), 2);
+			ft_putstr_fd("\n", 2);
 			g_exit_status = 1 * 256;
 			return (env);
 		}

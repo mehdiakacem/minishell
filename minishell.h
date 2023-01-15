@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/14 22:57:11 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/15 00:43:43 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,9 +91,9 @@ int			ft_cmpin_env(char	**env, char *var);
 char		**ft_populate(char **new_env, char **old_env);
 int			ft_dupin_open(int fd_stdin);
 int			ft_dupout_open(int fd_stdout);
-void    	ft_dupin_close(int fd_stdin, int temp_fdin);
-void    	ft_dupout_close(int fd_stdout, int temp_fdout);
-char    	**ft_exit(int n_cmd, char **cmd, char **env);
+void		ft_dupin_close(int fd_stdin, int temp_fdin);
+void		ft_dupout_close(int fd_stdout, int temp_fdout);
+char		**ft_exit(int n_cmd, char **cmd, char **env);
 char		**ft_jointo_old(char **env, char *arg);
 char		**ft_search_val(char **env, char *var);
 char		**ft_add_var(char *var, char **env);
