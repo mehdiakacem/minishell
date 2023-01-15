@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:59:14 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/15 00:02:20 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/15 14:33:02 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,9 +58,9 @@ int	ft_redirect_input(t_token *redirec_token)
 	{
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(file_name, 2);
-		ft_putstr_fd(":", 2);	
-		ft_putstr_fd(strerror(errno), 2);	
-		ft_putstr_fd("\n", 2);	
+		ft_putstr_fd(":", 2);
+		ft_putstr_fd(strerror(errno), 2);
+		ft_putstr_fd("\n", 2);
 		g_exit_status = 1 * 256;
 	}
 	return (fd);
@@ -94,7 +94,7 @@ int	ft_heredoc_input(t_token *redirec_token)
 			break ;
 		else
 			linef = ft_strjoin(line, "\n");
-			free(line);
+		free(line);
 		if (ft_strcmp(linef, delimiter) != 0)
 		{
 			ft_putstr_fd(linef, fd);

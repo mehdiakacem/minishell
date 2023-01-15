@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 11:21:25 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/14 22:59:46 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/15 14:33:24 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ void	ft_expand(t_token *token_list, char **env)
 			else if (ft_strncmp(token_list->next->name, "?", 1) == 0)
 			{
 				free(token_list->next->name);
-				token_list->next->name = ft_strjoin(ft_itoa(g_exit_status / 256), "");
+				token_list->next->name = \
+				ft_strjoin(ft_itoa(g_exit_status / 256), "");
 			}
 			else if (token_list->next->type == WORD)
 			{
