@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+         #
+#    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/14 23:09:55 by nmoussam         ###   ########.fr        #
+#    Updated: 2023/01/15 16:29:48 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,10 @@ CC = cc
 
 FLAGS = -Wall -Wextra -Werror
 HEADER = minishell.h
-LFLAGS = -L/goinfre/nmoussam/homebrew/opt/readline/lib
-IFLAGS = -I/goinfre/nmoussam/homebrew/opt/readline/include
+# LFLAGS = -L/goinfre/nmoussam/homebrew/opt/readline/lib
+# IFLAGS = -I/goinfre/nmoussam/homebrew/opt/readline/include
+LFLAGS = -L /Users/makacem/homebrew/Cellar/readline/8.2.1/lib
+IFLAGS = -I /Users/makacem/homebrew/Cellar/readline/8.2.1/include
 
 SRC = main.c \
 	ft_signalhandler.c \

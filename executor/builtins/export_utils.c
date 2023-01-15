@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 13:49:34 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/12 17:25:43 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/15 14:15:51 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,13 @@ char	**ft_add_var(char *var, char **env)
 	return (new_env);
 }
 
+void	ft_print_content(char *var)
+{
+	ft_putchar('=');
+	var++;
+	ft_printf("\"%s\"", var);
+}
+
 void	ft_print_env(char **env)
 {
 	char	**arr;
@@ -72,11 +79,7 @@ void	ft_print_env(char **env)
 				var++;
 		}
 		if (*var != '\0')
-		{
-			ft_putchar('=');
-			var++;
-			ft_printf("\"%s\"", var);
-		}
+			ft_print_content(var);
 		ft_putchar('\n');
 		temp++;
 	}
