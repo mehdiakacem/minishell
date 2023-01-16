@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_exit.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 22:37:02 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/14 23:02:44 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/16 17:19:35 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ char	**ft_exit(int n_cmd, char **cmd, char **env)
 		printf("exit\n");
 		printf("minishell: exit: %s: numeric argument required\n", cmd[1]);
 		g_exit_status = (ft_atoi(cmd[1]) % 256) * 256;
+		
+		//exit(g_exit_status/256)
 	}
 	else
 	{
