@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 23:08:41 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/15 22:04:16 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/16 20:57:18 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 int	exec_file(t_treenode *root, char *path, char **env)
 {
 	int	pid;
-	// int wstatus;
 
 	if (access(path, X_OK) == 0 && access(path, F_OK) == 0)
 	{
@@ -43,12 +42,12 @@ int	exec_file(t_treenode *root, char *path, char **env)
 			}
 			else if (g_exit_status == 3)
 			{
-				//printf("g_exit_status = %d\n", g_exit_status);
 				write(2, "^\\Quit: 3\n", 8);
 				g_exit_status = 131 * 256;
 			}
 		}
+		// free(path);
 		return (1);
 	}
 	return (0);
-	}
+}

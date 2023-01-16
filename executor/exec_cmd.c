@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exec_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/16 11:04:57 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/16 19:02:52 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,22 @@ void	ft_print(char *cmd)
 	ft_putstr_fd(": command not found\n", 2);
 }
 
+void	ft_free_path(char **str)
+{
+	char	**arr;
+
+	if (str != NULL)
+	{
+		arr = str;
+		while (*arr != NULL)
+		{
+			free(*arr);
+			arr++;
+		}
+		free(str);
+	}
+}
+
 void	find_and_exec(t_treenode *root, char **str, char **env)
 {
 	int		i;
@@ -62,12 +78,22 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 
 	tmp = ft_strjoin("/", root->cmd[0]);
 	if (!tmp)
-		return ;// free
+	{
+		ft_free_path(str);
+		free(root->cmd[0]);
+		return ;
+	}
 	i = 0;
 	while (str[i])
 	{
 		path = ft_strjoin(str[i], tmp);
-		if (exec_file(root, path, env) == 0)
+		if (!path)
+		{
+			ft_free_path(str);
+			free(tmp);
+			return ;
+		}
+		else if (exec_file(root, path, env) == 0)
 		{
 			i++;
 			free(path);
@@ -85,22 +111,6 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 		ft_dupout_close(root->stdout_fd, root->temp_fdout);
 		ft_print(root->cmd[0]);
 		g_exit_status = 127 * 256;
-	}
-}
-
-void	ft_free_path(char **str)
-{
-	char	**arr;
-
-	if (str != NULL)
-	{
-		arr = str;
-		while (*arr != NULL)
-		{
-			free(*arr);
-			arr++;
-		}
-		free(str);
 	}
 }
 
@@ -135,7 +145,7 @@ void	ft_exec_cmd(t_treenode	*root, char **env)
 	}
 	else if (!str)
 	{
-		ft_printf("minishell: %s: No such file or directory123\n", root->cmd[0]);
+		ft_printf("minishell: %s: No such file or directory\n", root->cmd[0]);
 		g_exit_status = 127 * 256;
 		return ;
 	}
