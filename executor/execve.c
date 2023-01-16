@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 23:08:41 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/16 21:40:11 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 00:38:41 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,17 @@ int	exec_file(t_treenode *root, char *path, char **env)
 		{
 			signal(SIGQUIT, SIG_DFL);	
 			if (execve(path, root->cmd, env) == -1)
+			{
+				g_exit_status = 127 * 256;
 				return (0);
+			}
 		}
 		wait(&g_exit_status);
 		if (WIFSIGNALED(g_exit_status))
 		{
 			if (g_exit_status == SIGINT)
 			{
+				g_global.sig_cat = 1;
 				write(2, "\n", 1);
 				g_exit_status = 130 * 256;
 			}

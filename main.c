@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/17 00:01:42 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 00:40:19 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,11 @@ int	main(int argc, char **argv, char **env)
 	argc = 0;
 	argv = NULL;
 	g_global.sig = 0;
+	g_global.sig_cat = 0;
 	env = ft_create_new_env(env);
 	while (1)
 	{
-		handling_sig();
+			handling_sig();
 		line = readline("minishell$ ");
 		g_global.exit_heredoc = 1;
 		rl_event_hook = event;

@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 12:47:52 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/15 22:21:46 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 00:45:41 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	handler(int sig)
 {
-	if (sig == SIGINT && g_global.sig == 0)
+	if (sig == SIGINT && g_global.sig == 0 && g_global.sig_cat != 1)
 	{
 		printf("\n");
 		rl_replace_line("", 0);

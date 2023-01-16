@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 17:56:41 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/16 21:35:09 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 00:34:29 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	ft_execute_utils(int *fd, t_treenode *root, char **env, int id)
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[0]);
 		ft_execute_rec(root->right, env);
-		exit(127);
+		exit(g_exit_status / 256);
 	}
 	else
 	{
 		dup2(fd[0], STDIN_FILENO);
 		close(fd[1]);
 		ft_execute_rec(root->left, env);
-		exit(0);
+		exit(g_exit_status / 256);
 	}
 }
 
