@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 17:01:45 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/16 00:27:51 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/16 03:01:35 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ char	**ft_home(char **env)
 	{
 		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
 		g_exit_status = 1 * 256;
+		free(tmp_pwd);
 		return (env);
 	}
 	else if (chdir(home) == -1)
@@ -41,10 +42,13 @@ char	**ft_home(char **env)
 		pwd = ft_search_val(env, "PWD=");
 		if (!pwd)
 		{
-			new_pwd = ft_strjoin("PWD=", getcwd(NULL, 0));
+			new_pwd = ft_strjoin("PWD=", tmp_pwd);
 			env = ft_add_var(new_pwd, env);
+			free(new_pwd);
 			oldpwd = ft_search_val(env, "OLDPWD=");
+			free(*oldpwd);
 			*oldpwd = ft_strjoin("OLDPWD=", tmp_pwd);
+			free(tmp_pwd);
 			g_exit_status = 0;
 			return (env);
 		}
@@ -72,13 +76,15 @@ char	**ft_old_pwd(char **env)
 	if (!pwd)
 	{
 		pwd = getcwd(NULL, 0);
+		free(*old_pwd);
+		*old_pwd = ft_strjoin("OLDPWD=", pwd);
+		free(pwd);
+		return (env);
 	}
 	if (!old_pwd)
 		env = ft_add_var("OLDPWD=", env);
 	free(*old_pwd);
 	*old_pwd = ft_strjoin("OLDPWD=", pwd);
-	printf("pwd %s\n", pwd);
-	printf("tmp_pwd %s\n", *old_pwd);
 	return (env);
 }
 
@@ -91,8 +97,11 @@ char	**ft_new_pwd(char **env)
 	pwd = ft_search_val(env, "PWD");
 	if (!pwd)
 	{
-		new_pwd = ft_strjoin("PWD=", getcwd(NULL, 0));
+		tmp_pwd = getcwd(NULL, 0);
+		new_pwd = ft_strjoin("PWD=", tmp_pwd);
 		env = ft_add_var(new_pwd, env);
+		free(new_pwd);
+		free(tmp_pwd);
 		return (env);
 	}
 	else
@@ -116,19 +125,26 @@ char	**ft_cd_point(char **env)
 char	**ft_cd(int n_cmd, char **cmd, char **env)
 {
 	char	*old_pwd;
+	char	*cwd;
 
 	old_pwd = ft_getenv(env, "OLDPWD");
+	cwd = getcwd(NULL, 0);
 	if (!old_pwd)
-		env = ft_add_var("OLDPWD=", env);
+	{
+		printf("4\n");
+		env = ft_add_var("OLDPWD", env);
+	}
 	if (n_cmd == 1 || (n_cmd == 2 && (ft_strcmp(cmd[1], "~") == 0 \
 	|| ft_strcmp(cmd[1], "--") == 0 || ft_strcmp(cmd[1], "#") == 0)))
 	{
 		env = ft_home(env);
+		free(cwd);
 		return (env);
 	}
-	else if (getcwd(NULL, 0) == NULL && ft_strcmp(cmd[1], ".") == 0)
+	else if (cwd == NULL && ft_strcmp(cmd[1], ".") == 0)
 	{
 		env = ft_cd_point(env);
+		free(cwd);
 		return (env);
 	}
 	else
@@ -146,6 +162,7 @@ char	**ft_cd(int n_cmd, char **cmd, char **env)
 			env = ft_old_pwd(env);
 			env = ft_new_pwd(env);
 			g_exit_status = 0;
+			free(cwd);
 			return (env);
 		}
 	}
