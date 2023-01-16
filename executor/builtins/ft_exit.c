@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 22:37:02 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/16 21:02:43 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/16 23:11:32 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,13 @@ char	**ft_exit(int n_cmd, char **cmd, char **env)
 	{
 		printf("exit\n");
 		g_exit_status = (ft_atoi(cmd[1]) % 256) * 256;
-		printf("exit_status = %d\n", g_exit_status / 256);
-		exit(456);
+		exit(g_exit_status / 256);
 	}
 	else
 	{
 		printf("minishell: exit: %s: numeric argument required\n", cmd[1]);
 		g_exit_status = 255 * 256;
-		exit(g_exit_status);
+		exit(g_exit_status / 256);
 	}
 	return (env);
 }

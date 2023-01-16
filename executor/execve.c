@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 23:08:41 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/16 20:57:18 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/16 21:40:11 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,11 +42,10 @@ int	exec_file(t_treenode *root, char *path, char **env)
 			}
 			else if (g_exit_status == 3)
 			{
-				write(2, "^\\Quit: 3\n", 8);
+				write(2, "Quit: 3\n", 9);
 				g_exit_status = 131 * 256;
 			}
 		}
-		// free(path);
 		return (1);
 	}
 	return (0);

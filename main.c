@@ -6,12 +6,13 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/16 21:03:35 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 00:01:42 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+void	printtree(t_treenode *root);
 
 t_global	g_global;
 int g_exit_status = 0;
@@ -72,7 +73,9 @@ int	main(int argc, char **argv, char **env)
 			env = ft_execute(root, env);
 			free(line);
 			ft_free_tokens(token_list);
-			free(root);
+			// printtree(root);
+			//free(root);
+			// system("leaks minishell");
 		}
 	}
 	ft_free_env(env);
@@ -116,5 +119,30 @@ void	ft_empty_arg(t_token *token_list)
 			free(scd_dq);
 		}
 		tmp_token = tmp_token->next;
+	}
+}
+
+void	printtree(t_treenode *root)
+{
+	t_treenode *left;
+	t_treenode *tmp;
+	
+	left = root;
+	while (left != NULL)
+	{
+		if (left->right != NULL )
+		 	free(left->right->cmd);
+		free(left->right);
+		left = left->left;
+	}
+	tmp = root;
+	free(tmp);
+	tmp = tmp->left;
+	while (tmp != NULL)
+	{
+		if (tmp->type == CMD)
+			free(tmp->cmd);
+		free(tmp);
+		tmp = tmp->left;
 	}
 }

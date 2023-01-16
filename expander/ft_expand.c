@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 11:21:25 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/16 20:49:31 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/16 22:47:50 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,5 +87,6 @@ t_token	*ft_dont_exppend(t_token *token_list)
 		}
 		token_list = token_list->next;
 	}
+	token_list->type = WORD;
 	return (token_list);
 }

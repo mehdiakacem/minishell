@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/16 19:02:52 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/16 21:27:14 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,6 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 	if (!tmp)
 	{
 		ft_free_path(str);
-		free(root->cmd[0]);
 		return ;
 	}
 	i = 0;
@@ -100,6 +99,7 @@ void	find_and_exec(t_treenode *root, char **str, char **env)
 		}
 		else
 		{
+			free(path);
 			free(tmp);
 			return ;
 		}
@@ -141,6 +141,7 @@ void	ft_exec_cmd(t_treenode	*root, char **env)
 			ft_free_path(str);
 			return ;
 		}
+		ft_free_path(str);
 		g_exit_status = 0;
 	}
 	else if (!str)
