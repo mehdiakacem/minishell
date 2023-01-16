@@ -6,14 +6,13 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/16 17:26:36 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/16 21:03:35 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
 
-#include "minishell.h"
 t_global	g_global;
 int g_exit_status = 0;
 int	event(void)
@@ -25,6 +24,10 @@ int ft_putchar22(int  c)
   write(1, &c, 1);
   return (1);     
 }
+
+void	ft_print_token_content(t_token *token_list);
+void	ft_print_type(t_token *token_list);
+void	ft_empty_arg(t_token *token_list);
 
 int	main(int argc, char **argv, char **env)
 {
@@ -63,7 +66,8 @@ int	main(int argc, char **argv, char **env)
 		}
 		else
 		{
-			ft_expand(token_list->next, env);
+			ft_empty_arg(token_list);
+			ft_expand(token_list, env);
 			root = ft_tree(token_list->next);
 			env = ft_execute(root, env);
 			free(line);
@@ -73,4 +77,44 @@ int	main(int argc, char **argv, char **env)
 	}
 	ft_free_env(env);
 	return (0);
+}
+
+void	ft_empty_arg(t_token *token_list)
+{
+	t_token	*tmp_token;
+	t_token *frst_dq;
+	t_token *scd_dq;
+
+	tmp_token = token_list;
+	while (tmp_token != NULL)
+	{
+		if (tmp_token->next != NULL && tmp_token->type == DQUOTE && tmp_token->next->type == DQUOTE)
+		{
+			frst_dq = tmp_token;
+			frst_dq->type = WORD;
+			free(frst_dq->name);
+			tmp_token->name = ft_strjoin("", "");
+			scd_dq = tmp_token->next;
+			free(scd_dq->name);
+			tmp_token->next = scd_dq->next;
+			free(scd_dq);
+		}
+		tmp_token = tmp_token->next;
+	}
+	tmp_token = token_list;
+	while (tmp_token != NULL)
+	{
+		if (tmp_token->next != NULL && tmp_token->type == SQUOTE && tmp_token->next->type == SQUOTE)
+		{
+			frst_dq = tmp_token;
+			frst_dq->type = WORD;
+			free(frst_dq->name);
+			tmp_token->name = ft_strjoin("", "");
+			scd_dq = tmp_token->next;
+			free(scd_dq->name);
+			tmp_token->next = scd_dq->next;
+			free(scd_dq);
+		}
+		tmp_token = tmp_token->next;
+	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   lexer.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 12:31:56 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/14 22:25:21 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/16 14:14:01 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ typedef struct token
 t_token	*ft_lex(char	*line);
 t_token	*ft_create_token_list(char	*line);
 void	ft_tokenize(t_token *token);
-void	ft_wordnize(t_token *token);
+void	ft_wordnize_sq(t_token *token);
+void	ft_wordnize_dq(t_token *token);
 t_token	*ft_grp_tokens(t_token *token);
 void	ft_grp_two_words(t_token *token);
 

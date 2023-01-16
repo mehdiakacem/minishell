@@ -6,7 +6,7 @@
 #    By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/16 17:35:02 by nmoussam         ###   ########.fr        #
+#    Updated: 2023/01/16 21:02:12 by nmoussam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,6 @@ FLAGS = -Wall -Wextra -Werror
 HEADER = minishell.h
 LFLAGS = -L/goinfre/nmoussam/homebrew/opt/readline/lib
 IFLAGS = -I/goinfre/nmoussam/homebrew/opt/readline/include
-
 
 SRC = main.c \
 	ft_signalhandler.c \
