@@ -6,11 +6,30 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 23:08:41 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/17 18:53:19 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 20:11:07 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
+
+void	check_signal(void)
+{
+	wait(&g_exit_status);
+	if (WIFSIGNALED(g_exit_status))
+	{
+		if (g_exit_status == SIGINT)
+		{
+			g_global.sig_cat = 1;
+			write(2, "\n", 1);
+			g_exit_status = 130 * 256;
+		}
+		else if (g_exit_status == 3)
+		{
+			write(2, "Quit: 3\n", 9);
+			g_exit_status = 131 * 256;
+		}
+	}
+}
 
 int	exec_file(t_treenode *root, char *path, char **env)
 {
@@ -35,21 +54,7 @@ int	exec_file(t_treenode *root, char *path, char **env)
 				return (0);
 			}
 		}
-		wait(&g_exit_status);
-		if (WIFSIGNALED(g_exit_status))
-		{
-			if (g_exit_status == SIGINT)
-			{
-				g_global.sig_cat = 1;
-				write(2, "\n", 1);
-				g_exit_status = 130 * 256;
-			}
-			else if (g_exit_status == 3)
-			{
-				write(2, "Quit: 3\n", 9);
-				g_exit_status = 131 * 256;
-			}
-		}
+		check_signal();
 		return (1);
 	}
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/17 18:56:53 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 19:02:40 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,13 +94,14 @@ int	main(int argc, char **argv, char **env)
 void	ft_empty_arg(t_token *token_list)
 {
 	t_token	*tmp_token;
-	t_token *frst_dq;
-	t_token *scd_dq;
+	t_token	*frst_dq;
+	t_token	*scd_dq;
 
 	tmp_token = token_list;
 	while (tmp_token != NULL)
 	{
-		if (tmp_token->next != NULL && tmp_token->type == DQUOTE && tmp_token->next->type == DQUOTE)
+		if (tmp_token->next != NULL && tmp_token->type == DQUOTE && \
+tmp_token->next->type == DQUOTE)
 		{
 			frst_dq = tmp_token;
 			frst_dq->type = WORD;
@@ -116,7 +117,8 @@ void	ft_empty_arg(t_token *token_list)
 	tmp_token = token_list;
 	while (tmp_token != NULL)
 	{
-		if (tmp_token->next != NULL && tmp_token->type == SQUOTE && tmp_token->next->type == SQUOTE)
+		if (tmp_token->next != NULL && tmp_token->type == SQUOTE && \
+tmp_token->next->type == SQUOTE)
 		{
 			frst_dq = tmp_token;
 			frst_dq->type = WORD;
@@ -133,16 +135,16 @@ void	ft_empty_arg(t_token *token_list)
 
 void	ft_free_tree(t_treenode *root)
 {
-	t_treenode *left;
-	t_treenode *tmp;
+	t_treenode	*left;
+	t_treenode	*tmp;
 
 	left = root;
 	if (root == NULL)
-		return;
+		return ;
 	while (left != NULL)
 	{
 		if (left->right != NULL )
-		 	free(left->right->cmd);
+			free(left->right->cmd);
 		free(left->right);
 		left = left->left;
 	}
