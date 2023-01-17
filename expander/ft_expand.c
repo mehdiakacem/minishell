@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 11:21:25 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/16 22:47:50 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 20:16:19 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ t_token	*ft_tryto_exppend(t_token *token_list, char **env);
 
 void	ft_expand(t_token *token_list, char **env)
 {
+	char	*p_exit_status;
+
 	while (token_list != NULL)
 	{
 		if (token_list->type == DOLLAR)
@@ -28,9 +30,10 @@ void	ft_expand(t_token *token_list, char **env)
 				token_list->type = WORD;
 			else if (ft_strncmp(token_list->next->name, "?", 1) == 0)
 			{
+				p_exit_status = ft_itoa(g_exit_status / 256);
 				free(token_list->next->name);
-				token_list->next->name = \
-				ft_strjoin(ft_itoa(g_exit_status / 256), "");
+				token_list->next->name = ft_strjoin(p_exit_status, "");
+				free(p_exit_status);
 			}
 			else if (token_list->next->type == WORD)
 				ft_tryto_exppend(token_list, env);
