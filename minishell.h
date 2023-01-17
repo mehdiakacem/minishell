@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/17 22:02:54 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 22:18:22 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,10 +140,10 @@ char		**home_utils3(char *home, char *tmp_pwd, char **pwd, char **env);
 void		print_msg(char *cwd);
 char		**ft_cd_point(char *cwd, char **env);
 void		ft_print(t_treenode *root, char *cmd, char *tmp);
+void		ft_free_tree(t_treenode *root);
 void		ft_empty_arg(t_token *token_list);
 int			ft_putchar22(int c);
 int			event(void);
-void		ft_free_tree(t_treenode *root);
 int			ft_pars_error(void);
 void		main_utils(void);
 #endif
