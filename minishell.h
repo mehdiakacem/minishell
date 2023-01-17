@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/17 22:09:05 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/17 22:18:22 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,15 +39,16 @@
 
 # define CMD 7
 # define PIPE 1
+
 typedef struct s_global
 {
-	int							exit_heredoc;
-	int							sig;
-	int							sig_cat;
+	int	exit_heredoc;
+	int	sig;
+	int	sig_cat;
+	int	exit_status;
 }								t_global;
 
-extern t_global					g_global;
-int	g_exit_status;
+t_global	g_global;
 
 typedef struct t_treenode {
 	int					type;
@@ -141,5 +142,8 @@ char		**ft_cd_point(char *cwd, char **env);
 void		ft_print(t_treenode *root, char *cmd, char *tmp);
 void		ft_free_tree(t_treenode *root);
 void		ft_empty_arg(t_token *token_list);
-
+int			ft_putchar22(int c);
+int			event(void);
+int			ft_pars_error(void);
+void		main_utils(void);
 #endif

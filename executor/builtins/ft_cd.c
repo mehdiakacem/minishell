@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 17:01:45 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/17 17:44:00 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 21:42:46 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	**ft_home(char *cwd, char **env)
 		pwd = ft_search_val(env, "PWD=");
 		env = home_utils3(home, tmp_pwd, pwd, env);
 	}
-	g_exit_status = 0;
+	g_global.exit_status = 0;
 	free(cwd);
 	return (env);
 }
@@ -90,7 +90,7 @@ char	**ft_cd_point(char *cwd, char **env)
 {
 	ft_putstr_fd("cd: error retrieving current directory: \
 	getcwd: cannot access parent directories: No such file or directory\n", 2);
-	g_exit_status = 0;
+	g_global.exit_status = 0;
 	free(cwd);
 	return (env);
 }
@@ -117,7 +117,7 @@ char	**ft_cd(int n_cmd, char **cmd, char **env)
 		{
 			env = ft_old_pwd(env);
 			env = ft_new_pwd(env);
-			g_exit_status = 0;
+			g_global.exit_status = 0;
 			free(cwd);
 			return (env);
 		}

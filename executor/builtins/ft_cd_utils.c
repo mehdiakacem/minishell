@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 16:42:14 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/17 17:36:41 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 21:42:46 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	home_utils1(char *tmp_pwd)
 {
 	free(tmp_pwd);
 	ft_putstr_fd("minishell: cd: HOME not set\n", 2);
-	g_exit_status = 1 * 256;
+	g_global.exit_status = 1 * 256;
 }
 
 void	home_utils2(char *tmp_pwd)
@@ -25,7 +25,7 @@ void	home_utils2(char *tmp_pwd)
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
 	free(tmp_pwd);
-	g_exit_status = 1 * 256;
+	g_global.exit_status = 1 * 256;
 }
 
 char	**home_utils3(char *home, char *tmp_pwd, char **pwd, char **env)
@@ -42,7 +42,7 @@ char	**home_utils3(char *home, char *tmp_pwd, char **pwd, char **env)
 		free(*oldpwd);
 		*oldpwd = ft_strjoin("OLDPWD=", tmp_pwd);
 		free(tmp_pwd);
-		g_exit_status = 0;
+		g_global.exit_status = 0;
 		return (env);
 	}
 	else
@@ -63,5 +63,5 @@ void	print_msg(char *cwd)
 	ft_putstr_fd(strerror(errno), 2);
 	ft_putstr_fd("\n", 2);
 	free(cwd);
-	g_exit_status = 1 * 256;
+	g_global.exit_status = 1 * 256;
 }

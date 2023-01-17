@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_env.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 15:06:52 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/15 14:29:38 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/17 21:42:46 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ char	**ft_env(int n_cmd, char **cmd, char **env)
 		return (ft_env_err(env));
 	arr = env;
 	ft_print_envenv(arr);
-	g_exit_status = 0;
-	return (g_exit_status = 0, env);
+	g_global.exit_status = 0;
+	return (g_global.exit_status = 0, env);
 }
 
 void	ft_print_envenv(char	**arr)
@@ -63,6 +63,6 @@ void	ft_print_contenv(char *var)
 char	**ft_env_err(char	**env)
 {
 	ft_printf("env: usage: with no options or arguments\n");
-	g_exit_status = 1 * 256;
+	g_global.exit_status = 1 * 256;
 	return (env);
 }
