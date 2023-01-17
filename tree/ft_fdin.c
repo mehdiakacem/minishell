@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fdin.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:59:14 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/15 22:23:18 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 16:33:33 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
+void	ft_heredoc(char *delimiter, char *linef, int fd, t_token *token);
 
 int	ft_fdin(t_token *token_list)
 {
@@ -67,7 +68,6 @@ int	ft_heredoc_input(t_token *redirec_token)
 {
 	int		fd;
 	char	*delimiter;
-	char	*line;
 	char	*linef;
 
 	fd = 0;
@@ -84,6 +84,37 @@ int	ft_heredoc_input(t_token *redirec_token)
 	fd = open("/tmp/heredoc", O_CREAT | O_TRUNC | O_RDWR, 0644);
 	linef = "";
 	delimiter = ft_strjoin(redirec_token->name, "\n");
+	ft_heredoc(delimiter, linef, fd, redirec_token);
+	g_global.exit_heredoc = 1;
+	close(fd);
+	fd = open("/tmp/heredoc", O_RDONLY, 0644);
+	return (fd);
+}
+
+t_token	*ft_redictionfor_input(t_token *tokne_list)
+{
+	t_token	*token;
+
+	token = tokne_list;
+	while (token != NULL && token->type != PIPE)
+	{
+		if (token->type == REDIRECTION
+			&& (ft_strncmp(token->name, "<", 2) == 0 \
+			|| ft_strncmp(token->name, "<<", 2) == 0))
+			return (token);
+		token = token->next;
+	}
+	return (NULL);
+}
+
+void	ft_heredoc(char *delimiter, char *linef, int fd, t_token *token)
+{
+	char	*line;
+
+	if (token->next != NULL
+		&& (ft_strncmp(token->next->name, "\"", 1) == 0
+			|| ft_strncmp(token->next->name, "'", 1) == 0))
+	token->next->type = SPACEE;
 	while (ft_strcmp(linef, delimiter) != 0 && g_global.exit_heredoc == 1)
 	{
 		line = readline("> ");
@@ -103,25 +134,4 @@ int	ft_heredoc_input(t_token *redirec_token)
 			free(linef);
 	}
 	free(delimiter);
-	g_global.exit_heredoc = 1;
-	close(fd);
-	
-	fd = open("/tmp/heredoc", O_RDONLY, 0644);
-	return (fd);
-}
-
-t_token	*ft_redictionfor_input(t_token *tokne_list)
-{
-	t_token	*token;
-
-	token = tokne_list;
-	while (token != NULL)
-	{
-		if (token->type == REDIRECTION
-			&& (ft_strncmp(token->name, "<", 2) == 0 \
-			|| ft_strncmp(token->name, "<<", 2) == 0))
-			return (token);
-		token = token->next;
-	}
-	return (NULL);
 }

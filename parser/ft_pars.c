@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/15 16:22:31 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/17 17:51:50 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 18:19:29 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,6 @@ int	ft_pars(t_token *token_list)
 	else if (ft_check_redirections(token_list) == 1)
 		return (1);
 	return (0);
-}
-
-int	ft_pars_error(void)
-{
-	printf("minishell: syntax error\n");
-	//exitstatut 258*256;
-	return (1);
 }
 
 void	ft_print_token_content(t_token *token_list)
