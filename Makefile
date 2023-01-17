@@ -6,7 +6,7 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/17 13:12:32 by makacem          ###   ########.fr        #
+#    Updated: 2023/01/17 13:18:31 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,10 +16,10 @@ CC = cc
 
 FLAGS = -Wall -Wextra -Werror
 HEADER = minishell.h
-LFLAGS = -L/goinfre/nmoussam/homebrew/opt/readline/lib
-IFLAGS = -I/goinfre/nmoussam/homebrew/opt/readline/include
-# LFLAGS = -L /Users/makacem/homebrew/Cellar/readline/8.2.1/lib
-# IFLAGS = -I /Users/makacem/homebrew/Cellar/readline/8.2.1/include
+# LFLAGS = -L/goinfre/nmoussam/homebrew/opt/readline/lib
+# IFLAGS = -I/goinfre/nmoussam/homebrew/opt/readline/include
+LFLAGS = -L /Users/makacem/homebrew/Cellar/readline/8.2.1/lib
+IFLAGS = -I /Users/makacem/homebrew/Cellar/readline/8.2.1/include
 
 SRC = main.c \
 	ft_signalhandler.c \

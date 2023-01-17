@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/11 13:08:39 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/16 20:35:01 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/17 13:59:17 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 void	ft_print_token_content(t_token *token_list);
 void	ft_print_type(t_token *token_list);
-void	ft_rm_dq(t_token *token);
 
 t_token	*ft_lex(char	*line)
 {
@@ -25,11 +24,8 @@ t_token	*ft_lex(char	*line)
 	token = ft_create_token_list(line);
 	ft_tokenize(token);
 	token_list = ft_grp_tokens(token);
-	ft_wordnize_sq(token_list);
 	ft_wordnize_dq(token_list);
-	// ft_print_token_content(token_list);
-	// ft_print_type(token_list);
-	//ft_rm_dq(token_list);
+	ft_wordnize_sq(token_list);
 	ft_grp_two_words(token_list);
 	while (token != NULL)
 	{
