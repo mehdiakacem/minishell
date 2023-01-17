@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/17 20:03:22 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/17 22:02:26 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,71 +89,4 @@ int	main(int argc, char **argv, char **env)
 	}
 	ft_free_env(env);
 	return (0);
-}
-
-void	ft_empty_arg(t_token *token_list)
-{
-	t_token	*tmp_token;
-	t_token *frst_dq;
-	t_token *scd_dq;
-
-	tmp_token = token_list;
-	while (tmp_token != NULL)
-	{
-		if (tmp_token->next != NULL && tmp_token->type == DQUOTE && tmp_token->next->type == DQUOTE)
-		{
-			frst_dq = tmp_token;
-			frst_dq->type = WORD;
-			free(frst_dq->name);
-			tmp_token->name = ft_strjoin("", "");
-			scd_dq = tmp_token->next;
-			free(scd_dq->name);
-			tmp_token->next = scd_dq->next;
-			free(scd_dq);
-		}
-		tmp_token = tmp_token->next;
-	}
-	tmp_token = token_list;
-	while (tmp_token != NULL)
-	{
-		if (tmp_token->next != NULL && tmp_token->type == SQUOTE && tmp_token->next->type == SQUOTE)
-		{
-			frst_dq = tmp_token;
-			frst_dq->type = WORD;
-			free(frst_dq->name);
-			tmp_token->name = ft_strjoin("", "");
-			scd_dq = tmp_token->next;
-			free(scd_dq->name);
-			tmp_token->next = scd_dq->next;
-			free(scd_dq);
-		}
-		tmp_token = tmp_token->next;
-	}
-}
-
-void	ft_free_tree(t_treenode *root)
-{
-	t_treenode *left;
-	t_treenode *tmp;
-
-	left = root;
-	if (root == NULL)
-		return;
-	while (left != NULL)
-	{
-		if (left->right != NULL )
-		 	free(left->right->cmd);
-		free(left->right);
-		left = left->left;
-	}
-	tmp = root;
-	free(tmp);
-	tmp = tmp->left;
-	while (tmp != NULL)
-	{
-		if (tmp->type == CMD)
-			free(tmp->cmd);
-		free(tmp);
-		tmp = tmp->left;
-	}
 }

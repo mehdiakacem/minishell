@@ -6,7 +6,7 @@
 #    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/17 20:17:04 by makacem          ###   ########.fr        #
+#    Updated: 2023/01/17 22:07:39 by makacem          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,6 +49,8 @@ SRC = main.c \
 	utils/ft_getenv.c \
 	utils/ft_populate.c \
 	utils/ft_shlvl_plus.c \
+	utils/ft_empty_arg.c \
+	utils/ft_free_tree.c \
 	executor/ft_execute.c \
 	executor/exec_cmd.c \
 	executor/pipe.c \
