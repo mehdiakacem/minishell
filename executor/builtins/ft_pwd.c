@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pwd.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 19:50:21 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/16 02:15:32 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/17 21:42:46 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ char	**ft_pwd(int n_cmd, char **cmd, char **env)
 	{
 		printf("minishell: pwd: -%c invalid option\npwd: usage: pwd [-LP]\n", \
 		cmd[1][1]);
-		g_exit_status = 1 * 256;
+		g_global.exit_status = 1 * 256;
 		return (env);
 	}
 	getcwd(buff, 1245);
 	printf("%s\n", buff);
-	g_exit_status = 0;
+	g_global.exit_status = 0;
 	return (env);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_expand.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/24 11:21:25 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/17 20:16:19 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/17 21:42:46 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,12 @@ void	ft_expand(t_token *token_list, char **env)
 		if (token_list->type == DOLLAR)
 		{
 			token_list->type = SPACEE;
-			if (token_list->next == NULL \
-				|| token_list->next->type == SPACEE \
-				|| token_list->next->type == DOLLAR)
+			if (token_list->next == NULL || token_list->next->type == SPACEE \
+			|| token_list->next->type == DOLLAR)
 				token_list->type = WORD;
 			else if (ft_strncmp(token_list->next->name, "?", 1) == 0)
 			{
-				p_exit_status = ft_itoa(g_exit_status / 256);
+				p_exit_status = ft_itoa(g_global.exit_status / 256);
 				free(token_list->next->name);
 				token_list->next->name = ft_strjoin(p_exit_status, "");
 				free(p_exit_status);

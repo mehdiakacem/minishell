@@ -1,40 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_signalhandler.c                                 :+:      :+:    :+:   */
+/*   main_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/06 12:47:52 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/17 21:41:00 by nmoussam         ###   ########.fr       */
+/*   Created: 2023/01/17 22:01:17 by nmoussam          #+#    #+#             */
+/*   Updated: 2023/01/17 22:07:52 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handler(int sig)
+int	ft_putchar22(int c)
 {
-	if (sig == SIGINT && g_global.sig == 0 && g_global.sig_cat != 1)
-	{
-		printf("\n");
-		rl_replace_line("", 0);
-		rl_on_new_line();
-		rl_redisplay();
-	}
-	else
-	{
-		rl_done = 1;
-		g_global.exit_heredoc = 0;
-	}
+	write(1, &c, 1);
+	return (1);
 }
 
-void	handling_sig(void)
+int	event(void)
 {
-	rl_catch_signals = 0;
-	if (signal(SIGINT, handler) == SIG_ERR || \
-	signal(SIGQUIT, SIG_IGN) == SIG_ERR)
-	{
-		write(2, "sig error\n", 10);
-		exit(1);
-	}
+	return (0);
+}
+
+void	main_utils(void)
+{
+	char	*sr_cap;
+
+	sr_cap = tgetstr("sr", NULL);
+	tputs(sr_cap, 0, ft_putchar22);
+	printf("minishell$ exit\n");
+	exit(0);
+}
+
+int	ft_pars_error(void)
+{
+	ft_putstr_fd("minishell: syntax error\n", 2);
+	g_global.exit_status = 258 * 256;
+	return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 21:31:37 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/17 21:31:59 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 21:42:46 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ char	**path(t_treenode *root, char **env)
 	str = ft_getenv(env, "PATH");
 	if (!str)
 	{
-		g_exit_status = 127 * 256;
+		g_global.exit_status = 127 * 256;
 		return (NULL);
 	}
 	else
@@ -55,5 +55,5 @@ void	ft_print(t_treenode *root, char *cmd, char *tmp)
 	ft_putstr_fd("minishell: ", 2);
 	ft_putstr_fd(cmd, 2);
 	ft_putstr_fd(": command not found\n", 2);
-	g_exit_status = 127 * 256;
+	g_global.exit_status = 127 * 256;
 }

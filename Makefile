@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
+#    By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/17 20:17:04 by makacem          ###   ########.fr        #
+#    Updated: 2023/01/17 22:01:31 by nmoussam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ IFLAGS = -I/goinfre/nmoussam/homebrew/opt/readline/include
 # IFLAGS = -I /Users/makacem/homebrew/Cellar/readline/8.2.1/include
 
 SRC = main.c \
+	main_utils.c \
 	ft_signalhandler.c \
 	lexer/ft_lex.c \
 	lexer/ft_create_token_list.c \
@@ -53,6 +54,7 @@ SRC = main.c \
 	executor/exec_cmd.c \
 	executor/pipe.c \
 	executor/execve.c \
+	executor/exec_cmd_utils.c \
 	executor/builtins/ft_env.c \
 	executor/builtins/ft_export.c \
 	executor/builtins/ft_echo.c \

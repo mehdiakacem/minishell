@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 19:03:11 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/17 21:31:55 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 21:42:46 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ft_free_path(char **str)
 		free(str);
 	}
 }
-
 
 void	find_and_exec(t_treenode *root, char **str, char **env)
 {
@@ -65,7 +64,7 @@ void	ft_exec_cmd_utils(t_treenode *root, char **env, char **str)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(root->cmd[0], 2);
 		ft_putstr_fd(": is a directory\n", 2);
-		g_exit_status = 126 * 256;
+		g_global.exit_status = 126 * 256;
 		ft_free_path(str);
 		return ;
 	}
@@ -76,12 +75,12 @@ void	ft_exec_cmd_utils(t_treenode *root, char **env, char **str)
 		ft_putstr_fd(": ", 2);
 		ft_putstr_fd(strerror(errno), 2);
 		ft_putstr_fd("\n", 2);
-		g_exit_status = 127 * 256;
+		g_global.exit_status = 127 * 256;
 		ft_free_path(str);
 		return ;
 	}
 	ft_free_path(str);
-	g_exit_status = 0;
+	g_global.exit_status = 0;
 }
 
 void	ft_exec_cmd(t_treenode	*root, char **env)
@@ -96,7 +95,7 @@ void	ft_exec_cmd(t_treenode	*root, char **env)
 		ft_putstr_fd("minishell: ", 2);
 		ft_putstr_fd(root->cmd[0], 2);
 		ft_putstr_fd(": No such file or directory\n", 2);
-		g_exit_status = 127 * 256;
+		g_global.exit_status = 127 * 256;
 		return ;
 	}
 	else
