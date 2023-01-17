@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: makacem <makacem@student.42.fr>            +#+  +:+       +#+         #
+#    By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/02 15:29:08 by makacem           #+#    #+#              #
-#    Updated: 2023/01/17 13:12:32 by makacem          ###   ########.fr        #
+#    Updated: 2023/01/17 16:43:55 by nmoussam         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRC = main.c \
 	executor/builtins/ft_echo.c \
 	executor/builtins/ft_pwd.c \
 	executor/builtins/ft_cd.c \
+	executor/builtins/ft_cd_utils.c \
 	executor/builtins/ft_unset.c \
 	executor/builtins/ft_exit.c \
 	executor/builtins/export_utils.c \

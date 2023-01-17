@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/14 23:08:41 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/17 00:38:41 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 15:05:29 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	exec_file(t_treenode *root, char *path, char **env)
 		}
 		else if (pid == 0)
 		{
-			signal(SIGQUIT, SIG_DFL);	
+			signal(SIGQUIT, SIG_DFL);
 			if (execve(path, root->cmd, env) == -1)
 			{
 				g_exit_status = 127 * 256;
