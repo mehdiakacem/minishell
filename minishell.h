@@ -6,7 +6,7 @@
 /*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/17 00:37:54 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/17 17:13:13 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ char		**ft_sort_env(char **env);
 int			ft_search_env(char	**env, char *var);
 char		**ft_remove_var(char	**env, char *var);
 int			ft_search_env(char	**env, char *var);
-char		**ft_home(char **env);
+char		**ft_home(char *cwd, char **env);
 void		execute_left(int *fd, t_treenode *left, char **env);
 void		execute_right(int *fd, t_treenode *right, char **env);
 char		**ft_execute(t_treenode *root, char **env);
@@ -110,9 +110,9 @@ int			ft_cmpin_env(char	**env, char *var);
 char		**ft_populate(char **new_env, char **old_env);
 int			ft_dupin_open(int fd_stdin);
 int			ft_dupout_open(int fd_stdout);
-void    	ft_dupin_close(int fd_stdin, int temp_fdin);
-void    	ft_dupout_close(int fd_stdout, int temp_fdout);
-char    	**ft_exit(int n_cmd, char **cmd, char **env);
+void		ft_dupin_close(int fd_stdin, int temp_fdin);
+void		ft_dupout_close(int fd_stdout, int temp_fdout);
+char		**ft_exit(int n_cmd, char **cmd, char **env);
 char		**ft_jointo_old(char **env, char *arg);
 char		**ft_search_val(char **env, char *var);
 char		**ft_add_var(char *var, char **env);
@@ -130,8 +130,13 @@ int			ft_pars_export(char *arg);
 char		**ft_jointo_old(char **env, char *arg);
 int			ft_count_cmds(char	**cmd);
 int			ft_count_words(t_token *token);
-void	handling_sig(void);
-void	handler(int sig);
-int ft_putchar22(int  c);
+void		handling_sig(void);
+void		handler(int sig);
+int			ft_putchar22(int c);
+void		home_utils1(char *tmp_pwd);
+void		home_utils2(char *tmp_pwd);
+char		**home_utils3(char *home, char *tmp_pwd, char **pwd, char **env);
+void		print_msg(char *cwd);
+char		**ft_cd_point(char *cwd, char **env);
 
 #endif

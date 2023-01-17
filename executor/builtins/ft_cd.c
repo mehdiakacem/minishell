@@ -3,66 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   ft_cd.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
+/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 17:01:45 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/16 03:01:35 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/17 17:44:00 by nmoussam         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-char	**ft_home(char **env)
+char	**ft_home(char *cwd, char **env)
 {
 	char	*home;
 	char	**pwd;
-	char	**oldpwd;
 	char	*tmp_pwd;
-	char	*new_pwd;
 
 	home = ft_getenv(env, "HOME");
 	tmp_pwd = getcwd(NULL, 0);
 	if (!home)
 	{
-		ft_putstr_fd("minishell: cd: HOME not set\n", 2);
-		g_exit_status = 1 * 256;
-		free(tmp_pwd);
+		home_utils1(tmp_pwd);
+		free(cwd);
 		return (env);
 	}
 	else if (chdir(home) == -1)
-	{
-		ft_putstr_fd("minishell: cd: ", 2);
-		ft_putstr_fd(strerror(errno), 2);
-		ft_putstr_fd("\n", 2);
-		g_exit_status = 256;
-		return (env);
-	}
+		return (home_utils2(tmp_pwd), env);
 	else
 	{
 		pwd = ft_search_val(env, "PWD=");
-		if (!pwd)
-		{
-			new_pwd = ft_strjoin("PWD=", tmp_pwd);
-			env = ft_add_var(new_pwd, env);
-			free(new_pwd);
-			oldpwd = ft_search_val(env, "OLDPWD=");
-			free(*oldpwd);
-			*oldpwd = ft_strjoin("OLDPWD=", tmp_pwd);
-			free(tmp_pwd);
-			g_exit_status = 0;
-			return (env);
-		}
-		else
-		{
-			free(*pwd);
-			*pwd = ft_strjoin("PWD=", home);
-			oldpwd = ft_search_val(env, "OLDPWD=");
-			free(*oldpwd);
-			*oldpwd = ft_strjoin("OLDPWD=", tmp_pwd);
-			free(tmp_pwd);
-		}
+		env = home_utils3(home, tmp_pwd, pwd, env);
 	}
 	g_exit_status = 0;
+	free(cwd);
 	return (env);
 }
 
@@ -114,11 +86,12 @@ char	**ft_new_pwd(char **env)
 	return (env);
 }
 
-char	**ft_cd_point(char **env)
+char	**ft_cd_point(char *cwd, char **env)
 {
 	ft_putstr_fd("cd: error retrieving current directory: \
 	getcwd: cannot access parent directories: No such file or directory\n", 2);
 	g_exit_status = 0;
+	free(cwd);
 	return (env);
 }
 
@@ -130,33 +103,16 @@ char	**ft_cd(int n_cmd, char **cmd, char **env)
 	old_pwd = ft_getenv(env, "OLDPWD");
 	cwd = getcwd(NULL, 0);
 	if (!old_pwd)
-	{
-		printf("4\n");
 		env = ft_add_var("OLDPWD", env);
-	}
 	if (n_cmd == 1 || (n_cmd == 2 && (ft_strcmp(cmd[1], "~") == 0 \
 	|| ft_strcmp(cmd[1], "--") == 0 || ft_strcmp(cmd[1], "#") == 0)))
-	{
-		env = ft_home(env);
-		free(cwd);
-		return (env);
-	}
+		return (ft_home(cwd, env), env);
 	else if (cwd == NULL && ft_strcmp(cmd[1], ".") == 0)
-	{
-		env = ft_cd_point(env);
-		free(cwd);
-		return (env);
-	}
+		return (ft_cd_point(cwd, env), env);
 	else
 	{
 		if (chdir(cmd[1]) == -1)
-		{
-			ft_putstr_fd("minishell: cd: ", 2);
-			ft_putstr_fd(strerror(errno), 2);
-			ft_putstr_fd("\n", 2);
-			g_exit_status = 1 * 256;
-			return (env);
-		}
+			return (print_msg(cwd), env);
 		else
 		{
 			env = ft_old_pwd(env);

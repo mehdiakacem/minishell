@@ -6,11 +6,18 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/17 18:13:43 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/17 20:03:22 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ft_pars_error(void)
+{
+	ft_putstr_fd("minishell: syntax error\n", 2);
+	g_exit_status = 258 * 256;
+	return (1);
+}
 
 void	ft_free_tree(t_treenode *root);
 
@@ -26,8 +33,6 @@ int ft_putchar22(int  c)
   return (1);     
 }
 
-void	ft_print_token_content(t_token *token_list);
-void	ft_print_type(t_token *token_list);
 void	ft_empty_arg(t_token *token_list);
 
 int	main(int argc, char **argv, char **env)
@@ -56,6 +61,11 @@ int	main(int argc, char **argv, char **env)
 	        printf("minishell$ exit\n");
             exit(0);
 		}
+		if (ft_strlen(line) == 0)
+		{
+			free (line);
+			continue;
+		}
 		if (ft_strlen(line) != 0)
 			add_history(line);
 		token_list = ft_lex(line);
@@ -75,8 +85,6 @@ int	main(int argc, char **argv, char **env)
 			free(line);
 			ft_free_tokens(token_list);
 			ft_free_tree(root);
-			//free(root);
-			// system("leaks minishell");
 		}
 	}
 	ft_free_env(env);

@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/27 17:45:58 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/17 18:56:12 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/17 20:03:16 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,6 @@ char	**ft_execute_rec(t_treenode *root, char **env)
 	}
 	else if (root->type == CMD)
 	{
-		if (*(root->cmd) == NULL && root->stdin_fd == 0 && root->stdout_fd == 0)
-		{
-			ft_putstr_fd("minishell: : command not found\n", 2);
-			return (env);
-		}
 		if (*(root->cmd) != NULL && root->stdin_fd >= 0 && root->stdout_fd >= 0)
 			env = execution_cmd(root, env);
 		free(root->cmd);
