@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_export.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/28 16:03:39 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/17 21:42:46 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/18 02:09:56 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,12 @@ char	**ft_export_check(char **arg, char **env)
 	{
 		printf("minishell: export: -%c: invalid option\nexport: usage: export [-nf] [name[=value] ...] \
 or export -p\n", *(*arg + 1));
-		g_global.exit_status = 2 * 256;
+		g_global.exit_status = 2;
 	}
 	else if (ft_isalpha(**arg) == 0 || ft_pars_export(*arg) == 0)
 	{
 		printf("minishell: export: `%s': not a valid identifier\n", *arg);
-		g_global.exit_status = 1 * 256;
+		g_global.exit_status = 1;
 	}
 	else if (ft_search_env(env, *arg) == 0)
 		env = ft_add_var(*arg, env);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_fdout.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/06 16:54:02 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/17 21:42:46 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/18 02:09:56 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int	ft_redirect_output(t_token *redirec_token)
 	if (redirec_token->type == 15)
 	{
 		ft_printf("minishell: $%s: ambiguous redirect\n", redirec_token->name);
-		g_global.exit_status = 1 * 256;
+		g_global.exit_status = 1;
 		return (-1);
 	}
 	file_name = redirec_token->name;
@@ -61,7 +61,7 @@ int	ft_redirect_output(t_token *redirec_token)
 	if (fd == -1)
 	{
 		ft_printf("minishell: %s: %s\n", file_name, strerror(errno));
-		g_global.exit_status = 1 * 256;
+		g_global.exit_status = 1;
 	}
 	return (fd);
 }
@@ -81,7 +81,7 @@ int	ft_append_output(t_token *redirec_token)
 	if (redirec_token->type == 15)
 	{
 		ft_printf("minishell: $%s: ambiguous redirect\n", redirec_token->name);
-		g_global.exit_status = 1 * 256;
+		g_global.exit_status = 1;
 		return (-1);
 	}
 	file_name = redirec_token->name;
@@ -90,7 +90,7 @@ int	ft_append_output(t_token *redirec_token)
 	if (fd == -1)
 	{
 		ft_printf("minishell: %s: %s\n", file_name, strerror(errno));
-		g_global.exit_status = 1 * 256;
+		g_global.exit_status = 1;
 	}
 	return (fd);
 }

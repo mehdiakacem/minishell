@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/18 00:42:02 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/18 02:39:10 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,4 +146,5 @@ int			ft_putchar22(int c);
 int			event(void);
 int			ft_pars_error(void);
 int			main_utils(char *line);
+void		check_signal(void);
 #endif

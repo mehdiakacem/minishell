@@ -6,7 +6,7 @@
 /*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 22:01:17 by nmoussam          #+#    #+#             */
-/*   Updated: 2023/01/18 00:41:49 by makacem          ###   ########.fr       */
+/*   Updated: 2023/01/18 02:09:47 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,6 @@ int	main_utils(char *line)
 int	ft_pars_error(void)
 {
 	ft_putstr_fd("minishell: syntax error\n", 2);
-	g_global.exit_status = 258 * 256;
+	g_global.exit_status = 258;
 	return (1);
 }
