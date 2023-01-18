@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/07 11:55:38 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/17 22:17:42 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/18 00:41:40 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,45 +21,46 @@ void	main_utils2(char *line, t_token *token_list)
 
 void	ft_free1(char *line, t_token *token_list, t_treenode *root)
 {
-		free(line);
-		ft_free_tokens(token_list);
-		ft_free_tree(root);
+	free(line);
+	ft_free_tokens(token_list);
+	ft_free_tree(root);
 }
-int	main(int argc, char **argv, char **env)
-{
-	char		*line;
-	int			error;
-	t_token		*token_list;
-	t_treenode	*root;
 
+char	**initialize(int argc, char **argv, char **env)
+{
 	argc = 0;
 	argv = NULL;
 	g_global.sig = 0;
 	g_global.sig_cat = 0;
 	env = ft_create_new_env(env);
+	return (env);
+}
+
+void	main_utils4(t_token *token_list, char **env)
+{
+	ft_empty_arg(token_list);
+	ft_expand(token_list, env);
+}
+
+int	main(int argc, char **argv, char **env)
+{
+	char		*line;
+	t_token		*token_list;
+	t_treenode	*root;
+
+	env = initialize(argc, argv, env);
 	while (1)
 	{
 		handling_sig();
 		line = readline("minishell$ ");
-		g_global.exit_heredoc = 1;
-		rl_event_hook = event;
-		if (!(line))
-			main_utils();
-		if (ft_strlen(line) == 0)
-		{
-			free (line);
+		if (main_utils(line) == 1)
 			continue ;
-		}
-		if (ft_strlen(line) != 0)
-			add_history(line);
 		token_list = ft_lex(line);
-		error = ft_pars(token_list);
-		if (error == 1)
+		if (ft_pars(token_list) == 1)
 			main_utils2(line, token_list);
 		else
 		{
-			ft_empty_arg(token_list);
-			ft_expand(token_list, env);
+			main_utils4(token_list, env);
 			root = ft_tree(token_list->next);
 			env = ft_execute(root, env);
 			ft_free1(line, token_list, root);

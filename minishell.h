@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: nmoussam <nmoussam@student.42.fr>          +#+  +:+       +#+        */
+/*   By: makacem <makacem@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/02 15:32:01 by makacem           #+#    #+#             */
-/*   Updated: 2023/01/17 22:18:22 by nmoussam         ###   ########.fr       */
+/*   Updated: 2023/01/18 00:42:02 by makacem          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,5 +145,5 @@ void		ft_empty_arg(t_token *token_list);
 int			ft_putchar22(int c);
 int			event(void);
 int			ft_pars_error(void);
-void		main_utils(void);
+int			main_utils(char *line);
 #endif
